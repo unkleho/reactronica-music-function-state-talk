@@ -16,6 +16,7 @@ import {
 } from 'spectacle';
 import createTheme from 'spectacle/lib/themes/default';
 import styled from 'react-emotion';
+import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 
 import './App.css';
 import './code-pane.scss';
@@ -86,6 +87,14 @@ function App() {
             }}
             theme="external"
           ></CodePane>
+        </Slide>
+
+        <Slide>
+          <LiveProvider code="<strong>Hello World!</strong>">
+            <LiveEditor />
+            <LiveError />
+            <LivePreview />
+          </LiveProvider>
         </Slide>
 
         {/* Causes browser to hang, not sure what is going on */}
