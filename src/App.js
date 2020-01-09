@@ -17,6 +17,7 @@ import {
 import createTheme from 'spectacle/lib/themes/default';
 import styled from 'react-emotion';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
+import Tone from 'tone';
 
 import './App.css';
 import './code-pane.scss';
@@ -90,8 +91,28 @@ function App() {
         </Slide>
 
         <Slide>
-          <LiveProvider code="<strong>Hello World!</strong>">
-            <LiveEditor />
+          <LiveProvider
+            code={`() => {
+  const synth = React.useRef();
+
+  React.useEffect(() => {
+    synth.current = new Tone.Synth().toMaster();
+  }, [])
+
+  return (
+    <button onClick={() => {
+      synth.current.triggerAttackRelease('C3');
+    }}>Play</button>
+  )
+}`}
+            scope={{
+              Tone,
+            }}
+            theme={{
+              styles: [],
+            }}
+          >
+            <LiveEditor className="prism-code" />
             <LiveError />
             <LivePreview />
           </LiveProvider>

@@ -1,5 +1,28 @@
 .prism-code {
-  .token {
-    color: red;
+  font-family: 'Inconsolata', monospace !important;
+
+  .token-line {
+    line-height: 1.3;
+  }
+
+  .operator {
+    color: var(--colour-purple);
+  }
+
+  .number {
+    color: var(--colour-purple);
+  }
+
+  .tag,
+  .plain {
+    color: var(--colour-yellow);
+  }
+
+  .keyword {
+    color: var(--colour-pink);
+  }
+
+  .attr-name {
+    color: var(--colour-yellow-dark);
   }
 }
