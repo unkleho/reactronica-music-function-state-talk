@@ -1,29 +1,24 @@
 import React from 'react';
 import { render } from 'react-dom';
 import styled from 'react-emotion';
-
 import {
   Deck,
   Slide,
   Appear,
   CodePane,
-  // FlexBox,
-  // Box,
   Image,
   Heading as RawHeading,
   List as RawList,
   ListItem as RawListItem,
-  // OrderedList,
   Quote,
   Text,
-  // UnorderedList,
-  // Grid,
   Notes,
   FullScreen,
-  // Progress,
-  Markdown,
+  MarkdownSlides,
+  // ComponentPlayground,
 } from 'spectacle';
 import createTheme from 'spectacle/lib/themes/default';
+import Tone from 'tone';
 
 const theme = createTheme(
   {
@@ -55,15 +50,14 @@ const ListItem = styled(RawListItem)`
   line-height: 1.4;
 `;
 
+const testCode = `
+const Button = ({ title }) => <button type="button">{title}</button>;
+render(<Button title="My Button" />);
+`;
+
 // eslint-disable-next-line react/no-multi-comp
 const Presentation = () => (
-  <Deck
-    showFullscreenControl={false}
-    // autoLayout={true}
-    theme={theme}
-    // contentHeight="100%"
-    // template={template}
-  >
+  <Deck showFullscreenControl={false} theme={theme}>
     <Slide>
       <Heading>Reactronica:</Heading>
       <Heading>Music as a Function of State</Heading>
@@ -83,8 +77,38 @@ const Presentation = () => (
         </ListItem>
       </List>
     </Slide>
-    {/* 
 
+    <Slide>
+      <CodePane
+        fontSize={18}
+        language="javascript"
+        autoFillHeight
+        // source={require('raw-loader!./code.example')}
+      >
+        {`test`}
+      </CodePane>
+    </Slide>
+
+    {MarkdownSlides`
+      ### First MD generated Slide
+      ---
+      ### Second MD Generated Slide
+    `}
+
+    <Slide>
+      <ToneExample></ToneExample>
+    </Slide>
+
+    {/* Not working for some reason - Chrome hangs */}
+    {/* <Slide>
+      <ComponentPlayground
+        theme="dark"
+        code={`const Button = ({ title }) => <button type="button">{title}</button>;
+render(<Button title="My Button" />);`}
+      ></ComponentPlayground>
+    </Slide> */}
+
+    {/* 
     <Slide>
       <CodePane fontSize={18} language="cpp" autoFillHeight>
         {cppCodeBlock}
@@ -102,5 +126,25 @@ const Presentation = () => (
     </Markdown> */}
   </Deck>
 );
+
+const ToneExample = () => {
+  const synth = React.useRef();
+
+  React.useEffect(() => {
+    synth.current = new Tone.Synth().toMaster();
+  }, []);
+
+  return (
+    <div>
+      <button
+        onClick={() => {
+          if (synth && synth.current) {
+            synth.current.triggerAttackRelease('C3');
+          }
+        }}
+      ></button>
+    </div>
+  );
+};
 
 render(<Presentation />, document.getElementById('root'));
