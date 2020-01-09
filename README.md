@@ -1,44 +1,68 @@
-Spectacle Boilerplate
-=====================
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Contents
+## Available Scripts
 
-- [Reference](#reference)
-- [Getting Started](#getting-started)
-- [Tutorial](#tutorial)
-- [Build & Deployment](#build-deployment)
+In the project directory, you can run:
 
-## Reference
+### `npm start`
 
-The Spectacle core API is available in the [Spectacle Docs](https://github.com/FormidableLabs/spectacle/blob/master/README.md).
+Runs the app in the development mode.<br />
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Getting Started
+The page will reload if you make edits.<br />
+You will also see any lint errors in the console.
 
-1. Install dependencies
+### `npm test`
 
-    ```sh
-    $ yarn install
-    ```
+Launches the test runner in the interactive watch mode.<br />
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-2. Start the webpack server. The server will run at the default `webpack-dev-server` address, [`localhost:8080`](http://localhost:8080).
+### `npm run build`
 
-    ```sh
-    $ yarn start
+Builds the app for production to the `build` folder.<br />
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-    # Or with a specific port!
-    $ yarn start --port=3000
-    ```
+The build is minified and the filenames include the hashes.<br />
+Your app is ready to be deployed!
 
-## Tutorial
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-If want you a step-by-step guide for getting started with Spectacle, a basic tutorial is available [here](https://github.com/FormidableLabs/spectacle/blob/master/docs/tutorial.md).
+### `npm run eject`
 
-## Build & Deployment
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-Building the dist version of the project is as easy as running
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-```sh
-$ yarn build
-```
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-From there you can deploy the built slides  in `dist` to services like Netlify, Surge, etc!
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).
+
+### Code Splitting
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+
+### Analyzing the Bundle Size
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+
+### Making a Progressive Web App
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+
+### Advanced Configuration
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
+
+### Deployment
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
+
+### `npm run build` fails to minify
+
+This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
