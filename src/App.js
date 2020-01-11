@@ -15,6 +15,7 @@ import {
 import createTheme from 'spectacle/lib/themes/default';
 import styled from 'react-emotion';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
+import CodeSlide from 'spectacle-code-slide';
 import Tone from 'tone';
 
 import './global.module.css';
@@ -256,10 +257,14 @@ function App() {
           <Notes>Show Reactronica API</Notes>
         </Slide>
 
-        <Slide>
-          <CodePane
-            lang="jsx"
-            source={`const Song = () => {
+        <CodeSlide
+          className="prism-code"
+          lang="jsx"
+          transition={[]}
+          code={`const Song = ({
+  isPlaying,
+  bpm,
+}) => {
   return (
     <Song isPlaying={false}>
       <Track>
@@ -268,13 +273,42 @@ function App() {
     </Song>
   )
 }`}
-            style={{
-              fontSize: 32,
-            }}
-            theme="external"
-          ></CodePane>
-
+          ranges={[
+            {
+              loc: [0, 1],
+              // title: 'Song',
+            },
+            {
+              loc: [1, 2],
+            },
+          ]}
+          // theme="external"
+        >
           <Notes>Show Reactronica internals</Notes>
+        </CodeSlide>
+
+        <Slide>
+          <Heading>Demos</Heading>
+        </Slide>
+
+        <Slide>
+          <Heading>Drum Pads</Heading>
+        </Slide>
+
+        <Slide>
+          <Heading>Ukulele Tab</Heading>
+        </Slide>
+
+        <Slide>
+          <Heading>Chord Finder</Heading>
+        </Slide>
+
+        <Slide>
+          <Heading>DAW</Heading>
+        </Slide>
+
+        <Slide>
+          <Heading>MIDI Keyboard and Drums</Heading>
         </Slide>
 
         {/* Causes browser to hang, not sure what is going on */}

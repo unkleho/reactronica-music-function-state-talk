@@ -10,5 +10,6 @@ body {
 
 code,
 pre {
+  color: var(--colour-white);
   font-family: 'Inconsolata', monospace;
 }
