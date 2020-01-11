@@ -6,6 +6,11 @@ a {
 .prism-code {
   background-color: var(--colour-black);
   font-family: 'Inconsolata', monospace !important;
+  // padding: 1em !important;
+
+  .comment {
+    color: var(--colour-grey-lighter);
+  }
 
   .token-line {
     line-height: 1.3;
@@ -33,7 +38,7 @@ a {
   }
 
   .punctuation {
-    color: #6c6783;
+    color: var(--colour-grey-lightest);
   }
 
   .keyword {
@@ -46,6 +51,7 @@ a {
 }
 
 .npm__react-simple-code-editor__textarea {
+  // padding: 1em !important;
   line-height: 1.3 !important;
 }
 
@@ -69,4 +75,5 @@ a {
   margin: 0;
   background-color: var(--colour-bg);
   text-align: left;
+  line-height: 1.3;
 }

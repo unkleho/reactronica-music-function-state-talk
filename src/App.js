@@ -17,6 +17,7 @@ import styled from 'react-emotion';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import Tone from 'tone';
 
+import './global.module.css';
 import './App.css';
 import './code-pane.scss';
 
@@ -170,6 +171,7 @@ function App() {
             <ListItem>Powerful audio library for the web</ListItem>
             <ListItem>Imperative</ListItem>
             <ListItem>Class based</ListItem>
+            <ListItem>Large API - show docs</ListItem>
           </List>
         </Slide>
 
@@ -226,19 +228,23 @@ function App() {
         <Slide>
           <Heading size={3}>Components</Heading>
           <List>
-            <ListItem>Song</ListItem>
-            <ListItem>Track</ListItem>
-            <ListItem>Instrument</ListItem>
-            <ListItem>Effect</ListItem>
+            <ListItem>Song: Top level wrapper</ListItem>
+            <ListItem>Track: Layer of audio</ListItem>
+            <ListItem>Instrument: Audio source of Track</ListItem>
+            <ListItem>Effect: Audio effects such as reverb and delay</ListItem>
           </List>
         </Slide>
 
         <Slide>
           <CodePane
             lang="jsx"
-            source={`const Test = () => {
+            source={`const Example = () => {
   return (
-    <div>Hello</div>
+    <Song isPlaying={false}>
+      <Track>
+        <Instrument type="synth" />
+      </Track>
+    </Song>
   )
 }`}
             style={{
@@ -246,6 +252,29 @@ function App() {
             }}
             theme="external"
           ></CodePane>
+
+          <Notes>Show Reactronica API</Notes>
+        </Slide>
+
+        <Slide>
+          <CodePane
+            lang="jsx"
+            source={`const Song = () => {
+  return (
+    <Song isPlaying={false}>
+      <Track>
+        <Instrument type="synth" />
+      </Track>
+    </Song>
+  )
+}`}
+            style={{
+              fontSize: 32,
+            }}
+            theme="external"
+          ></CodePane>
+
+          <Notes>Show Reactronica internals</Notes>
         </Slide>
 
         {/* Causes browser to hang, not sure what is going on */}
