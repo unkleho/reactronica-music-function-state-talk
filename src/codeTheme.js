@@ -39,6 +39,12 @@ const theme = {
       },
     },
     {
+      types: ['attr-value'],
+      style: {
+        color: css['colour-green'],
+      },
+    },
+    {
       types: ['number'],
       style: {
         color: css['colour-yellow'],

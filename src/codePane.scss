@@ -1,0 +1,42 @@
+a {
+  color: var(--colour-secondary);
+  text-decoration: none;
+}
+
+.code-pane {
+  pre {
+    padding: 1rem 2rem !important;
+  }
+}
+
+.react-live {
+  display: flex;
+}
+
+.react-live__editor {
+  flex: 1;
+  margin-right: 1em;
+
+  pre,
+  textarea {
+    padding: 1rem 2rem !important;
+  }
+
+  textarea:focus {
+    outline-color: var(--colour-primary);
+  }
+}
+
+.react-live__preview-pane {
+  flex: 1;
+  position: relative;
+}
+
+.react-live__error {
+  position: absolute;
+  top: 0;
+  margin: 0;
+  background-color: var(--colour-bg);
+  text-align: left;
+  line-height: 1.3;
+}

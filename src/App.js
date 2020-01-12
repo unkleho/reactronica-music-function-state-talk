@@ -22,7 +22,8 @@ import codeTheme from './codeTheme';
 
 import './global.module.css';
 import './App.css';
-import './code-pane.scss';
+import './codeTheme.scss';
+import './codePane.scss';
 
 const theme = createTheme(
   {
@@ -222,13 +223,10 @@ function App() {
                 useState: React.useState,
                 useEffect: React.useEffect,
               }}
-              // theme={{
-              //   styles: [],
-              // }}
               theme={codeTheme}
               language="jsx"
             >
-              <LiveEditor className="prism-code react-live__editor" />
+              <LiveEditor className="code-theme react-live__editor" />
               <div className="react-live__preview-pane">
                 <LiveError className="react-live__error" />
                 <LivePreview className="react-live__preview" />
@@ -257,6 +255,7 @@ function App() {
 
         <Slide>
           <CodePane
+            className="code-theme code-pane"
             lang="jsx"
             source={`const Example = () => {
   return (
@@ -269,6 +268,7 @@ function App() {
 }`}
             style={{
               fontSize: 32,
+              // padding: 0,
             }}
             theme="external"
           ></CodePane>
@@ -277,7 +277,7 @@ function App() {
         </Slide>
 
         <CodeSlide
-          className="prism-code"
+          className="code-theme code-slide"
           lang="jsx"
           transition={[]}
           code={`const Song = ({
@@ -301,7 +301,6 @@ function App() {
               loc: [1, 2],
             },
           ]}
-          // theme="external"
         >
           <Notes>Show Reactronica internals</Notes>
         </CodeSlide>
