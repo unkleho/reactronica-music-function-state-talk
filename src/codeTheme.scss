@@ -29,7 +29,7 @@
   }
 
   .number {
-    color: var(--colour-purple);
+    color: var(--colour-orange);
   }
 
   .tag,
@@ -51,6 +51,10 @@
 
   .punctuation {
     color: var(--colour-grey-lightest);
+  }
+
+  .string {
+    color: var(--colour-green);
   }
 
   .keyword {

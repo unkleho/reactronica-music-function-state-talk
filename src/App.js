@@ -3,7 +3,7 @@ import {
   Deck,
   Slide,
   Appear,
-  CodePane,
+  // CodePane,
   // Image,
   Heading as RawHeading,
   List as RawList,
@@ -17,7 +17,9 @@ import styled from 'react-emotion';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import CodeSlide from 'spectacle-code-slide';
 import Tone from 'tone';
+import { Song, Track, Instrument, Effect } from 'reactronica';
 
+import ReactLive from './ReactLive';
 import codeTheme from './codeTheme';
 
 import './global.module.css';
@@ -68,6 +70,10 @@ const List = styled(RawList)`
 const ListItem = styled(RawListItem)`
   margin-bottom: 1em;
   line-height: 1.4;
+`;
+
+const WideSlide = styled(Slide)`
+  max-width: 1800px;
 `;
 
 function App() {
@@ -180,6 +186,7 @@ function App() {
           <List>
             <ListItem>React components for making music</ListItem>
             <ListItem>My first library!</ListItem>
+            <ListItem>VERY early days...</ListItem>
             <ListItem>Inspired by React Music</ListItem>
             <ListItem>Uses Tone JS under the hood</ListItem>
           </List>
@@ -195,11 +202,7 @@ function App() {
           </List>
         </Slide>
 
-        <Slide
-          contentStyles={{
-            maxWidth: 1800,
-          }}
-        >
+        <WideSlide>
           <Heading size={6}>Tone JS + React</Heading>
 
           <div className="react-live">
@@ -233,7 +236,7 @@ function App() {
               </div>
             </LiveProvider>
           </div>
-        </Slide>
+        </WideSlide>
 
         <Slide>
           <Heading size={3}>Reactronica API</Heading>
@@ -246,63 +249,202 @@ function App() {
         <Slide>
           <Heading size={3}>Components</Heading>
           <List>
-            <ListItem>Song: Top level wrapper</ListItem>
-            <ListItem>Track: Layer of audio</ListItem>
-            <ListItem>Instrument: Audio source of Track</ListItem>
-            <ListItem>Effect: Audio effects such as reverb and delay</ListItem>
+            <ListItem>
+              <code>{`<Song />`}</code> Top level wrapper
+            </ListItem>
+            <ListItem>
+              <code>{`<Track />`}</code> Layer of audio
+            </ListItem>
+            <ListItem>
+              <code>{`<Instrument />`}</code> Audio source of Track
+            </ListItem>
+            <ListItem>
+              <code>{`<Effect />`}</code> Audio effects such as reverb and delay
+            </ListItem>
           </List>
         </Slide>
 
-        <Slide>
-          <CodePane
-            className="code-theme code-pane"
-            lang="jsx"
-            source={`const Example = () => {
+        <WideSlide>
+          <ReactLive
+            code={`() => {
   return (
-    <Song isPlaying={false}>
-      <Track>
-        <Instrument type="synth" />
+    <Song isPlaying={false} bpm={70} volume={0}>
+      <Track
+        steps={['C3', null, 'G3', null]}
+        // effects={<Effect type="distortion" id="1" />}
+      >
+        <Instrument type="amSynth" />
       </Track>
     </Song>
   )
 }`}
-            style={{
-              fontSize: 32,
-              // padding: 0,
+            scope={{
+              Song,
+              Track,
+              Instrument,
+              Effect,
             }}
-            theme="external"
-          ></CodePane>
+          />
 
-          <Notes>Show Reactronica API</Notes>
-        </Slide>
+          <Notes>
+            Demonstate API. Fix reactronica props errors! Maybe throw errors?
+          </Notes>
+        </WideSlide>
 
         <CodeSlide
-          className="code-theme code-slide"
-          lang="jsx"
-          transition={[]}
-          code={`const Song = ({
+          code={`const SongContext = React.createContext();
+          
+const Song = ({
   isPlaying,
   bpm,
+  children
 }) => {
+  useEffect(() => {
+    if (isPlaying) {
+      Tone.Transport.start();
+    } else {
+      Tone.Transport.stop();
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    Tone.Transport.bpm.value = bpm;
+  }, [bpm])
+
   return (
-    <Song isPlaying={false}>
-      <Track>
-        <Instrument type="synth" />
-      </Track>
-    </Song>
+    <SongContext.Provider value={{ isPlaying }}>
+      {children}
+    </SongContext.Provider>
   )
 }`}
           ranges={[
             {
-              loc: [0, 1],
-              // title: 'Song',
+              loc: [2, 7],
+              // title: 'Song props',
             },
             {
-              loc: [1, 2],
+              loc: [3, 4],
+              // title: isPlaying prop
+            },
+            {
+              loc: [7, 14],
+              // title: isPlaying useEffect
+            },
+            {
+              loc: [4, 5],
+              // title: bpm prop
+            },
+            {
+              loc: [15, 18],
+              // title: isPlaying useEffect
+            },
+            {
+              loc: [0, 1],
+              // title: 'SongContext createContext',
+            },
+            {
+              loc: [20, 23],
+              // title: 'SongContext.Provider',
             },
           ]}
+          className="code-theme code-slide"
+          lang="jsx"
         >
-          <Notes>Show Reactronica internals</Notes>
+          <Notes>
+            Show Reactronica Song internals. Mention that this is a simplified
+            version!
+          </Notes>
+        </CodeSlide>
+
+        <CodeSlide
+          code={`const Track = ({
+  steps,
+  onStepPlay,
+  children,
+}) => {
+  const { isPlaying } = useContext(SongContext);
+  const sequencer = useRef();
+  const instrument = useRef();
+
+  useEffect(() => {
+    sequencer.current = new Tone.Sequence(
+      (_, note) => {
+        instrument.current.triggerAttackRelease(note)
+
+        if (typeof onStepPlay === 'function') {
+          onStepPlay(note);
+        }
+      },
+      steps,
+    )
+
+    return () => {
+      sequencer.current.dispose();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (isPlaying) {
+      sequencer.current.start();
+    } else {
+      sequencer.current.stop();
+    }
+  }, [isPlaying])
+
+  useEffect(() => {
+    sequencer.current.removeAll();
+
+    steps.forEach((note, i) => {
+      sequencer.current.add(i, note);
+    });
+  }, [steps])
+
+  return (
+    <TrackContext.Provider>
+      {children}
+    </TrackContext.Provider>
+  );
+}`}
+          ranges={[
+            {
+              loc: [0, 5],
+              // title: 'Track props',
+            },
+            {
+              loc: [6, 7],
+            },
+            {
+              loc: [9, 20],
+              // title: 'Mount effect' to set up sequence
+            },
+            {
+              loc: [21, 24],
+              // title: 'Unmount' cleanup function
+            },
+            {
+              loc: [24, 25],
+              // title: Empty array dep ensures it only runs once
+            },
+            {
+              loc: [5, 6],
+              // title: Access isPlaying from Song using context
+            },
+            {
+              loc: [26, 33],
+              // title: start or stop sequencer if isPlaying changes
+            },
+            {
+              loc: [34, 41],
+              // title: update Tone.Sequence if steps change
+            },
+          ]}
+          className="code-theme code-slide"
+          lang="jsx"
+        >
+          <Notes>
+            Show Reactronica Track internals. Highly simplified version, without
+            Instrument update and effects
+          </Notes>
         </CodeSlide>
 
         <Slide>
@@ -311,6 +453,9 @@ function App() {
 
         <Slide>
           <Heading>Drum Pads</Heading>
+          <Notes>
+            Demonstrate using one central state can output UI and sound
+          </Notes>
         </Slide>
 
         <Slide>

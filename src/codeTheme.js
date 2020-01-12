@@ -47,7 +47,7 @@ const theme = {
     {
       types: ['number'],
       style: {
-        color: css['colour-yellow'],
+        color: css['colour-orange'],
       },
     },
     {
