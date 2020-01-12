@@ -452,7 +452,8 @@ const Song = ({
         </Slide>
 
         <Slide>
-          <Heading>Drum Pads</Heading>
+          <Heading>Sequencer</Heading>
+
           <Notes>
             Demonstrate using one central state can output UI and sound
           </Notes>
@@ -463,15 +464,15 @@ const Song = ({
         </Slide>
 
         <Slide>
-          <Heading>Chord Finder</Heading>
-        </Slide>
-
-        <Slide>
           <Heading>DAW</Heading>
+
+          <Notes>Show instruments and effects</Notes>
         </Slide>
 
         <Slide>
-          <Heading>MIDI Keyboard and Drums</Heading>
+          <Heading>MIDI Drum Pads</Heading>
+
+          <Notes>Little performance!</Notes>
         </Slide>
 
         {/* Causes browser to hang, not sure what is going on */}
