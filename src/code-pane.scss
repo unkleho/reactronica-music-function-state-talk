@@ -3,53 +3,6 @@ a {
   text-decoration: none;
 }
 
-.prism-code {
-  background-color: var(--colour-black);
-  font-family: 'Inconsolata', monospace !important;
-  // padding: 1em !important;
-
-  .comment {
-    color: var(--colour-grey-lighter);
-  }
-
-  .token-line {
-    line-height: 1.3;
-  }
-
-  .number {
-    color: var(--colour-purple);
-  }
-
-  .tag,
-  .class-name {
-    color: var(--colour-yellow);
-  }
-
-  .script {
-    color: var(--colour-orange);
-  }
-
-  .operator {
-    color: var(--colour-purple);
-  }
-
-  .function {
-    color: var(--colour-blue);
-  }
-
-  .punctuation {
-    color: var(--colour-grey-lightest);
-  }
-
-  .keyword {
-    color: var(--colour-pink);
-  }
-
-  .attr-name {
-    color: var(--colour-yellow-dark);
-  }
-}
-
 .npm__react-simple-code-editor__textarea {
   // padding: 1em !important;
   line-height: 1.3 !important;
@@ -77,3 +30,50 @@ a {
   text-align: left;
   line-height: 1.3;
 }
+
+// Using codeTheme.js for now
+// .prism-code {
+//   background-color: var(--colour-black);
+//   font-family: 'Inconsolata', monospace !important;
+
+//   .comment {
+//     color: var(--colour-grey-lighter);
+//   }
+
+//   .token-line {
+//     line-height: 1.3;
+//   }
+
+//   .number {
+//     color: var(--colour-purple);
+//   }
+
+//   .tag,
+//   .class-name {
+//     color: var(--colour-yellow);
+//   }
+
+//   .script {
+//     color: var(--colour-orange);
+//   }
+
+//   .operator {
+//     color: var(--colour-purple);
+//   }
+
+//   .function {
+//     color: var(--colour-blue);
+//   }
+
+//   .punctuation {
+//     color: var(--colour-grey-lightest);
+//   }
+
+//   .keyword {
+//     color: var(--colour-pink);
+//   }
+
+//   .attr-name {
+//     color: var(--colour-yellow-dark);
+//   }
+// }

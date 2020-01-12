@@ -8,7 +8,7 @@ import {
   Heading as RawHeading,
   List as RawList,
   ListItem as RawListItem,
-  // Quote,
+  Quote as RawQuote,
   Text as RawText,
   Notes,
 } from 'spectacle';
@@ -17,6 +17,8 @@ import styled from 'react-emotion';
 import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import CodeSlide from 'spectacle-code-slide';
 import Tone from 'tone';
+
+import codeTheme from './codeTheme';
 
 import './global.module.css';
 import './App.css';
@@ -46,6 +48,12 @@ const Heading = styled(RawHeading)`
 const SubHeading = styled(RawHeading)`
   color: #ccc;
   font-weight: 600;
+`;
+
+const Quote = styled(RawQuote)`
+  color: var(--colour-primary);
+  margin-bottom: 2rem;
+  line-height: 1.3;
 `;
 
 const Text = styled(RawText)`
@@ -87,6 +95,16 @@ function App() {
               </ListItem>
             </Appear>
           </List>
+        </Slide>
+
+        <Slide>
+          <Quote>"...UI as a pure function of application state"</Quote>
+          <Text>
+            @rauchg,{' '}
+            <a href="https://rauchg.com/2015/pure-ui/">
+              rauchg.com/2015/pure-ui
+            </a>
+          </Text>
         </Slide>
 
         <Slide>
@@ -170,9 +188,9 @@ function App() {
           <Heading size={3}>Tone JS</Heading>
           <List>
             <ListItem>Powerful audio library for the web</ListItem>
-            <ListItem>Imperative</ListItem>
+            <ListItem>Mostly imperative</ListItem>
             <ListItem>Class based</ListItem>
-            <ListItem>Large API - show docs</ListItem>
+            <ListItem>Large API - 140 classes!</ListItem>
           </List>
         </Slide>
 
@@ -194,7 +212,7 @@ function App() {
 
   return (
     <button onClick={() => {
-      synth.current.triggerAttackRelease('C3');
+      synth.current.triggerAttackRelease('C3', '4n');
     }}>Play</button>
   )
 }`}
@@ -204,9 +222,10 @@ function App() {
                 useState: React.useState,
                 useEffect: React.useEffect,
               }}
-              theme={{
-                styles: [],
-              }}
+              // theme={{
+              //   styles: [],
+              // }}
+              theme={codeTheme}
               language="jsx"
             >
               <LiveEditor className="prism-code react-live__editor" />

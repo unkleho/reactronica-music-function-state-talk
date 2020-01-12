@@ -59,6 +59,10 @@
   colour-bg: var(--colour-bg);
   colour-black: var(--colour-black);
   colour-white: var(--colour-white);
+  colour-grey: var(--colour-grey);
+  colour-grey-light: var(--colour-grey-light);
+  colour-grey-lighter: var(--colour-grey-lighter);
+  colour-grey-lightest: var(--colour-grey-lightest);
   colour-pink: var(--colour-pink);
   colour-purple: var(--colour-purple);
   colour-blue: var(--colour-blue);
