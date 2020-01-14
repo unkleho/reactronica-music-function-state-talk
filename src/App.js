@@ -3,7 +3,7 @@ import {
   Deck,
   Slide,
   Appear,
-  // CodePane,
+  CodePane,
   // Image,
   Heading as RawHeading,
   List as RawList,
@@ -135,7 +135,7 @@ function App() {
         </Slide>
 
         <Slide>
-          <Heading size={3}>???? as a Function of State</Heading>
+          <Heading size={3}>_____ as a Function of State</Heading>
           <List>
             <ListItem>
               VR: <strong>React VR</strong>
@@ -267,14 +267,18 @@ function App() {
         <WideSlide>
           <ReactLive
             code={`() => {
+  const [isPlaying, setIsPlaying] = useState(false);
+              
   return (
-    <Song isPlaying={false} bpm={70} volume={0}>
+    <Song isPlaying={isPlaying} bpm={70} volume={0}>
       <Track
         steps={['C3', null, 'G3', null]}
-        // effects={<Effect type="distortion" id="1" />}
       >
         <Instrument type="amSynth" />
+        <Effect type="distortion" id="1" />
       </Track>
+
+      {isPlaying ? 'Playing' : 'Stopped'}
     </Song>
   )
 }`}
@@ -283,12 +287,11 @@ function App() {
               Track,
               Instrument,
               Effect,
+              useState: React.useState,
             }}
           />
 
-          <Notes>
-            Demonstate API. Fix reactronica props errors! Maybe throw errors?
-          </Notes>
+          <Notes>Demonstate API.</Notes>
         </WideSlide>
 
         <CodeSlide
@@ -473,6 +476,76 @@ const Song = ({
           <Heading>MIDI Drum Pads</Heading>
 
           <Notes>Little performance!</Notes>
+        </Slide>
+
+        {/* --------------------------------------------------------------- */}
+        {/* Reactronica API flat vs nested props */}
+        {/* --------------------------------------------------------------- */}
+
+        <Slide>
+          <CodePane
+            theme="external"
+            style={{
+              fontSize: 24,
+            }}
+            lang="jsx"
+            className="code-theme"
+            source={`const ExampleFlat = () => {  
+  return (
+    <Song isPlaying={true} bpm={100}>
+      <Track
+        steps={'C3', null, 'G3', null]}
+      >
+        <Instrument 
+          type="synth"
+          oscillatorType="sine"
+          envelopeAttack={10}
+          envelopeDecay={10}
+          envelopeRelease={10}
+          envelopeSustain={10}
+        />
+
+        <Effect type="delay" />
+        <Effect type="reverb" />
+      </Track>
+    </Song>
+  );
+}`}
+          ></CodePane>
+        </Slide>
+
+        <Slide>
+          <CodePane
+            theme="external"
+            style={{
+              fontSize: 24,
+            }}
+            lang="jsx"
+            className="code-theme"
+            source={`const ExampleNested = () => {  
+  return (
+    <Song isPlaying={true} bpm={100}>
+      <Track 
+        steps={['C3', null, 'G3', null]} 
+        effects={[<Effect type="delay" />, <Effect type="reverb" />]}
+      >
+        <Instrument 
+          type={"synth"}
+          oscillator={{
+            type: "sine"
+          }}
+          envelope={{
+            attack: 10
+            decay: 10
+            release: 10
+            sustain: 10  
+          }}
+        />
+      </Track>
+    </Song>
+  );
+}`}
+          ></CodePane>
         </Slide>
 
         {/* Causes browser to hang, not sure what is going on */}
