@@ -78,6 +78,8 @@ const WideSlide = styled(Slide)`
 `;
 
 function App() {
+  const [showButton, setShowButton] = React.useState(false);
+
   return (
     <div className="App">
       <Deck theme={theme} showFullscreenControl={false} progress="bar">
@@ -266,6 +268,13 @@ function App() {
         </Slide>
 
         <WideSlide>
+          <button
+            onClick={() => {
+              setShowButton(true);
+            }}
+          >
+            Show button
+          </button>
           <ReactLive
             code={`() => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -278,8 +287,7 @@ function App() {
         <Instrument type="amSynth" />
         <Effect type="distortion" id="1" />
       </Track>
-
-      {isPlaying ? 'Playing' : 'Stopped'}
+      ${showButton ? `{isPlaying ? 'Playing' : 'Stopped'}` : ''}
     </Song>
   )
 }`}
@@ -294,6 +302,7 @@ function App() {
 
           <Notes>
             Demonstate API. Show multiple tracks and effects. Demo step types.
+            Demo onStepPlay.
           </Notes>
         </WideSlide>
 
