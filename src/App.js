@@ -14,13 +14,13 @@ import {
 } from 'spectacle';
 import createTheme from 'spectacle/lib/themes/default';
 import styled from 'react-emotion';
-import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
+// import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import CodeSlide from 'spectacle-code-slide';
-import Tone from 'tone';
+// import Tone from 'tone';
 import { Song, Track, Instrument, Effect } from 'reactronica';
 
 import ReactLive from './ReactLive';
-import codeTheme from './codeTheme';
+// import codeTheme from './codeTheme';
 
 import './global.module.css';
 import './App.css';
@@ -202,7 +202,7 @@ function App() {
           </List>
         </Slide>
 
-        <WideSlide>
+        {/* <WideSlide>
           <Heading size={6}>Tone JS + React</Heading>
 
           <div className="react-live">
@@ -236,7 +236,7 @@ function App() {
               </div>
             </LiveProvider>
           </div>
-        </WideSlide>
+        </WideSlide> */}
 
         <Slide>
           <Heading size={3}>Reactronica API</Heading>
@@ -291,7 +291,9 @@ function App() {
             }}
           />
 
-          <Notes>Demonstate API.</Notes>
+          <Notes>
+            Demonstate API. Show multiple tracks and effects. Demo step types.
+          </Notes>
         </WideSlide>
 
         <CodeSlide
