@@ -74,6 +74,7 @@ const ListItem = styled(RawListItem)`
 
 const WideSlide = styled(Slide)`
   max-width: 1800px;
+  max-height: 900px;
 `;
 
 function App() {
