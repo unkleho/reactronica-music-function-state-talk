@@ -13,11 +13,13 @@ a {
 
 .react-live {
   display: flex;
+  justify-content: center;
 }
 
 .react-live__editor {
   flex: 1;
   margin-right: 1em;
+  max-width: 1000px;
 
   pre,
   textarea {

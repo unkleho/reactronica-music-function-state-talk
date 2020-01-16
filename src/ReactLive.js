@@ -3,7 +3,7 @@ import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 
 import codeTheme from './codeTheme';
 
-const ReactLive = ({ code, scope = {} }) => {
+const ReactLive = ({ code, scope = {}, showPreview = true }) => {
   return (
     <div className="react-live">
       <LiveProvider
@@ -18,7 +18,11 @@ const ReactLive = ({ code, scope = {} }) => {
         language="jsx"
       >
         <LiveEditor className="code-theme react-live__editor" />
-        <div className="react-live__preview-pane">
+
+        <div
+          className="react-live__preview-pane"
+          style={{ display: showPreview ? 'flex' : 'none' }}
+        >
           <LiveError className="react-live__error" />
           <LivePreview className="react-live__preview" />
         </div>

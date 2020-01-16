@@ -43,6 +43,7 @@ const theme = createTheme(
 
 const Heading = styled(RawHeading)`
   margin-bottom: 64px;
+  line-height: 1.2;
   background: linear-gradient(160deg, #5f0fd1, #0fa6d1);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -86,6 +87,7 @@ function App() {
         <Slide>
           <Heading>Reactronica</Heading>
           <SubHeading size={5}>Music as a Function of State</SubHeading>
+          {/* <Text>Music as a Function of State</Text> */}
         </Slide>
 
         <Slide>
@@ -96,7 +98,7 @@ function App() {
               <strong>State Library of NSW</strong>
             </ListItem>
             <Appear>
-              <ListItem>Background in (industrial) design</ListItem>
+              <ListItem>Background in design</ListItem>
             </Appear>
             <Appear>
               <ListItem>
@@ -157,7 +159,7 @@ function App() {
             </ListItem>
           </List>
 
-          <Notes>Ask audience for examples</Notes>
+          <Notes>Ask audience for examples, show screen shots</Notes>
         </Slide>
 
         <Slide>
@@ -176,6 +178,12 @@ function App() {
               state, so always kept in sync
             </ListItem>
           </List>
+
+          <Notes>
+            Turns out, React and JSX is quite good at describing music. Rather
+            than declaring visual elements in 2D or 3D, Reactronica declares
+            music in 4D. I'd consider animation 4D and React already does this.
+          </Notes>
         </Slide>
 
         <Slide>
@@ -190,8 +198,12 @@ function App() {
             <ListItem>React components for making music</ListItem>
             <ListItem>My first library!</ListItem>
             <ListItem>VERY early days...</ListItem>
-            <ListItem>Inspired by React Music</ListItem>
-            <ListItem>Uses Tone JS under the hood</ListItem>
+            <ListItem>
+              Inspired by <strong>React Music</strong>
+            </ListItem>
+            <ListItem>
+              Uses <strong>Tone JS</strong> under the hood
+            </ListItem>
           </List>
         </Slide>
 
@@ -266,6 +278,106 @@ function App() {
             </ListItem>
           </List>
         </Slide>
+
+        {[
+          {
+            title: '<Song />',
+            code: ` return (
+    <Song isPlaying={false} bpm={70}>
+    </Song>
+  )`,
+          },
+          {
+            title: '<Track />',
+            code: ` return (
+    <Song isPlaying={false} bpm={70}>
+      <Track
+        steps={['C3', null, 'G3', null]}
+      >
+      </Track>
+    </Song>
+  )`,
+          },
+          {
+            title: '<Instrument />',
+            code: ` return (
+    <Song isPlaying={false} bpm={70}>
+      <Track
+        steps={['C3', null, 'G3', null]}
+      >
+        <Instrument type="synth"></Instrument>
+      </Track>
+    </Song>
+  )`,
+          },
+          {
+            title: 'Steps prop',
+            code: ` return (
+    <Song isPlaying={false} bpm={70}>
+      <Track
+        steps={[['C3', 'E3'], null, 'G3', null]}
+      >
+        <Instrument type="synth"></Instrument>
+      </Track>
+    </Song>
+  )`,
+          },
+          {
+            title: 'Effects',
+            code: ` return (
+    <Song isPlaying={false} bpm={70}>
+      <Track
+        steps={[['C3', 'E3'], null, 'G3', null]}
+      >
+        <Instrument type="synth"></Instrument>
+        <Effect type="feedbackDelay" />
+      </Track>
+    </Song>
+  )`,
+          },
+          {
+            title: 'Multi tracks with sampler',
+            code: ` return (
+    <Song isPlaying={true} bpm={70}>
+      <Track
+        steps={[['C3', 'E3'], null, 'G3', null]}
+      >
+        <Instrument type="synth"></Instrument>
+        <Effect type="freebackDelay" />
+      </Track>
+      <Track
+        steps={[['C3', 'E3'], null, 'G3', null]}
+      >
+        <Instrument type="amSynth"></Instrument>
+      </Track>
+    </Song>
+  )`,
+          },
+        ].map(slide => {
+          return (
+            <WideSlide>
+              {/* <Heading size={4}>{slide.title}</Heading> */}
+              <ReactLive
+                code={`() => {
+${slide.code}
+}`}
+                scope={{
+                  Song,
+                  Track,
+                  Instrument,
+                  Effect,
+                  useState: React.useState,
+                }}
+                showPreview={false}
+              />
+
+              <Notes>
+                Demonstate API. Show multiple tracks and effects. Demo notes in
+                instrument. Demo step types. Demo onStepPlay.
+              </Notes>
+            </WideSlide>
+          );
+        })}
 
         <WideSlide>
           <button
@@ -502,38 +614,6 @@ const Song = ({
             }}
             lang="jsx"
             className="code-theme"
-            source={`const ExampleFlat = () => {  
-  return (
-    <Song isPlaying={true} bpm={100}>
-      <Track
-        steps={'C3', null, 'G3', null]}
-      >
-        <Instrument 
-          type="synth"
-          oscillatorType="sine"
-          envelopeAttack={10}
-          envelopeDecay={10}
-          envelopeRelease={10}
-          envelopeSustain={10}
-        />
-
-        <Effect type="delay" />
-        <Effect type="reverb" />
-      </Track>
-    </Song>
-  );
-}`}
-          ></CodePane>
-        </Slide>
-
-        <Slide>
-          <CodePane
-            theme="external"
-            style={{
-              fontSize: 24,
-            }}
-            lang="jsx"
-            className="code-theme"
             source={`const ExampleNested = () => {  
   return (
     <Song isPlaying={true} bpm={100}>
@@ -560,14 +640,9 @@ const Song = ({
           ></CodePane>
         </Slide>
 
-        {/* Causes browser to hang, not sure what is going on */}
-        {/* <Slide>
-          <ComponentPlayground
-            theme="dark"
-            code={`const Button = ({ title }) => <button type="button">{title}</button>;
-            render(<Button title="My Button" />);`}
-          ></ComponentPlayground>
-        </Slide> */}
+        {/* --------------------------------------------------------------- */}
+        {/* DEMOS */}
+        {/* --------------------------------------------------------------- */}
       </Deck>
     </div>
   );
