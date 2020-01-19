@@ -14,12 +14,11 @@ import {
 } from 'spectacle';
 import createTheme from 'spectacle/lib/themes/default';
 import styled from 'react-emotion';
-// import { LiveProvider, LiveEditor, LiveError, LivePreview } from 'react-live';
 import CodeSlide from 'spectacle-code-slide';
-// import Tone from 'tone';
 import { Song, Track, Instrument, Effect } from 'reactronica';
 
 import ReactLive from './ReactLive';
+import StepsEditorSlide from './components/StepsEditorSlide';
 // import codeTheme from './codeTheme';
 
 import './global.module.css';
@@ -110,7 +109,7 @@ function App() {
         </Slide>
 
         <Slide>
-          <Quote>"...UI as a pure function of application state"</Quote>
+          <Quote>“...UI as a pure function of application state”</Quote>
           <Text>
             @rauchg,{' '}
             <a href="https://rauchg.com/2015/pure-ui/">
@@ -292,7 +291,7 @@ function App() {
             code: ` return (
     <Song isPlaying={false} bpm={70}>
       <Track
-        steps={['C3', null, 'G3', null]}
+        steps={['A3', 'C3', 'E3', null]}
       >
       </Track>
     </Song>
@@ -303,7 +302,7 @@ function App() {
             code: ` return (
     <Song isPlaying={false} bpm={70}>
       <Track
-        steps={['C3', null, 'G3', null]}
+        steps={['A3', 'C3', 'E3', null]}
       >
         <Instrument type="synth"></Instrument>
       </Track>
@@ -313,9 +312,9 @@ function App() {
           {
             title: 'Steps prop',
             code: ` return (
-    <Song isPlaying={false} bpm={70}>
+    <Song isPlaying={true} bpm={70}>
       <Track
-        steps={[['C3', 'E3'], null, 'G3', null]}
+        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
       >
         <Instrument type="synth"></Instrument>
       </Track>
@@ -325,12 +324,12 @@ function App() {
           {
             title: 'Effects',
             code: ` return (
-    <Song isPlaying={false} bpm={70}>
+    <Song isPlaying={true} bpm={70}>
       <Track
-        steps={[['C3', 'E3'], null, 'G3', null]}
+        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
       >
-        <Instrument type="synth"></Instrument>
-        <Effect type="feedbackDelay" />
+        <Instrument type="amSynth"></Instrument>
+        <Effect type="freeverb" />
       </Track>
     </Song>
   )`,
@@ -340,15 +339,40 @@ function App() {
             code: ` return (
     <Song isPlaying={true} bpm={70}>
       <Track
-        steps={[['C3', 'E3'], null, 'G3', null]}
-      >
-        <Instrument type="synth"></Instrument>
-        <Effect type="freebackDelay" />
-      </Track>
-      <Track
-        steps={[['C3', 'E3'], null, 'G3', null]}
+        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
       >
         <Instrument type="amSynth"></Instrument>
+      </Track>
+      <Track
+        steps={['C3', null, 'C3', null]}
+      >
+        <Instrument type="sampler" 
+          samples={{
+            C3: '/audio/kick.wav',
+          }}
+        />
+      </Track>
+    </Song>
+  )`,
+          },
+          {
+            title: 'Multi tracks with sampler',
+            code: ` return (
+    <Song isPlaying={true} bpm={70}>
+      <Track
+        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
+      >
+        <Instrument type="amSynth"></Instrument>
+      </Track>
+      <Track
+        steps={['C3', 'G3', 'C3', 'G3']}
+      >
+        <Instrument type="sampler" 
+          samples={{
+            C3: '/audio/kick.wav',
+            D3: '/audio/snare.wav'
+          }}
+        />
       </Track>
     </Song>
   )`,
@@ -373,50 +397,11 @@ ${slide.code}
 
               <Notes>
                 Demonstate API. Show multiple tracks and effects. Demo notes in
-                instrument. Demo step types. Demo onStepPlay.
+                instrument. Demo step types.
               </Notes>
             </WideSlide>
           );
         })}
-
-        <WideSlide>
-          <button
-            onClick={() => {
-              setShowButton(true);
-            }}
-          >
-            Show button
-          </button>
-          <ReactLive
-            code={`() => {
-  const [isPlaying, setIsPlaying] = useState(false);
-              
-  return (
-    <Song isPlaying={isPlaying} bpm={70} volume={0}>
-      <Track
-        steps={['C3', null, 'G3', null]}
-      >
-        <Instrument type="amSynth" />
-        <Effect type="distortion" id="1" />
-      </Track>
-      ${showButton ? `{isPlaying ? 'Playing' : 'Stopped'}` : ''}
-    </Song>
-  )
-}`}
-            scope={{
-              Song,
-              Track,
-              Instrument,
-              Effect,
-              useState: React.useState,
-            }}
-          />
-
-          <Notes>
-            Demonstate API. Show multiple tracks and effects. Demo step types.
-            Demo onStepPlay.
-          </Notes>
-        </WideSlide>
 
         <CodeSlide
           code={`const SongContext = React.createContext();
@@ -577,6 +562,59 @@ const Song = ({
         <Slide>
           <Heading>Demos</Heading>
         </Slide>
+
+        <WideSlide>
+          <div
+            style={{
+              display: 'flex',
+            }}
+          >
+            <StepsEditorSlide
+              defaultSteps={[null]}
+              startNote="C3"
+              endNote="B3"
+            ></StepsEditorSlide>
+          </div>
+        </WideSlide>
+
+        <WideSlide>
+          <button
+            onClick={() => {
+              setShowButton(true);
+            }}
+          >
+            Show button
+          </button>
+          <ReactLive
+            code={`() => {
+  const [isPlaying, setIsPlaying] = useState(false);
+              
+  return (
+    <Song isPlaying={isPlaying} bpm={70} volume={0}>
+      <Track
+        steps={['C3', null, 'G3', null]}
+      >
+        <Instrument type="amSynth" />
+        <Effect type="distortion" id="1" />
+      </Track>
+      ${showButton ? `{isPlaying ? 'Playing' : 'Stopped'}` : ''}
+    </Song>
+  )
+}`}
+            scope={{
+              Song,
+              Track,
+              Instrument,
+              Effect,
+              useState: React.useState,
+            }}
+          />
+
+          <Notes>
+            Import StepSequencer and show how state changes music and UI. Demo
+            onStepPlay
+          </Notes>
+        </WideSlide>
 
         <Slide>
           <Heading>Sequencer</Heading>
