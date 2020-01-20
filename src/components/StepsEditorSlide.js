@@ -1,15 +1,14 @@
 import React, { useState } from 'react';
-// import { CodePane } from 'spectacle';
 import { Song, Track, Instrument } from 'reactronica';
-import { Editor } from 'react-live';
-import codeTheme from '../codeTheme';
 
+import CodeEditor from './CodeEditor';
 import StepsEditor from './StepsEditor';
 
 const StepsEditorSlide = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [showOnStepPlay, setShowOnStepPlay] = useState(true);
+  const [showOnStepPlay, setShowOnStepPlay] = useState(false);
   const [currentStepIndex, setCurrentStepIndex] = useState();
+  const [highlightedLines, setHighlightedLines] = useState([]);
   const [steps] = useState([
     [
       {
@@ -31,16 +30,21 @@ const StepsEditorSlide = () => {
 
   return (
     <>
-      <Editor
+      <CodeEditor
         contentEditable={false}
         style={{
-          fontSize: 24,
           minWidth: 'auto',
           width: '50%',
+          marginRight: '2rem',
         }}
+        highlightedLines={highlightedLines}
         code={`() => {
-  const [steps, setSteps] = useState(defaultSteps);
-  const [currentStep, setCurrentStep] = useState();
+  const [steps, setSteps] = useState(defaultSteps);${
+    showOnStepPlay
+      ? `
+  const [currentStep, setCurrentStep] = useState();`
+      : ''
+  }
 
   return (
     <>
@@ -69,52 +73,7 @@ const StepsEditorSlide = () => {
     </>
   )
 }`}
-        language="jsx"
-        theme={codeTheme}
-        // className="code-theme react-live__editor"
-      ></Editor>
-
-      {/* <CodePane
-        theme="external"
-        style={{
-          fontSize: 24,
-          minWidth: 'auto',
-          width: '50%',
-        }}
-        lang="jsx"
-        className="code-theme"
-        source={`() => {
-  const [steps, setSteps] = useState(defaultSteps);
-  const [currentStep, setCurrentStep] = useState();
-
-  return (
-    <>
-      <Song isPlaying={${isPlaying}} bpm={100}>
-        <Track 
-          steps={steps}${
-            showOnStepPlay
-              ? `
-          onStepPlay={(_, index) => setCurrentStep(index)}`
-              : ''
-          }
-        >
-          <Instrument type={"synth"} />
-        </Track>
-      </Song>
-
-      <StepsEditor 
-        steps={steps}${
-          showOnStepPlay
-            ? `
-        currentStep={currentStep}`
-            : ''
-        }        
-        onClick={(steps) => setSteps(steps)} 
       />
-    </>
-  )
-}`}
-      ></CodePane> */}
 
       <div
         style={{
@@ -125,13 +84,17 @@ const StepsEditorSlide = () => {
           defaultSteps={steps}
           startNote="C3"
           endNote="B3"
-          currentStepIndex={currentStepIndex}
-        ></StepsEditor>
+          currentStepIndex={showOnStepPlay ? currentStepIndex : undefined}
+          style={{
+            marginBottom: '1rem',
+          }}
+        />
 
         <button
           className="demoButton"
           onClick={() => {
             setIsPlaying(!isPlaying);
+            setHighlightedLines([7]);
           }}
         >
           {isPlaying ? 'Stop' : 'Play'}
@@ -141,6 +104,7 @@ const StepsEditorSlide = () => {
           className="demoButton"
           onClick={() => {
             setShowOnStepPlay(!showOnStepPlay);
+            setHighlightedLines([3, 10, 18]);
           }}
         >
           {showOnStepPlay ? 'Hide' : 'Show'} onStepPlay

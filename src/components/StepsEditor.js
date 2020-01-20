@@ -15,6 +15,7 @@ const DAWStepsEditor = ({
   endNote = 'B4',
   disableScrollIntoView = false,
   className,
+  style,
   onStepEditorClick,
   onKeyboardDown,
   onKeyboardUp,
@@ -114,7 +115,7 @@ const DAWStepsEditor = ({
   const emptyArray = [...new Array(1 + subdivision)];
 
   return (
-    <div className={[css.stepsEditor, className || ''].join(' ')}>
+    <div className={[css.stepsEditor, className || ''].join(' ')} style={style}>
       {clipName && (
         <div className={css.info}>
           <p>{clipName}</p>

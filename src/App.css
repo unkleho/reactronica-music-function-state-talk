@@ -3,6 +3,7 @@
 }
 
 .demoButton {
+  margin-right: var(--baseline-2);
   padding: var(--baseline-2);
   color: var(--colour-white);
   font-size: inherit;
