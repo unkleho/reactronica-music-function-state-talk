@@ -377,9 +377,9 @@ function App() {
     </Song>
   )`,
           },
-        ].map(slide => {
+        ].map((slide, i) => {
           return (
-            <WideSlide>
+            <WideSlide key={i}>
               {/* <Heading size={4}>{slide.title}</Heading> */}
               <ReactLive
                 code={`() => {

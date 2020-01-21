@@ -24,7 +24,7 @@ const CodeEditor = ({
         className={['code-editor', className].join(' ')}
       />
 
-      <style jsx>
+      <style>
         {highlightedLines.map(line => {
           return `.code-editor .token-line:nth-child(${line}) {
             background-color: #161616;

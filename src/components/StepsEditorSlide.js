@@ -4,11 +4,41 @@ import { Song, Track, Instrument } from 'reactronica';
 import CodeEditor from './CodeEditor';
 import StepsEditor from './StepsEditor';
 
+import useSlideActions from '../hooks/useSlideActions';
+
 const StepsEditorSlide = () => {
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const [showCurrentStepState, setShowCurrentStepState] = useState(false);
   const [showOnStepPlay, setShowOnStepPlay] = useState(false);
+  const [showCurrentStepProp, setShowCurrentStepProp] = useState(false);
+
   const [currentStepIndex, setCurrentStepIndex] = useState();
   const [highlightedLines, setHighlightedLines] = useState([]);
+
+  const slideActions = [
+    () => {
+      setShowCurrentStepState(false);
+      setHighlightedLines([]);
+    },
+    () => {
+      setShowCurrentStepState(true);
+      setShowOnStepPlay(false);
+      setHighlightedLines([3]);
+    },
+    () => {
+      setShowOnStepPlay(true);
+      setShowCurrentStepProp(false);
+      setHighlightedLines([10]);
+    },
+    () => {
+      setShowCurrentStepProp(true);
+      setHighlightedLines([18]);
+    },
+  ];
+
+  useSlideActions(slideActions);
+
   const [steps] = useState([
     [
       {
@@ -40,7 +70,7 @@ const StepsEditorSlide = () => {
         highlightedLines={highlightedLines}
         code={`() => {
   const [steps, setSteps] = useState(defaultSteps);${
-    showOnStepPlay
+    showCurrentStepState
       ? `
   const [currentStep, setCurrentStep] = useState();`
       : ''
@@ -63,7 +93,7 @@ const StepsEditorSlide = () => {
 
       <StepsEditor 
         steps={steps}${
-          showOnStepPlay
+          showCurrentStepProp
             ? `
         currentStep={currentStep}`
             : ''
@@ -88,26 +118,18 @@ const StepsEditorSlide = () => {
           style={{
             marginBottom: '1rem',
           }}
+          onStepEditorClick={(steps, step, index) => {
+            console.log('Update steps', steps, step, index);
+          }}
         />
 
         <button
           className="demoButton"
           onClick={() => {
             setIsPlaying(!isPlaying);
-            setHighlightedLines([7]);
           }}
         >
           {isPlaying ? 'Stop' : 'Play'}
-        </button>
-
-        <button
-          className="demoButton"
-          onClick={() => {
-            setShowOnStepPlay(!showOnStepPlay);
-            setHighlightedLines([3, 10, 18]);
-          }}
-        >
-          {showOnStepPlay ? 'Hide' : 'Show'} onStepPlay
         </button>
       </div>
 
