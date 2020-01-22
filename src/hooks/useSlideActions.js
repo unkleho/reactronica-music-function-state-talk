@@ -23,10 +23,12 @@ const useSlideActions = (slideActions = []) => {
     const slideAction = slideActions[slideNumber];
 
     if (typeof slideAction === 'function') {
-      slideAction();
+      slideAction(slideNumber);
     }
     // eslint-disable-next-line
   }, [slideNumber]);
+
+  return slideNumber;
 };
 
 export default useSlideActions;

@@ -19,6 +19,7 @@ import { Song, Track, Instrument, Effect } from 'reactronica';
 
 import ReactLive from './ReactLive';
 import StepsEditorSlide from './components/StepsEditorSlide';
+import ComponentsSlide from './components/ComponentsSlide';
 // import codeTheme from './codeTheme';
 
 import './global.module.css';
@@ -278,130 +279,17 @@ function App() {
           </List>
         </Slide>
 
-        {[
-          {
-            title: '<Song />',
-            code: ` return (
-    <Song isPlaying={false} bpm={70}>
-    </Song>
-  )`,
-          },
-          {
-            title: '<Track />',
-            code: ` return (
-    <Song isPlaying={false} bpm={70}>
-      <Track
-        steps={['A3', 'C3', 'E3', null]}
-      >
-      </Track>
-    </Song>
-  )`,
-          },
-          {
-            title: '<Instrument />',
-            code: ` return (
-    <Song isPlaying={false} bpm={70}>
-      <Track
-        steps={['A3', 'C3', 'E3', null]}
-      >
-        <Instrument type="synth"></Instrument>
-      </Track>
-    </Song>
-  )`,
-          },
-          {
-            title: 'Steps prop',
-            code: ` return (
-    <Song isPlaying={true} bpm={70}>
-      <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
-      >
-        <Instrument type="synth"></Instrument>
-      </Track>
-    </Song>
-  )`,
-          },
-          {
-            title: 'Effects',
-            code: ` return (
-    <Song isPlaying={true} bpm={70}>
-      <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
-      >
-        <Instrument type="amSynth"></Instrument>
-        <Effect type="freeverb" />
-      </Track>
-    </Song>
-  )`,
-          },
-          {
-            title: 'Multi tracks with sampler',
-            code: ` return (
-    <Song isPlaying={true} bpm={70}>
-      <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
-      >
-        <Instrument type="amSynth"></Instrument>
-      </Track>
-      <Track
-        steps={['C3', null, 'C3', null]}
-      >
-        <Instrument type="sampler" 
-          samples={{
-            C3: '/audio/kick.wav',
-          }}
-        />
-      </Track>
-    </Song>
-  )`,
-          },
-          {
-            title: 'Multi tracks with sampler',
-            code: ` return (
-    <Song isPlaying={true} bpm={70}>
-      <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
-      >
-        <Instrument type="amSynth"></Instrument>
-      </Track>
-      <Track
-        steps={['C3', 'G3', 'C3', 'G3']}
-      >
-        <Instrument type="sampler" 
-          samples={{
-            C3: '/audio/kick.wav',
-            D3: '/audio/snare.wav'
-          }}
-        />
-      </Track>
-    </Song>
-  )`,
-          },
-        ].map((slide, i) => {
-          return (
-            <WideSlide key={i}>
-              {/* <Heading size={4}>{slide.title}</Heading> */}
-              <ReactLive
-                code={`() => {
-${slide.code}
-}`}
-                scope={{
-                  Song,
-                  Track,
-                  Instrument,
-                  Effect,
-                  useState: React.useState,
-                }}
-                showPreview={false}
-              />
+        {/**
+         * Demo Reactronica API Components
+         */}
 
-              <Notes>
-                Demonstate API. Show multiple tracks and effects. Demo notes in
-                instrument. Demo step types.
-              </Notes>
-            </WideSlide>
-          );
-        })}
+        <WideSlide>
+          <ComponentsSlide></ComponentsSlide>
+        </WideSlide>
+
+        {/**
+         * Show internals of Reactronica components
+         */}
 
         <CodeSlide
           code={`const SongContext = React.createContext();
