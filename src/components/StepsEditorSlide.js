@@ -12,11 +12,11 @@ const StepsEditorSlide = () => {
 
   // StepsEditor State
   const [showStepsEditor, setShowStepsEditor] = useState(false);
+  const [showStepsEditorSteps, setShowStepsEditorSteps] = useState(false);
 
   // Code State
   // const [showCurrentStepState, setShowCurrentStepState] = useState(false);
   const [showOnStepPlay, setShowOnStepPlay] = useState(false);
-  // const [showCurrentStepProp, setShowCurrentStepProp] = useState(false);
 
   // Slides State
   const [codeIndex, setCodeIndex] = useState(0);
@@ -53,7 +53,7 @@ const StepsEditorSlide = () => {
 
       <StepsEditor />
     </>
-      )`,
+  )`,
       action: index => {
         setShowStepsEditor(true);
         setSteps([null, null, null, null, null, null, null, null]);
@@ -76,28 +76,59 @@ const StepsEditorSlide = () => {
 
       <StepsEditor />
     </>
-      )`,
+  )`,
       action: index => {
         setShowStepsEditor(true);
         setSteps([
           [
             {
+              name: 'A3',
+            },
+            {
               name: 'C3',
+            },
+            {
+              name: 'E3',
             },
           ],
           null,
           [
             {
-              name: 'C3',
+              name: 'G3',
+            },
+            {
+              name: 'B3',
+            },
+            {
+              name: 'D3',
             },
           ],
           null,
+          [
+            {
+              name: 'A#3',
+            },
+            {
+              name: 'D3',
+            },
+            {
+              name: 'F3',
+            },
+          ],
           null,
-          null,
-          null,
+          [
+            {
+              name: 'A3',
+            },
+            {
+              name: 'C3',
+            },
+            {
+              name: 'E3',
+            },
+          ],
           null,
         ]);
-        // setShowOnStepPlay(false);
         setHighlightedLines([2]);
         setCodeIndex(index);
       },
@@ -109,16 +140,19 @@ const StepsEditorSlide = () => {
   return (
     <>
       <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
-        <Track steps={steps}>
+        <Track 
+          steps={steps}
+        >
           <Instrument type="synth" />
         </Track>
       </Song>
 
       <StepsEditor />
     </>
-      )`,
+  )`,
       action: index => {
-        setHighlightedLines([7]);
+        setShowStepsEditorSteps(false);
+        setHighlightedLines([8]);
         setCodeIndex(index);
       },
     },
@@ -129,16 +163,95 @@ const StepsEditorSlide = () => {
   return (
     <>
       <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
-        <Track steps={steps}>
+        <Track 
+          steps={steps}
+        >
           <Instrument type="synth" />
         </Track>
       </Song>
 
       <StepsEditor steps={steps} />
     </>
-      )`,
+  )`,
       action: index => {
-        setHighlightedLines([12]);
+        setShowStepsEditorSteps(true);
+        setHighlightedLines([14]);
+        setCodeIndex(index);
+      },
+    },
+    {
+      title: 'Add state for currentStep',
+      code: `const [steps, setSteps] = useState(defaultSteps);
+  const [currentStep, setCurrentStep] = useState();
+
+  return (
+    <>
+      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+        <Track 
+          steps={steps}
+        >
+          <Instrument type="synth" />
+        </Track>
+      </Song>
+
+      <StepsEditor steps={steps} />
+    </>
+  )`,
+      action: index => {
+        setHighlightedLines([3]);
+        setCodeIndex(index);
+      },
+    },
+    {
+      title: 'Set currentStep with Track callback',
+      code: `const [steps, setSteps] = useState(defaultSteps);
+  const [currentStep, setCurrentStep] = useState();
+
+  return (
+    <>
+      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+        <Track 
+          steps={steps} 
+          onStepPlay={(_, i) => setCurrentStep(i)}
+        >
+          <Instrument type="synth" />
+        </Track>
+      </Song>
+
+      <StepsEditor steps={steps} />
+    </>
+  )`,
+      action: index => {
+        setShowOnStepPlay(false);
+        setHighlightedLines([10]);
+        setCodeIndex(index);
+      },
+    },
+    {
+      title: 'Show playhead',
+      code: `const [steps, setSteps] = useState(defaultSteps);
+  const [currentStep, setCurrentStep] = useState();
+
+  return (
+    <>
+      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+        <Track 
+          steps={steps} 
+          onStepPlay={(_, i) => setCurrentStep(i)}
+        >
+          <Instrument type="synth" />
+        </Track>
+      </Song>
+
+      <StepsEditor 
+        steps={steps}
+        currentStep={currentStep}
+      />
+    </>
+  )`,
+      action: index => {
+        setShowOnStepPlay(true);
+        setHighlightedLines([18]);
         setCodeIndex(index);
       },
     },
@@ -153,7 +266,7 @@ const StepsEditorSlide = () => {
   useSlideActions(slideActions);
 
   const code = codeSteps[codeIndex].code;
-  // const title = codeSteps[codeIndex] && codeSteps[codeIndex].title;
+  const title = codeSteps[codeIndex] && codeSteps[codeIndex].title;
 
   const [steps, setSteps] = useState(undefined);
 
@@ -164,53 +277,24 @@ const StepsEditorSlide = () => {
         alignItems: 'center',
       }}
     >
-      <CodeEditor
-        contentEditable={false}
+      <div
         style={{
-          minWidth: 'auto',
-          width: '50%',
-          marginRight: '2rem',
+          width: '66%',
+          marginRight: '3rem',
         }}
-        highlightedLines={highlightedLines}
-        code={`() => {
+      >
+        <CodeEditor
+          contentEditable={false}
+          style={{
+            minWidth: 'auto',
+          }}
+          highlightedLines={highlightedLines}
+          code={`() => {
   ${code}
 }`}
-        //         code={`() => {
-        //   const [steps, setSteps] = useState(defaultSteps);${
-        //     showCurrentStepState
-        //       ? `
-        //   const [currentStep, setCurrentStep] = useState();`
-        //       : ''
-        //   }
-
-        //   return (
-        //     <>
-        //       <Song isPlaying={${isPlaying}} bpm={100}>
-        //         <Track
-        //           steps={steps}${
-        //             showOnStepPlay
-        //               ? `
-        //           onStepPlay={(_, index) => setCurrentStep(index)}`
-        //               : ''
-        //           }
-        //         >
-        //           <Instrument type={"synth"} />
-        //         </Track>
-        //       </Song>
-
-        //       <StepsEditor
-        //         steps={steps}${
-        //           showCurrentStepProp
-        //             ? `
-        //         currentStep={currentStep}`
-        //             : ''
-        //         }
-        //         onClick={(steps) => setSteps(steps)}
-        //       />
-        //     </>
-        //   )
-        // }`}
-      />
+        />
+        <h2 style={{ textAlign: 'left', fontSize: 32 }}>{title}</h2>
+      </div>
 
       <div
         style={{
@@ -220,7 +304,11 @@ const StepsEditorSlide = () => {
         {showStepsEditor && (
           <>
             <StepsEditor
-              defaultSteps={steps}
+              defaultSteps={
+                showStepsEditorSteps
+                  ? steps
+                  : [null, null, null, null, null, null, null, null]
+              }
               startNote="C3"
               endNote="B3"
               currentStepIndex={showOnStepPlay ? currentStepIndex : undefined}
@@ -249,7 +337,7 @@ const StepsEditorSlide = () => {
           steps={steps}
           onStepPlay={(_, index) => setCurrentStepIndex(index)}
         >
-          <Instrument type="synth"></Instrument>
+          <Instrument type="fmSynth"></Instrument>
         </Track>
       </Song>
     </div>

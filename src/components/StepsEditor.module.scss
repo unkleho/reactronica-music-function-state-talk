@@ -56,7 +56,7 @@
   cursor: pointer;
 
   @include media-sm {
-    font-size: var(--font-size-xs);
+    font-size: var(--font-size-lg);
   }
 
   .header &:first-child {

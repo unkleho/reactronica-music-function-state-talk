@@ -17,7 +17,7 @@ const CodeEditor = ({
         theme={codeTheme}
         code={code}
         style={{
-          fontSize: 24,
+          fontSize: 32,
           padding: 8,
           ...style,
         }}
