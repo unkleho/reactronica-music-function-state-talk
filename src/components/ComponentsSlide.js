@@ -32,11 +32,22 @@ const StepsEditorSlide = () => {
     {
       title: 'Add Song component',
       code: `return (
-    <Song isPlaying={false} bpm={70}>
+    <Song>
     </Song>
   )`,
       action: index => {
         setHighlightedLines([3, 4]);
+        setCodeIndex(index);
+      },
+    },
+    {
+      title: 'Add Song props',
+      code: `return (
+    <Song isPlaying={false} bpm={70}>
+    </Song>
+  )`,
+      action: index => {
+        setHighlightedLines([3]);
         setCodeIndex(index);
       },
     },
@@ -135,7 +146,7 @@ const StepsEditorSlide = () => {
       action: index => {
         setSynthType('amSynth');
         setEffects([]);
-        setHighlightedLines([5]);
+        setHighlightedLines([7]);
         setCodeIndex(index);
       },
     },

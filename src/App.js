@@ -452,17 +452,11 @@ const Song = ({
         </Slide>
 
         <WideSlide>
-          <div
-            style={{
-              display: 'flex',
-            }}
-          >
-            <StepsEditorSlide
-              defaultSteps={[null]}
-              startNote="C3"
-              endNote="B3"
-            ></StepsEditorSlide>
-          </div>
+          <StepsEditorSlide
+            defaultSteps={[null]}
+            startNote="C3"
+            endNote="B3"
+          ></StepsEditorSlide>
         </WideSlide>
 
         <WideSlide>
