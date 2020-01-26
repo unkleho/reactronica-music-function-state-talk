@@ -3,12 +3,14 @@ import { useEffect, useState } from 'react';
 import { useKeyPress } from './';
 
 const useSlideActions = (slideActions = []) => {
-  const [slideNumber, setSlideNumber] = useState(null);
+  const [slideNumber, setSlideNumber] = useState(0);
 
   useKeyPress('ArrowDown', () => {
-    if (slideNumber === null) {
-      setSlideNumber(0);
-    } else if (slideNumber < slideActions.length - 1) {
+    // if (slideNumber === null) {
+    //   setSlideNumber(0);
+    // } else
+
+    if (slideNumber < slideActions.length - 1) {
       setSlideNumber(slideNumber + 1);
     }
   });

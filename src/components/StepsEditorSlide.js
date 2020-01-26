@@ -9,6 +9,7 @@ import useSlideActions from '../hooks/useSlideActions';
 const StepsEditorSlide = () => {
   // Reactronica State
   const [isPlaying, setIsPlaying] = useState(false);
+  const [notes, setNotes] = useState([]);
 
   // StepsEditor State
   const [showStepsEditor, setShowStepsEditor] = useState(false);
@@ -26,15 +27,21 @@ const StepsEditorSlide = () => {
   const codeSteps = [
     {
       title: 'How does Reactronica work with UI components?',
+      action: index => {
+        setCodeIndex(index);
+      },
+    },
+    {
+      title: 'How does Reactronica work with UI components?',
       code: `return (
-    <>
-      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
-        <Track>
-          <Instrument type="synth" />
-        </Track>
-      </Song>
-    </>
-  )`,
+  <>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+      <Track>
+        <Instrument type="synth" />
+      </Track>
+    </Song>
+  </>
+)`,
       action: index => {
         setShowStepsEditor(false);
         setHighlightedLines([]);
@@ -44,21 +51,21 @@ const StepsEditorSlide = () => {
     {
       title: 'Lets add a step editor',
       code: `return (
-    <>
-      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
-        <Track>
-          <Instrument type="synth" />
-        </Track>
-      </Song>
+  <>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+      <Track>
+        <Instrument type="synth" />
+      </Track>
+    </Song>
 
-      <StepsEditor />
-    </>
-  )`,
+    <StepsEditor />
+  </>
+)`,
       action: index => {
         setShowStepsEditor(true);
         setSteps([null, null, null, null, null, null, null, null]);
         setShowOnStepPlay(false);
-        setHighlightedLines([10]);
+        setHighlightedLines([9]);
         setCodeIndex(index);
       },
     },
@@ -66,70 +73,21 @@ const StepsEditorSlide = () => {
       title: 'Add some state for steps',
       code: `const [steps, setSteps] = useState(defaultSteps);
 
-  return (
-    <>
-      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
-        <Track>
-          <Instrument type="synth" />
-        </Track>
-      </Song>
+return (
+  <>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+      <Track>
+        <Instrument type="synth" />
+      </Track>
+    </Song>
 
-      <StepsEditor />
-    </>
-  )`,
+    <StepsEditor />
+  </>
+)`,
       action: index => {
         setShowStepsEditor(true);
-        setSteps([
-          [
-            {
-              name: 'A3',
-            },
-            {
-              name: 'C3',
-            },
-            {
-              name: 'E3',
-            },
-          ],
-          null,
-          [
-            {
-              name: 'G3',
-            },
-            {
-              name: 'B3',
-            },
-            {
-              name: 'D3',
-            },
-          ],
-          null,
-          [
-            {
-              name: 'A#3',
-            },
-            {
-              name: 'D3',
-            },
-            {
-              name: 'F3',
-            },
-          ],
-          null,
-          [
-            {
-              name: 'A3',
-            },
-            {
-              name: 'C3',
-            },
-            {
-              name: 'E3',
-            },
-          ],
-          null,
-        ]);
-        setHighlightedLines([2]);
+        setSteps(exampleSteps);
+        setHighlightedLines([1]);
         setCodeIndex(index);
       },
     },
@@ -137,22 +95,22 @@ const StepsEditorSlide = () => {
       title: 'Add steps to Track props',
       code: `const [steps, setSteps] = useState(defaultSteps);
 
-  return (
-    <>
-      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
-        <Track 
-          steps={steps}
-        >
-          <Instrument type="synth" />
-        </Track>
-      </Song>
+return (
+  <>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+      <Track 
+        steps={steps}
+      >
+        <Instrument type="synth" />
+      </Track>
+    </Song>
 
-      <StepsEditor />
-    </>
-  )`,
+    <StepsEditor />
+  </>
+)`,
       action: index => {
         setShowStepsEditorSteps(false);
-        setHighlightedLines([8]);
+        setHighlightedLines([7]);
         setCodeIndex(index);
       },
     },
@@ -160,98 +118,100 @@ const StepsEditorSlide = () => {
       title: 'Add steps to Steps editor props',
       code: `const [steps, setSteps] = useState(defaultSteps);
 
-  return (
-    <>
-      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
-        <Track 
-          steps={steps}
-        >
-          <Instrument type="synth" />
-        </Track>
-      </Song>
+return (
+  <>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+      <Track 
+        steps={steps}
+      >
+        <Instrument type="synth" />
+      </Track>
+    </Song>
 
-      <StepsEditor steps={steps} />
-    </>
-  )`,
+    <StepsEditor steps={steps} />
+  </>
+)`,
       action: index => {
         setShowStepsEditorSteps(true);
-        setHighlightedLines([14]);
+        setHighlightedLines([13]);
         setCodeIndex(index);
       },
     },
     {
       title: 'Add state for currentStep',
       code: `const [steps, setSteps] = useState(defaultSteps);
-  const [currentStep, setCurrentStep] = useState();
+const [currentStep, setCurrentStep] = useState();
 
-  return (
-    <>
-      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
-        <Track 
-          steps={steps}
-        >
-          <Instrument type="synth" />
-        </Track>
-      </Song>
+return (
+  <>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+      <Track 
+        steps={steps}
+      >
+        <Instrument type="synth" />
+      </Track>
+    </Song>
 
-      <StepsEditor steps={steps} />
-    </>
-  )`,
+    <StepsEditor steps={steps} />
+  </>
+)`,
       action: index => {
-        setHighlightedLines([3]);
+        setHighlightedLines([2]);
         setCodeIndex(index);
       },
     },
     {
       title: 'Set currentStep with Track callback',
       code: `const [steps, setSteps] = useState(defaultSteps);
-  const [currentStep, setCurrentStep] = useState();
+const [currentStep, setCurrentStep] = useState();
 
-  return (
-    <>
-      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
-        <Track 
-          steps={steps} 
-          onStepPlay={(_, i) => setCurrentStep(i)}
-        >
-          <Instrument type="synth" />
-        </Track>
-      </Song>
+return (
+  <>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+      <Track 
+        steps={steps} 
+        onStepPlay={(_, i) => setCurrentStep(i)}
+      >
+        <Instrument type="synth" />
+      </Track>
+    </Song>
 
-      <StepsEditor steps={steps} />
-    </>
-  )`,
+    <StepsEditor steps={steps} />
+  </>
+)`,
       action: index => {
         setShowOnStepPlay(false);
-        setHighlightedLines([10]);
+        setHighlightedLines([9]);
         setCodeIndex(index);
       },
     },
     {
       title: 'Show playhead',
-      code: `const [steps, setSteps] = useState(defaultSteps);
-  const [currentStep, setCurrentStep] = useState();
+      code: `   <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+      <Track 
+        steps={steps} 
+        onStepPlay={(_, i) => setCurrentStep(i)}
+      >
+        <Instrument 
+          type="synth" ${
+            notes.length > 0
+              ? `
+          notes={[{ name: '${notes[0].name}' }]}`
+              : ''
+          }
+        />
+      </Track>
+    </Song>
 
-  return (
-    <>
-      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
-        <Track 
-          steps={steps} 
-          onStepPlay={(_, i) => setCurrentStep(i)}
-        >
-          <Instrument type="synth" />
-        </Track>
-      </Song>
-
-      <StepsEditor 
-        steps={steps}
-        currentStep={currentStep}
-      />
-    </>
-  )`,
+    <StepsEditor 
+      steps={steps}
+      currentStep={currentStep}
+    />
+  </>
+)`,
       action: index => {
         setShowOnStepPlay(true);
-        setHighlightedLines([18]);
+        setHighlightedLines([14]);
         setCodeIndex(index);
       },
     },
@@ -274,26 +234,28 @@ const StepsEditorSlide = () => {
     <div
       style={{
         display: 'flex',
-        alignItems: 'center',
+        // alignItems: 'center',
       }}
     >
       <div
         style={{
+          alignSelf: 'flex-start',
           width: '66%',
           marginRight: '3rem',
         }}
       >
-        <CodeEditor
-          contentEditable={false}
-          style={{
-            minWidth: 'auto',
-          }}
-          highlightedLines={highlightedLines}
-          code={`() => {
-  ${code}
-}`}
-        />
         <h2 style={{ textAlign: 'left', fontSize: 32 }}>{title}</h2>
+
+        {code && (
+          <CodeEditor
+            contentEditable={false}
+            style={{
+              minWidth: 'auto',
+            }}
+            highlightedLines={highlightedLines}
+            code={code}
+          />
+        )}
       </div>
 
       <div
@@ -318,6 +280,16 @@ const StepsEditorSlide = () => {
               onStepEditorClick={(steps, step, index) => {
                 console.log('Update steps', steps, step, index);
               }}
+              onKeyboardDown={note => {
+                setNotes([
+                  {
+                    name: note,
+                  },
+                ]);
+              }}
+              onKeyboardUp={note => {
+                setNotes([]);
+              }}
             />
 
             <button
@@ -337,11 +309,189 @@ const StepsEditorSlide = () => {
           steps={steps}
           onStepPlay={(_, index) => setCurrentStepIndex(index)}
         >
-          <Instrument type="fmSynth"></Instrument>
+          <Instrument type="amSynth" notes={notes}></Instrument>
         </Track>
       </Song>
     </div>
   );
 };
+
+const exampleSteps = [
+  [
+    {
+      name: 'A3',
+      duration: 0.2,
+    },
+    {
+      name: 'C3',
+      duration: 0.2,
+    },
+    {
+      name: 'E3',
+      duration: 0.2,
+    },
+  ],
+  [
+    {
+      name: 'A3',
+      duration: 0.2,
+    },
+    {
+      name: 'C3',
+      duration: 0.2,
+    },
+    {
+      name: 'E3',
+      duration: 0.2,
+    },
+  ],
+  [
+    {
+      name: 'F3',
+      duration: 0.2,
+    },
+    {
+      name: 'A3',
+      duration: 0.2,
+    },
+    {
+      name: 'C3',
+      duration: 0.2,
+    },
+  ],
+  [
+    {
+      name: 'F3',
+      duration: 0.2,
+    },
+    {
+      name: 'A3',
+      duration: 0.2,
+    },
+    {
+      name: 'C3',
+      duration: 0.2,
+    },
+  ],
+  [
+    {
+      name: 'D3',
+      duration: 0.2,
+    },
+    {
+      name: 'F3',
+      duration: 0.2,
+    },
+    {
+      name: 'A3',
+      duration: 0.2,
+    },
+  ],
+  [
+    {
+      name: 'D3',
+      duration: 0.2,
+    },
+    {
+      name: 'F3',
+      duration: 0.2,
+    },
+    {
+      name: 'A3',
+      duration: 0.2,
+    },
+  ],
+  [
+    {
+      name: 'E3',
+      duration: 0.2,
+    },
+    {
+      name: 'G3',
+      duration: 0.2,
+    },
+    {
+      name: 'B3',
+      duration: 0.2,
+    },
+  ],
+  [
+    {
+      name: 'E3',
+      duration: 0.2,
+    },
+    {
+      name: 'G3',
+      duration: 0.2,
+    },
+    {
+      name: 'B3',
+      duration: 0.2,
+    },
+  ],
+];
+
+// const exampleStepsMeloncholy = [
+//   [
+//     {
+//       name: 'A3',
+//       duration: 1,
+//     },
+//     {
+//       name: 'C3',
+//       duration: 1,
+//     },
+//     {
+//       name: 'E3',
+//       duration: 1,
+//     },
+//   ],
+//   null,
+//   [
+//     {
+//       name: 'G3',
+//       duration: 1,
+//     },
+//     {
+//       name: 'B3',
+//       duration: 1,
+//     },
+//     {
+//       name: 'D3',
+//       duration: 1,
+//     },
+//   ],
+//   null,
+//   [
+//     {
+//       name: 'A#3',
+//       duration: 1,
+//     },
+//     {
+//       name: 'D3',
+//       duration: 1,
+//     },
+//     {
+//       name: 'F3',
+//       duration: 1,
+//     },
+//   ],
+//   null,
+//   [
+//     {
+//       name: 'A3',
+//       duration: 1,
+//     },
+//     {
+//       name: 'C3',
+//       duration: 1,
+//     },
+//     {
+//       name: 'E3',
+//       duration: 1,
+//     },
+//   ],
+//   null,
+// ];
 
 export default StepsEditorSlide;

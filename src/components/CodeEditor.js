@@ -26,9 +26,20 @@ const CodeEditor = ({
       />
 
       <style>
+        {highlightedLines.length > 0
+          ? `
+          .code-editor .token-line {
+            opacity: 0.4;
+            transition: 0.7s;
+          }
+        `
+          : ''}
+
         {highlightedLines.map(line => {
           return `.code-editor .token-line:nth-child(${line}) {
-            background-color: #161616;
+            // background-color: #161616;
+            opacity: 1;
+            transition: 0.7s;
           }`;
         })}
       </style>

@@ -15,3 +15,9 @@
     background-color: var(--colour-secondary);
   }
 }
+
+.codeTitle {
+  font-size: var(--baseline-4);
+  font-weight: 500;
+  text-align: left;
+}

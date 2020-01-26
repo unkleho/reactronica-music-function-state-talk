@@ -76,6 +76,7 @@ const ListItem = styled(RawListItem)`
 const WideSlide = styled(Slide)`
   max-width: 1800px;
   max-height: 900px;
+  height: ${props => (props.height ? props.height : 'auto')};
 `;
 
 function App() {
@@ -287,6 +288,14 @@ function App() {
           <ComponentsSlide></ComponentsSlide>
         </WideSlide>
 
+        <WideSlide height="100%">
+          <StepsEditorSlide
+            defaultSteps={[null]}
+            startNote="C3"
+            endNote="B3"
+          ></StepsEditorSlide>
+        </WideSlide>
+
         {/**
          * Show internals of Reactronica components
          */}
@@ -450,14 +459,6 @@ const Song = ({
         <Slide>
           <Heading>Demos</Heading>
         </Slide>
-
-        <WideSlide>
-          <StepsEditorSlide
-            defaultSteps={[null]}
-            startNote="C3"
-            endNote="B3"
-          ></StepsEditorSlide>
-        </WideSlide>
 
         <WideSlide>
           <button

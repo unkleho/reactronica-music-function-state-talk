@@ -171,12 +171,22 @@ const DAWStepsEditor = ({
                   return (
                     <button
                       className={[css.step, css.stepKey].join(' ')}
+                      onTouchStart={() => {
+                        if (typeof onKeyboardDown === 'function') {
+                          onKeyboardDown(note);
+                        }
+                      }}
                       onMouseDown={() => {
                         if (typeof onKeyboardDown === 'function') {
                           onKeyboardDown(note);
                         }
                       }}
                       onMouseUp={() => {
+                        if (typeof onKeyboardUp === 'function') {
+                          onKeyboardUp(note);
+                        }
+                      }}
+                      onTouchEnd={() => {
                         if (typeof onKeyboardUp === 'function') {
                           onKeyboardUp(note);
                         }
