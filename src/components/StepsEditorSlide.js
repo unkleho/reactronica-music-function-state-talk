@@ -244,7 +244,7 @@ return (
           marginRight: '3rem',
         }}
       >
-        <h2 style={{ textAlign: 'left', fontSize: 32 }}>{title}</h2>
+        <h2 className="codeTitle">{title}</h2>
 
         {code && (
           <CodeEditor
@@ -286,9 +286,11 @@ return (
                     name: note,
                   },
                 ]);
+                setHighlightedLines([15, 8]);
               }}
               onKeyboardUp={note => {
                 setNotes([]);
+                setHighlightedLines([14]);
               }}
             />
 
