@@ -421,7 +421,9 @@ const StepsEditorSlide = () => {
           <Instrument type={synthType}></Instrument>
 
           {effects.map((effect, i) => {
-            return <Effect type={effect.type} id={i} key={i}></Effect>;
+            return (
+              <Effect type={effect.type} id={i} key={i} wet={0.5}></Effect>
+            );
           })}
         </Track>
         <Track
