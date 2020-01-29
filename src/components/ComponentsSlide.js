@@ -9,7 +9,8 @@ import useSlideActions from '../hooks/useSlideActions';
 const StepsEditorSlide = () => {
   // Reactronica State
   const [isPlaying, setIsPlaying] = useState(false);
-  const [steps, setSteps] = useState(['A3', 'C3', 'E3', null]);
+  const [bpm, setBpm] = useState(100);
+  const [steps, setSteps] = useState(['A3', 'E3', 'C3', null]);
   const [samplerSteps, setSamplerSteps] = useState([null, null, null, null]);
   const [synthType, setSynthType] = useState('synth');
   const [effects, setEffects] = useState([]);
@@ -18,6 +19,7 @@ const StepsEditorSlide = () => {
   const [codeIndex, setCodeIndex] = useState(0);
   const [highlightedLines, setHighlightedLines] = useState([]);
   const [codeFontSize, setCodeFontSize] = useState(null);
+  const [importCode, setImportCode] = useState('');
 
   const codeSteps = [
     {
@@ -25,83 +27,97 @@ const StepsEditorSlide = () => {
       code: `return (
   )`,
       action: index => {
+        setImportCode('');
         setHighlightedLines([]);
         setCodeIndex(index);
       },
     },
     {
-      title: 'Add Song component',
+      title: 'Import Song',
       code: `return (
-    <Song>
-    </Song>
   )`,
       action: index => {
-        setHighlightedLines([3, 4]);
+        setImportCode(`import { Song } from 'reactronica';
+        
+`);
+        setHighlightedLines([1]);
         setCodeIndex(index);
       },
     },
     {
       title: 'Add Song props',
       code: `return (
-    <Song isPlaying={false} bpm={70}>
+    <Song isPlaying={false} bpm={100}>
     </Song>
   )`,
       action: index => {
-        setHighlightedLines([3]);
+        setImportCode(`import { Song } from 'reactronica';
+        
+`);
+        setHighlightedLines([5]);
         setCodeIndex(index);
       },
     },
     {
       title: 'Add Track component',
       code: `return (
-    <Song isPlaying={false} bpm={70}>
+    <Song isPlaying={false} bpm={100}>
       <Track>
       </Track>
     </Song>
   )`,
       action: index => {
-        setHighlightedLines([4, 5, 6]);
+        setImportCode(`import { Song, Track } from 'reactronica';
+        
+`);
+        setHighlightedLines([6, 7]);
         setCodeIndex(index);
       },
     },
     {
       title: 'Add steps',
       code: `return (
-    <Song isPlaying={false} bpm={70}>
+    <Song isPlaying={false} bpm={100}>
       <Track
-        steps={['A3', 'C3', 'E3', null]}
+        steps={['A3', 'E3', 'C3', null]}
       >
       </Track>
     </Song>
   )`,
       action: index => {
-        setHighlightedLines([5]);
+        setImportCode(`import { Song, Track } from 'reactronica';
+        
+`);
+        setHighlightedLines([7]);
         setCodeIndex(index);
       },
     },
     {
       title: 'Add Instrument component',
       code: `return (
-    <Song isPlaying={false} bpm={70}>
+    <Song isPlaying={false} bpm={100}>
       <Track
-        steps={['A3', 'C3', 'E3', null]}
+        steps={['A3', 'E3', 'C3', null]}
       >
         <Instrument type="synth" />
       </Track>
     </Song>
   )`,
       action: index => {
+        setImportCode(`import { Song, Track, Instrument } from 'reactronica';
+        
+`);
         setIsPlaying(false);
-        setHighlightedLines([7]);
+        setHighlightedLines([9]);
         setCodeIndex(index);
       },
     },
     {
       title: 'Lets play!',
       code: `return (
-    <Song isPlaying={true} bpm={70}>
+    <Song isPlaying={true} bpm={100}>
       <Track
-        steps={['A3', 'C3', 'E3', null]}
+        steps={['A3', 'E3', 'C3', null]}
       >
         <Instrument type="synth" />
       </Track>
@@ -109,7 +125,24 @@ const StepsEditorSlide = () => {
   )`,
       action: index => {
         setIsPlaying(true);
-        setHighlightedLines([3]);
+        setHighlightedLines([5]);
+        setCodeIndex(index);
+      },
+    },
+    {
+      title: 'Slow down the tempo',
+      code: `return (
+    <Song isPlaying={true} bpm={70}>
+      <Track
+        steps={['A3', 'E3', 'C3', null]}
+      >
+        <Instrument type="synth" />
+      </Track>
+    </Song>
+  )`,
+      action: index => {
+        setBpm(70);
+        setHighlightedLines([5]);
         setCodeIndex(index);
       },
     },
@@ -118,16 +151,16 @@ const StepsEditorSlide = () => {
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
+        steps={[['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]}
       >
         <Instrument type="synth" />
       </Track>
     </Song>
   )`,
       action: index => {
-        setSteps([['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]);
+        setSteps([['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]);
         setSynthType('synth');
-        setHighlightedLines([5]);
+        setHighlightedLines([7]);
         setCodeIndex(index);
       },
     },
@@ -136,7 +169,7 @@ const StepsEditorSlide = () => {
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
+        steps={[['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]}
       >
         <Instrument type="amSynth" />
       </Track>
@@ -145,7 +178,7 @@ const StepsEditorSlide = () => {
       action: index => {
         setSynthType('amSynth');
         setEffects([]);
-        setHighlightedLines([7]);
+        setHighlightedLines([9]);
         setCodeIndex(index);
       },
     },
@@ -154,7 +187,7 @@ const StepsEditorSlide = () => {
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
+        steps={[['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]}
       >
         <Instrument type="amSynth" />
         <Effect type="reverb" />
@@ -168,7 +201,7 @@ const StepsEditorSlide = () => {
             type: 'freeverb',
           },
         ]);
-        setHighlightedLines([8]);
+        setHighlightedLines([10]);
         setCodeIndex(index);
       },
     },
@@ -177,7 +210,7 @@ const StepsEditorSlide = () => {
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
+        steps={[['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]}
       >
         <Instrument type="amSynth" />
         <Effect type="reverb" />
@@ -188,7 +221,7 @@ const StepsEditorSlide = () => {
   )`,
       action: index => {
         // setEffects([]);
-        setHighlightedLines([9, 10, 11]);
+        setHighlightedLines([12, 13]);
         setCodeIndex(index);
       },
     },
@@ -197,7 +230,7 @@ const StepsEditorSlide = () => {
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
+        steps={[['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]}
       >
         <Instrument type="amSynth" />
         <Effect type="reverb" />
@@ -213,7 +246,7 @@ const StepsEditorSlide = () => {
         // setEffects([]);
         setCodeFontSize('24px');
         // setSamplerSteps(['C3', null, 'C3', null]);
-        setHighlightedLines([11, 12, 13]);
+        setHighlightedLines([13, 14, 15]);
         setCodeIndex(index);
       },
     },
@@ -222,7 +255,7 @@ const StepsEditorSlide = () => {
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
+        steps={[['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]}
       >
         <Instrument type="amSynth" />
         <Effect type="reverb" />
@@ -241,7 +274,7 @@ const StepsEditorSlide = () => {
         // setEffects([]);
         setCodeFontSize('24px');
         setSamplerSteps(undefined);
-        setHighlightedLines([13, 14, 15]);
+        setHighlightedLines([15, 16, 17]);
         setCodeIndex(index);
       },
     },
@@ -250,7 +283,7 @@ const StepsEditorSlide = () => {
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
+        steps={[['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]}
       >
         <Instrument type="amSynth" />
         <Effect type="reverb" />
@@ -271,7 +304,7 @@ const StepsEditorSlide = () => {
         // setEffects([]);
         setCodeFontSize('24px');
         setSamplerSteps(['C3', null, 'C3', null]);
-        setHighlightedLines([11]);
+        setHighlightedLines([13]);
         setCodeIndex(index);
       },
     },
@@ -280,7 +313,7 @@ const StepsEditorSlide = () => {
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
+        steps={[['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]}
       >
         <Instrument type="amSynth" />
         <Effect type="reverb" />
@@ -300,7 +333,7 @@ const StepsEditorSlide = () => {
   )`,
       action: index => {
         setSamplerSteps(['C3', null, 'C3', null]);
-        setHighlightedLines([17]);
+        setHighlightedLines([19]);
         setCodeIndex(index);
       },
     },
@@ -309,7 +342,7 @@ const StepsEditorSlide = () => {
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
+        steps={[['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]}
       >
         <Instrument type="amSynth" />
         <Effect type="reverb" />
@@ -317,7 +350,8 @@ const StepsEditorSlide = () => {
       <Track
         steps={['C3', 'D3', 'C3', 'D3']}
       >
-        <Instrument type="sampler" 
+        <Instrument
+          type="sampler" 
           samples={{
             C3: '/audio/kick.wav',
             D3: '/audio/snare.wav'
@@ -329,7 +363,7 @@ const StepsEditorSlide = () => {
       action: index => {
         setIsPlaying(true);
         setSamplerSteps(['C3', 'D3', 'C3', 'D3']);
-        setHighlightedLines([11]);
+        setHighlightedLines([13]);
         setCodeIndex(index);
       },
     },
@@ -338,7 +372,7 @@ const StepsEditorSlide = () => {
       code: `return (
     <Song isPlaying={false} bpm={70}>
       <Track
-        steps={[['A3', 'C3', 'E3'], null, ['F3', 'A3', 'C3'], null]}
+        steps={[['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]}
       >
         <Instrument type="amSynth" />
         <Effect type="reverb" />
@@ -346,7 +380,8 @@ const StepsEditorSlide = () => {
       <Track
         steps={['C3', 'D3', 'C3', 'D3']}
       >
-        <Instrument type="sampler" 
+        <Instrument
+          type="sampler" 
           samples={{
             C3: '/audio/kick.wav',
             D3: '/audio/snare.wav'
@@ -357,7 +392,7 @@ const StepsEditorSlide = () => {
   )`,
       action: index => {
         setIsPlaying(false);
-        setHighlightedLines([3]);
+        setHighlightedLines([5]);
         setCodeIndex(index);
       },
     },
@@ -378,7 +413,7 @@ const StepsEditorSlide = () => {
     <>
       <div
         style={{
-          width: '50%',
+          width: '55%',
           margin: '0 auto',
         }}
       >
@@ -389,7 +424,7 @@ const StepsEditorSlide = () => {
             fontSize: codeFontSize || '32px',
           }}
           highlightedLines={highlightedLines}
-          code={`() => {
+          code={`${importCode}const Example = () => {
   ${code}
 }`}
         />
@@ -413,7 +448,7 @@ const StepsEditorSlide = () => {
         </button>
       </div>
 
-      <Song isPlaying={isPlaying} bpm={70}>
+      <Song isPlaying={isPlaying} bpm={bpm}>
         <Track
           steps={steps}
           // onStepPlay={(_, index) => setCurrentStepIndex(index)}
@@ -422,7 +457,7 @@ const StepsEditorSlide = () => {
 
           {effects.map((effect, i) => {
             return (
-              <Effect type={effect.type} id={i} key={i} wet={0.5}></Effect>
+              <Effect type={effect.type} id={i} key={i} wet={0.7}></Effect>
             );
           })}
         </Track>
