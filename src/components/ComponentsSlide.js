@@ -9,7 +9,7 @@ import useSlideActions from '../hooks/useSlideActions';
 const StepsEditorSlide = () => {
   // Reactronica State
   const [isPlaying, setIsPlaying] = useState(false);
-  const [bpm, setBpm] = useState(100);
+  const [bpm, setBpm] = useState(120);
   const [steps, setSteps] = useState(['A3', 'E3', 'C3', null]);
   const [samplerSteps, setSamplerSteps] = useState([null, null, null, null]);
   const [synthType, setSynthType] = useState('synth');
@@ -47,7 +47,7 @@ const StepsEditorSlide = () => {
     {
       title: 'Add Song props',
       code: `return (
-    <Song isPlaying={false} bpm={100}>
+    <Song isPlaying={false} bpm={120}>
     </Song>
   )`,
       action: index => {
@@ -61,7 +61,7 @@ const StepsEditorSlide = () => {
     {
       title: 'Add Track component',
       code: `return (
-    <Song isPlaying={false} bpm={100}>
+    <Song isPlaying={false} bpm={120}>
       <Track>
       </Track>
     </Song>
@@ -77,7 +77,7 @@ const StepsEditorSlide = () => {
     {
       title: 'Add steps',
       code: `return (
-    <Song isPlaying={false} bpm={100}>
+    <Song isPlaying={false} bpm={120}>
       <Track
         steps={['A3', 'E3', 'C3', null]}
       >
@@ -95,7 +95,7 @@ const StepsEditorSlide = () => {
     {
       title: 'Add Instrument component',
       code: `return (
-    <Song isPlaying={false} bpm={100}>
+    <Song isPlaying={false} bpm={120}>
       <Track
         steps={['A3', 'E3', 'C3', null]}
       >
@@ -115,7 +115,7 @@ const StepsEditorSlide = () => {
     {
       title: 'Lets play!',
       code: `return (
-    <Song isPlaying={true} bpm={100}>
+    <Song isPlaying={true} bpm={120}>
       <Track
         steps={['A3', 'E3', 'C3', null]}
       >
@@ -176,6 +176,9 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
+        setImportCode(`import { Song, Track, Instrument } from 'reactronica';
+        
+`);
         setSynthType('amSynth');
         setEffects([]);
         setHighlightedLines([9]);
@@ -195,6 +198,9 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
+        setImportCode(`import { Song, Track, Instrument, Effect } from 'reactronica';
+        
+`);
         setCodeFontSize(null);
         setEffects([
           {
