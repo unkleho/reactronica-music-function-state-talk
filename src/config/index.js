@@ -1,1 +1,0 @@
-export { midiNotes } from './midiNotes';

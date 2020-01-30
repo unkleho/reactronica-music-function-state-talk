@@ -20,6 +20,7 @@ import { Song, Track, Instrument, Effect } from 'reactronica';
 import ReactLive from './ReactLive';
 import StepsEditorSlide from './components/StepsEditorSlide';
 import ComponentsSlide from './components/ComponentsSlide';
+import TabExample from './components/TabExample';
 // import codeTheme from './codeTheme';
 
 import './global.module.css';
@@ -300,6 +301,11 @@ function App() {
          * Show internals of Reactronica components
          */}
 
+        <Slide>
+          <Heading>Internals</Heading>
+          <Text>Song and Instrument components</Text>
+        </Slide>
+
         <CodeSlide
           code={`const SongContext = React.createContext();
           
@@ -456,48 +462,13 @@ const Song = ({
           </Notes>
         </CodeSlide>
 
+        {/* --------------------------------------------------------------- */}
+        {/* DEMOS */}
+        {/* --------------------------------------------------------------- */}
+
         <Slide>
           <Heading>Demos</Heading>
         </Slide>
-
-        <WideSlide>
-          <button
-            onClick={() => {
-              setShowButton(true);
-            }}
-          >
-            Show button
-          </button>
-          <ReactLive
-            code={`() => {
-  const [isPlaying, setIsPlaying] = useState(false);
-              
-  return (
-    <Song isPlaying={isPlaying} bpm={70} volume={0}>
-      <Track
-        steps={['C3', null, 'G3', null]}
-      >
-        <Instrument type="amSynth" />
-        <Effect type="distortion" id="1" />
-      </Track>
-      ${showButton ? `{isPlaying ? 'Playing' : 'Stopped'}` : ''}
-    </Song>
-  )
-}`}
-            scope={{
-              Song,
-              Track,
-              Instrument,
-              Effect,
-              useState: React.useState,
-            }}
-          />
-
-          <Notes>
-            Import StepSequencer and show how state changes music and UI. Demo
-            onStepPlay
-          </Notes>
-        </WideSlide>
 
         <Slide>
           <Heading>Sequencer</Heading>
@@ -509,6 +480,7 @@ const Song = ({
 
         <Slide>
           <Heading>Ukulele Tab</Heading>
+          <TabExample></TabExample>
         </Slide>
 
         <Slide>
@@ -561,9 +533,44 @@ const Song = ({
           ></CodePane>
         </Slide>
 
-        {/* --------------------------------------------------------------- */}
-        {/* DEMOS */}
-        {/* --------------------------------------------------------------- */}
+        <WideSlide>
+          <button
+            onClick={() => {
+              setShowButton(true);
+            }}
+          >
+            Show button
+          </button>
+          <ReactLive
+            code={`() => {
+  const [isPlaying, setIsPlaying] = useState(false);
+              
+  return (
+    <Song isPlaying={isPlaying} bpm={70} volume={0}>
+      <Track
+        steps={['C3', null, 'G3', null]}
+      >
+        <Instrument type="amSynth" />
+        <Effect type="distortion" id="1" />
+      </Track>
+      ${showButton ? `{isPlaying ? 'Playing' : 'Stopped'}` : ''}
+    </Song>
+  )
+}`}
+            scope={{
+              Song,
+              Track,
+              Instrument,
+              Effect,
+              useState: React.useState,
+            }}
+          />
+
+          <Notes>
+            Import StepSequencer and show how state changes music and UI. Demo
+            onStepPlay
+          </Notes>
+        </WideSlide>
       </Deck>
     </div>
   );
