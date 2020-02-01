@@ -16,13 +16,6 @@ const TabExample = () => {
 
   return (
     <div>
-      <button onClick={() => setIsPlaying(!isPlaying)}>
-        {isPlaying ? 'Stop' : 'Play'}
-      </button>
-
-      <br />
-      <br />
-
       <div className={css.tabWrapper}>
         <Tab
           grid={grid}
@@ -78,6 +71,16 @@ const TabExample = () => {
           </Track>
         </Song>
       </div>
+
+      <br />
+
+      <button
+        onClick={() => setIsPlaying(!isPlaying)}
+        className="demoButton"
+        style={{ marginRight: 0 }}
+      >
+        {isPlaying ? 'Stop' : 'Play'}
+      </button>
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { midiNotes } from '../config';
+import { midiNotes } from '../configs/midiConfig';
 
 import css from './StepsEditor.module.scss';
 

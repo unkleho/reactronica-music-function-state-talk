@@ -23,7 +23,7 @@ const StepsEditorSlide = () => {
 
   const codeSteps = [
     {
-      title: 'Start with function component',
+      title: 'Start with a function component',
       code: `return (
   )`,
       action: index => {
@@ -33,7 +33,7 @@ const StepsEditorSlide = () => {
       },
     },
     {
-      title: 'Import Song',
+      title: 'Import Song component',
       code: `return (
   )`,
       action: index => {
@@ -59,7 +59,7 @@ const StepsEditorSlide = () => {
       },
     },
     {
-      title: 'Add Track component',
+      title: 'Song needs a Track component',
       code: `return (
     <Song isPlaying={false} bpm={120}>
       <Track>
@@ -75,7 +75,7 @@ const StepsEditorSlide = () => {
       },
     },
     {
-      title: 'Add steps',
+      title: 'Track needs an array of notes (steps)',
       code: `return (
     <Song isPlaying={false} bpm={120}>
       <Track
@@ -93,7 +93,7 @@ const StepsEditorSlide = () => {
       },
     },
     {
-      title: 'Add Instrument component',
+      title: 'Use the Instrument component play steps with a synth',
       code: `return (
     <Song isPlaying={false} bpm={120}>
       <Track
@@ -130,7 +130,7 @@ const StepsEditorSlide = () => {
       },
     },
     {
-      title: 'Slow down the tempo',
+      title: 'Whoah, slow down the tempo',
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
@@ -232,7 +232,7 @@ const StepsEditorSlide = () => {
       },
     },
     {
-      title: 'Add sampler Instrument',
+      title: "This time we'll use a sampler Instrument",
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
@@ -257,7 +257,7 @@ const StepsEditorSlide = () => {
       },
     },
     {
-      title: 'Add a kick sample',
+      title: 'Assign a kick sample to C3',
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
@@ -285,7 +285,7 @@ const StepsEditorSlide = () => {
       },
     },
     {
-      title: 'Update sampler steps',
+      title: 'Update Track steps',
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
@@ -315,7 +315,7 @@ const StepsEditorSlide = () => {
       },
     },
     {
-      title: 'Add a snare sample',
+      title: 'We need a snare',
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
@@ -344,7 +344,7 @@ const StepsEditorSlide = () => {
       },
     },
     {
-      title: 'Update drum steps',
+      title: 'Now we have a beat',
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track

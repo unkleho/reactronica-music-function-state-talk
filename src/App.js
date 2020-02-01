@@ -3,7 +3,7 @@ import {
   Deck,
   Slide,
   Appear,
-  CodePane,
+  // CodePane,
   // Image,
   Heading as RawHeading,
   List as RawList,
@@ -15,9 +15,9 @@ import {
 import createTheme from 'spectacle/lib/themes/default';
 import styled from 'react-emotion';
 import CodeSlide from 'spectacle-code-slide';
-import { Song, Track, Instrument, Effect } from 'reactronica';
+// import { Song, Track, Instrument, Effect } from 'reactronica';
 
-import ReactLive from './ReactLive';
+// import ReactLive from './ReactLive';
 import StepsEditorSlide from './components/StepsEditorSlide';
 import ComponentsSlide from './components/ComponentsSlide';
 import TabExample from './components/TabExample';
@@ -81,7 +81,7 @@ const WideSlide = styled(Slide)`
 `;
 
 function App() {
-  const [showButton, setShowButton] = React.useState(false);
+  // const [showButton, setShowButton] = React.useState(false);
 
   return (
     <div className="App">
@@ -471,15 +471,7 @@ const Song = ({
         </Slide>
 
         <Slide>
-          <Heading>Sequencer</Heading>
-
-          <Notes>
-            Demonstrate using one central state can output UI and sound
-          </Notes>
-        </Slide>
-
-        <Slide>
-          <Heading>Ukulele Tab</Heading>
+          <Heading size={3}>Ukulele Tab</Heading>
           <TabExample></TabExample>
         </Slide>
 
@@ -494,83 +486,6 @@ const Song = ({
 
           <Notes>Little performance!</Notes>
         </Slide>
-
-        {/* --------------------------------------------------------------- */}
-        {/* Reactronica API flat vs nested props */}
-        {/* --------------------------------------------------------------- */}
-
-        <Slide>
-          <CodePane
-            theme="external"
-            style={{
-              fontSize: 24,
-            }}
-            lang="jsx"
-            className="code-theme"
-            source={`const ExampleNested = () => {  
-  return (
-    <Song isPlaying={true} bpm={100}>
-      <Track 
-        steps={['C3', null, 'G3', null]} 
-        effects={[<Effect type="delay" />, <Effect type="reverb" />]}
-      >
-        <Instrument 
-          type={"synth"}
-          oscillator={{
-            type: "sine"
-          }}
-          envelope={{
-            attack: 10
-            decay: 10
-            release: 10
-            sustain: 10  
-          }}
-        />
-      </Track>
-    </Song>
-  );
-}`}
-          ></CodePane>
-        </Slide>
-
-        <WideSlide>
-          <button
-            onClick={() => {
-              setShowButton(true);
-            }}
-          >
-            Show button
-          </button>
-          <ReactLive
-            code={`() => {
-  const [isPlaying, setIsPlaying] = useState(false);
-              
-  return (
-    <Song isPlaying={isPlaying} bpm={70} volume={0}>
-      <Track
-        steps={['C3', null, 'G3', null]}
-      >
-        <Instrument type="amSynth" />
-        <Effect type="distortion" id="1" />
-      </Track>
-      ${showButton ? `{isPlaying ? 'Playing' : 'Stopped'}` : ''}
-    </Song>
-  )
-}`}
-            scope={{
-              Song,
-              Track,
-              Instrument,
-              Effect,
-              useState: React.useState,
-            }}
-          />
-
-          <Notes>
-            Import StepSequencer and show how state changes music and UI. Demo
-            onStepPlay
-          </Notes>
-        </WideSlide>
       </Deck>
     </div>
   );

@@ -49,7 +49,7 @@ const StepsEditorSlide = () => {
       },
     },
     {
-      title: 'Lets add a step editor',
+      title: 'Lets add a step editor UI',
       code: `return (
   <>
     <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
@@ -109,8 +109,33 @@ return (
   </>
 )`,
       action: index => {
+        setIsPlaying(false);
         setShowStepsEditorSteps(false);
         setHighlightedLines([7]);
+        setCodeIndex(index);
+      },
+    },
+    {
+      title: 'Have a listen',
+      code: `const [steps, setSteps] = useState(defaultSteps);
+
+return (
+  <>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+      <Track 
+        steps={steps}
+      >
+        <Instrument type="synth" />
+      </Track>
+    </Song>
+
+    <StepsEditor />
+  </>
+)`,
+      action: index => {
+        setIsPlaying(true);
+        setShowStepsEditorSteps(false);
+        setHighlightedLines([5]);
         setCodeIndex(index);
       },
     },
@@ -278,6 +303,19 @@ return (
                 marginBottom: '1rem',
               }}
               onStepEditorClick={(steps, step, index) => {
+                const newSteps = steps.map(stepNotes => {
+                  if (stepNotes === null) {
+                    return null;
+                  }
+
+                  return stepNotes.map(stepNote => {
+                    return {
+                      ...stepNote,
+                      duration: 0.2,
+                    };
+                  });
+                });
+                setSteps(newSteps);
                 console.log('Update steps', steps, step, index);
               }}
               onKeyboardDown={note => {
@@ -333,34 +371,21 @@ const exampleSteps = [
       duration: 0.2,
     },
   ],
-  [
-    {
-      name: 'A3',
-      duration: 0.2,
-    },
-    {
-      name: 'C3',
-      duration: 0.2,
-    },
-    {
-      name: 'E3',
-      duration: 0.2,
-    },
-  ],
-  [
-    {
-      name: 'F3',
-      duration: 0.2,
-    },
-    {
-      name: 'A3',
-      duration: 0.2,
-    },
-    {
-      name: 'C3',
-      duration: 0.2,
-    },
-  ],
+  null,
+  // [
+  //   {
+  //     name: 'A3',
+  //     duration: 0.2,
+  //   },
+  //   {
+  //     name: 'C3',
+  //     duration: 0.2,
+  //   },
+  //   {
+  //     name: 'E3',
+  //     duration: 0.2,
+  //   },
+  // ],
   [
     {
       name: 'F3',
@@ -375,6 +400,21 @@ const exampleSteps = [
       duration: 0.2,
     },
   ],
+  null,
+  // [
+  //   {
+  //     name: 'F3',
+  //     duration: 0.2,
+  //   },
+  //   {
+  //     name: 'A3',
+  //     duration: 0.2,
+  //   },
+  //   {
+  //     name: 'C3',
+  //     duration: 0.2,
+  //   },
+  // ],
   [
     {
       name: 'D3',
@@ -389,34 +429,21 @@ const exampleSteps = [
       duration: 0.2,
     },
   ],
-  [
-    {
-      name: 'D3',
-      duration: 0.2,
-    },
-    {
-      name: 'F3',
-      duration: 0.2,
-    },
-    {
-      name: 'A3',
-      duration: 0.2,
-    },
-  ],
-  [
-    {
-      name: 'E3',
-      duration: 0.2,
-    },
-    {
-      name: 'G3',
-      duration: 0.2,
-    },
-    {
-      name: 'B3',
-      duration: 0.2,
-    },
-  ],
+  null,
+  // [
+  //   {
+  //     name: 'D3',
+  //     duration: 0.2,
+  //   },
+  //   {
+  //     name: 'F3',
+  //     duration: 0.2,
+  //   },
+  //   {
+  //     name: 'A3',
+  //     duration: 0.2,
+  //   },
+  // ],
   [
     {
       name: 'E3',
@@ -431,6 +458,21 @@ const exampleSteps = [
       duration: 0.2,
     },
   ],
+  null,
+  // [
+  //   {
+  //     name: 'E3',
+  //     duration: 0.2,
+  //   },
+  //   {
+  //     name: 'G3',
+  //     duration: 0.2,
+  //   },
+  //   {
+  //     name: 'B3',
+  //     duration: 0.2,
+  //   },
+  // ],
 ];
 
 // const exampleStepsMeloncholy = [
