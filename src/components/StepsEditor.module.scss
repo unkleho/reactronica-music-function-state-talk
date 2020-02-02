@@ -33,6 +33,11 @@
   flex: 2;
   color: var(--colour-bg);
   background-color: var(--colour-white);
+
+  &:active {
+    color: var(--colour-white);
+    background-color: var(--colour-secondary);
+  }
 }
 
 .rowIsAccidental .stepKey {
