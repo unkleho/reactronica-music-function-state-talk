@@ -87,9 +87,17 @@ function App() {
     <div className="App">
       <Deck theme={theme} showFullscreenControl={false} progress="bar">
         <Slide>
+          <Text>
+            <strong>Music</strong> as a Function of <strong>State</strong>
+          </Text>
           <Heading>Reactronica</Heading>
-          <SubHeading size={5}>Music as a Function of State</SubHeading>
-          {/* <Text>Music as a Function of State</Text> */}
+          {/* <SubHeading size={5}>Music as a Function of State</SubHeading> */}
+          <br />
+          <br />
+          <SubHeading size={5}>
+            <a href="https://twitter.com/unkleho">@unkleho</a>
+          </SubHeading>
+          {/* <Text>DX Lab, State Library of NSW</Text> */}
         </Slide>
 
         <Slide>
