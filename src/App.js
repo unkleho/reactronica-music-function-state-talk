@@ -42,6 +42,15 @@ const theme = createTheme(
 // Styled Components
 // ----------------------------------------------------------------------------
 
+const MainHeading = styled(RawHeading)`
+  margin-bottom: 64px;
+  font-size: 10rem;
+  line-height: 1.2;
+  background: linear-gradient(160deg, #5f0fd1, #0fa6d1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+`;
+
 const Heading = styled(RawHeading)`
   margin-bottom: 64px;
   line-height: 1.2;
@@ -63,6 +72,7 @@ const Quote = styled(RawQuote)`
 
 const Text = styled(RawText)`
   color: #ccc;
+  font-size: ${props => (props.fontSize ? props.fontSize : '2.666rem')};
 `;
 
 const List = styled(RawList)`
@@ -90,14 +100,14 @@ function App() {
           <Text>
             <strong>Music</strong> as a Function of <strong>State</strong>
           </Text>
-          <Heading>Reactronica</Heading>
-          {/* <SubHeading size={5}>Music as a Function of State</SubHeading> */}
+          <MainHeading>Reactronica</MainHeading>
           <br />
           <br />
           <SubHeading size={5}>
             <a href="https://twitter.com/unkleho">@unkleho</a>
           </SubHeading>
-          {/* <Text>DX Lab, State Library of NSW</Text> */}
+          <br></br>
+          <Text fontSize="2rem">DX Lab, State Library of NSW</Text>
         </Slide>
 
         <Slide>

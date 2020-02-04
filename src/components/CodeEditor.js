@@ -30,7 +30,7 @@ const CodeEditor = ({
           ? `
           .code-editor .token-line {
             opacity: 0.4;
-            transition: 0.7s;
+            transition: 0.5s;
           }
         `
           : ''}
@@ -39,7 +39,7 @@ const CodeEditor = ({
           return `.code-editor .token-line:nth-child(${line}) {
             // background-color: #161616;
             opacity: 1;
-            transition: 0.7s;
+            transition: 0.5s;
           }`;
         })}
       </style>

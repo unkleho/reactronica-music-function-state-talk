@@ -35,7 +35,7 @@ const StepsEditorSlide = () => {
       title: 'How does Reactronica work with UI components?',
       code: `return (
   <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
       <Track>
         <Instrument type="synth" />
       </Track>
@@ -52,7 +52,7 @@ const StepsEditorSlide = () => {
       title: 'Lets add a step editor UI',
       code: `return (
   <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
       <Track>
         <Instrument type="synth" />
       </Track>
@@ -75,7 +75,7 @@ const StepsEditorSlide = () => {
 
 return (
   <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
       <Track>
         <Instrument type="synth" />
       </Track>
@@ -97,7 +97,7 @@ return (
 
 return (
   <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
       <Track 
         steps={steps}
       >
@@ -121,7 +121,7 @@ return (
 
 return (
   <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
       <Track 
         steps={steps}
       >
@@ -145,7 +145,7 @@ return (
 
 return (
   <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
       <Track 
         steps={steps}
       >
@@ -169,7 +169,7 @@ const [currentStep, setCurrentStep] = useState();
 
 return (
   <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
       <Track 
         steps={steps}
       >
@@ -192,7 +192,7 @@ const [currentStep, setCurrentStep] = useState();
 
 return (
   <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
       <Track 
         steps={steps} 
         onStepPlay={(_, i) => setCurrentStep(i)}
@@ -211,8 +211,38 @@ return (
       },
     },
     {
-      title: 'Show playhead',
-      code: `   <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+      title: 'Playhead moves with the music',
+      code: `   <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
+      <Track 
+        steps={steps} 
+        onStepPlay={(_, i) => setCurrentStep(i)}
+      >
+        <Instrument 
+          type="synth" ${
+            notes.length > 0
+              ? `
+          notes={[{ name: '${notes[0].name}' }]}`
+              : ''
+          }
+        />
+      </Track>
+    </Song>
+
+    <StepsEditor 
+      steps={steps}
+      currentStep={currentStep}
+    />
+  </>
+)`,
+      action: index => {
+        setShowOnStepPlay(true);
+        setHighlightedLines([14]);
+        setCodeIndex(index);
+      },
+    },
+    {
+      title: 'Add more notes',
+      code: `   <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
       <Track 
         steps={steps} 
         onStepPlay={(_, i) => setCurrentStep(i)}
@@ -259,18 +289,21 @@ return (
     <div
       style={{
         display: 'flex',
+        flexWrap: 'wrap',
         // alignItems: 'center',
       }}
     >
+      <h2 className="codeTitle" style={{ width: '100%' }}>
+        {title}
+      </h2>
+
       <div
         style={{
-          alignSelf: 'flex-start',
-          width: '66%',
-          marginRight: '3rem',
+          // alignSelf: 'flex-start',
+          // width: '50%',
+          flex: 1,
         }}
       >
-        <h2 className="codeTitle">{title}</h2>
-
         {code && (
           <CodeEditor
             contentEditable={false}
@@ -285,7 +318,8 @@ return (
 
       <div
         style={{
-          width: '50%',
+          flex: 1,
+          marginLeft: '3rem',
         }}
       >
         {showStepsEditor && (
@@ -344,7 +378,7 @@ return (
         )}
       </div>
 
-      <Song isPlaying={isPlaying}>
+      <Song isPlaying={isPlaying} bpm={100}>
         <Track
           steps={steps}
           onStepPlay={(_, index) => setCurrentStepIndex(index)}

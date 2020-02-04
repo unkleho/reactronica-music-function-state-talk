@@ -165,7 +165,28 @@ const StepsEditorSlide = () => {
       },
     },
     {
-      title: 'Change synth to amSynth',
+      title: 'Change to Frequency Modulated Synth',
+      code: `return (
+    <Song isPlaying={true} bpm={70}>
+      <Track
+        steps={[['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]}
+      >
+        <Instrument type="fmSynth" />
+      </Track>
+    </Song>
+  )`,
+      action: index => {
+        setImportCode(`import { Song, Track, Instrument } from 'reactronica';
+        
+`);
+        setSynthType('fmSynth');
+        setEffects([]);
+        setHighlightedLines([9]);
+        setCodeIndex(index);
+      },
+    },
+    {
+      title: 'Amplitude Modulated Synth',
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
@@ -176,9 +197,6 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
-        setImportCode(`import { Song, Track, Instrument } from 'reactronica';
-        
-`);
         setSynthType('amSynth');
         setEffects([]);
         setHighlightedLines([9]);
