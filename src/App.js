@@ -8,7 +8,7 @@ import {
   Heading as RawHeading,
   List as RawList,
   ListItem as RawListItem,
-  Quote as RawQuote,
+  // Quote as RawQuote,
   Text as RawText,
   Notes,
 } from 'spectacle';
@@ -22,6 +22,7 @@ import StepsEditorSlide from './components/StepsEditorSlide';
 import ComponentsSlide from './components/ComponentsSlide';
 import TabExample from './components/TabExample';
 // import codeTheme from './codeTheme';
+// import WaveAnimation from './components/WaveAnimation/WaveAnimation';
 
 import './global.module.css';
 import './App.css';
@@ -64,11 +65,11 @@ const SubHeading = styled(RawHeading)`
   font-weight: 600;
 `;
 
-const Quote = styled(RawQuote)`
-  color: var(--colour-primary);
-  margin-bottom: 2rem;
-  line-height: 1.3;
-`;
+// const Quote = styled(RawQuote)`
+//   color: var(--colour-primary);
+//   margin-bottom: 2rem;
+//   line-height: 1.3;
+// `;
 
 const Text = styled(RawText)`
   color: #ccc;
@@ -91,8 +92,6 @@ const WideSlide = styled(Slide)`
 `;
 
 function App() {
-  // const [showButton, setShowButton] = React.useState(false);
-
   return (
     <div className="App">
       <Deck theme={theme} showFullscreenControl={false} progress="bar">
@@ -101,6 +100,7 @@ function App() {
             <strong>Music</strong> as a Function of <strong>State</strong>
           </Text>
           <MainHeading>Reactronica</MainHeading>
+          {/* <WaveAnimation></WaveAnimation> */}
           <br />
           <br />
           <SubHeading size={5}>
@@ -113,12 +113,14 @@ function App() {
         <Slide>
           <Heading>About</Heading>
           <List>
-            <ListItem>
-              <strong>DX Lab Technical Lead</strong> at the{' '}
-              <strong>State Library of NSW</strong>
-            </ListItem>
             <Appear>
-              <ListItem>Background in design</ListItem>
+              <ListItem>
+                <strong>DX Lab Technical Lead</strong> at the{' '}
+                <strong>State Library of NSW</strong>
+              </ListItem>
+            </Appear>
+            <Appear>
+              <ListItem>Design background</ListItem>
             </Appear>
             <Appear>
               <ListItem>
@@ -129,7 +131,7 @@ function App() {
           </List>
         </Slide>
 
-        <Slide>
+        {/* <Slide>
           <Quote>“...UI as a pure function of application state”</Quote>
           <Text>
             @rauchg,{' '}
@@ -137,21 +139,40 @@ function App() {
               rauchg.com/2015/pure-ui
             </a>
           </Text>
-        </Slide>
+        </Slide> */}
 
         <Slide>
           <Heading size={3}>UI as a Function of State</Heading>
           <List>
-            <ListItem>
+            {/* <ListItem>
               React popularised rendering predictable markup from functions
-            </ListItem>
-            <ListItem>UI = f(state)</ListItem>
-            <ListItem>
-              HTML: <strong>React DOM</strong>
-            </ListItem>
-            <ListItem>
-              Mobile App: <strong>React Native</strong>
-            </ListItem>
+            </ListItem> */}
+            <Appear>
+              <ListItem>UI = f(state)</ListItem>
+            </Appear>
+            <Appear>
+              <ListItem>
+                HTML: <strong>React DOM</strong>
+              </ListItem>
+            </Appear>
+            <Appear>
+              <ListItem>
+                Mobile App: <strong>React Native</strong>
+              </ListItem>
+            </Appear>
+
+            <Appear>
+              <ListItem>VR, 3D, Command Line, TV, PDF etc</ListItem>
+            </Appear>
+
+            <Appear>
+              <ListItem>
+                More at{' '}
+                <a href="https://github.com/chentsulin/awesome-react-renderer">
+                  github.com/chentsulin/awesome-react-renderer
+                </a>
+              </ListItem>
+            </Appear>
           </List>
 
           <Notes>
@@ -159,7 +180,7 @@ function App() {
           </Notes>
         </Slide>
 
-        <Slide>
+        {/* <Slide>
           <Heading size={3}>_____ as a Function of State</Heading>
           <List>
             <ListItem>
@@ -180,9 +201,9 @@ function App() {
           </List>
 
           <Notes>Ask audience for examples, show screen shots</Notes>
-        </Slide>
+        </Slide> */}
 
-        <Slide>
+        {/* <Slide>
           <Heading size={3}>Music as a Function of State</Heading>
           <List>
             <ListItem>
@@ -204,7 +225,7 @@ function App() {
             than declaring visual elements in 2D or 3D, Reactronica declares
             music in 4D. I'd consider animation 4D and React already does this.
           </Notes>
-        </Slide>
+        </Slide> */}
 
         <Slide>
           <SubHeading size={5}>Introducing</SubHeading>
@@ -215,19 +236,26 @@ function App() {
         <Slide>
           <Heading size={3}>Reactronica</Heading>
           <List>
-            <ListItem>React components for making music</ListItem>
-            <ListItem>My first library!</ListItem>
-            <ListItem>VERY early days...</ListItem>
-            <ListItem>
-              Inspired by <strong>React Music</strong>
-            </ListItem>
-            <ListItem>
-              Uses <strong>Tone JS</strong> under the hood
-            </ListItem>
+            <Appear>
+              <ListItem>React components for making music</ListItem>
+            </Appear>
+            <Appear>
+              <ListItem>VERY early days...</ListItem>
+            </Appear>
+            <Appear>
+              <ListItem>
+                Inspired by <strong>React Music</strong>
+              </ListItem>
+            </Appear>
+            <Appear>
+              <ListItem>
+                Uses <strong>Tone JS</strong> under the hood
+              </ListItem>
+            </Appear>
           </List>
         </Slide>
 
-        <Slide>
+        {/* <Slide>
           <Heading size={3}>Tone JS</Heading>
           <List>
             <ListItem>Powerful audio library for the web</ListItem>
@@ -235,7 +263,7 @@ function App() {
             <ListItem>Class based</ListItem>
             <ListItem>Large API - 140 classes!</ListItem>
           </List>
-        </Slide>
+        </Slide> */}
 
         {/* <WideSlide>
           <Heading size={6}>Tone JS + React</Heading>
@@ -273,15 +301,15 @@ function App() {
           </div>
         </WideSlide> */}
 
-        <Slide>
+        {/* <Slide>
           <Heading size={3}>Reactronica API</Heading>
           <List>
             <ListItem>Modelled on how modern DAWs work</ListItem>
             <ListItem>Show Ableton Image</ListItem>
           </List>
-        </Slide>
+        </Slide> */}
 
-        <Slide>
+        {/* <Slide>
           <Heading size={3}>Components</Heading>
           <List>
             <ListItem>
@@ -297,7 +325,7 @@ function App() {
               <code>{`<Effect />`}</code> Audio effects such as reverb and delay
             </ListItem>
           </List>
-        </Slide>
+        </Slide> */}
 
         {/**
          * Demo Reactronica API Components

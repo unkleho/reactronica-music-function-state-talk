@@ -124,6 +124,7 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
+        setBpm(120);
         setIsPlaying(true);
         setHighlightedLines([5]);
         setCodeIndex(index);
@@ -142,6 +143,7 @@ const StepsEditorSlide = () => {
   )`,
       action: index => {
         setBpm(70);
+        setSteps(['A3', 'E3', 'C3', null]);
         setHighlightedLines([5]);
         setCodeIndex(index);
       },
