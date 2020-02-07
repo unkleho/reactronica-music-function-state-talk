@@ -335,7 +335,7 @@ const StepsEditorSlide = () => {
       },
     },
     {
-      title: 'We need a snare',
+      title: 'We assign a snare to D3',
       code: `return (
     <Song isPlaying={true} bpm={70}>
       <Track
@@ -390,6 +390,79 @@ const StepsEditorSlide = () => {
         setIsPlaying(true);
         setSamplerSteps(['C3', 'D3', 'C3', 'D3']);
         setHighlightedLines([13]);
+        setCodeIndex(index);
+      },
+    },
+    {
+      title: 'Bring on some hihats',
+      code: `return (
+    <Song isPlaying={true} bpm={70}>
+      <Track
+        steps={[['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]}
+      >
+        <Instrument type="amSynth" />
+        <Effect type="reverb" />
+      </Track>
+      <Track
+        steps={[['C3', 'E3'], 'D3', 'C3', 'D3']}
+      >
+        <Instrument
+          type="sampler" 
+          samples={{
+            C3: '/audio/kick.wav',
+            D3: '/audio/snare.wav',
+            E3: '/audio/hihat-loop.wav',
+          }}
+        />
+      </Track>
+    </Song>
+  )`,
+      action: index => {
+        setIsPlaying(true);
+        setSamplerSteps([
+          ['C3', { name: 'E3', duration: 4 }],
+          'D3',
+          'C3',
+          'D3',
+        ]);
+        setHighlightedLines([13, 20]);
+        setCodeIndex(index);
+      },
+    },
+    {
+      title: 'We need some bottom end',
+      code: `return (
+    <Song isPlaying={true} bpm={70}>
+      <Track
+        steps={[['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]}
+      >
+        <Instrument type="amSynth" />
+        <Effect type="reverb" />
+      </Track>
+      <Track
+        steps={[['C3', 'E3', 'F3'], 'D3', 'C3', 'D3']}
+      >
+        <Instrument
+          type="sampler" 
+          samples={{
+            C3: '/audio/kick.wav',
+            D3: '/audio/snare.wav',
+            E3: '/audio/hihat-loop.wav',
+            F3: '/audio/sub.wav',
+          }}
+        />
+      </Track>
+    </Song>
+  )`,
+      action: index => {
+        setIsPlaying(true);
+        setSamplerSteps([
+          ['C3', { name: 'E3', duration: 4 }, { name: 'F3', duration: 4 }],
+          'D3',
+          'C3',
+          'D3',
+        ]);
+        setHighlightedLines([13, 21]);
         setCodeIndex(index);
       },
     },
@@ -496,6 +569,8 @@ const StepsEditorSlide = () => {
             samples={{
               C3: '/audio/kick.wav',
               D3: '/audio/snare.wav',
+              E3: '/audio/KBH_hihat_loop_140_-3db.wav',
+              F3: '/audio/ABR_808_sub_barri_glide_Am.wav',
             }}
           ></Instrument>
         </Track>
