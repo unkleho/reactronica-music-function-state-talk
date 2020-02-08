@@ -160,7 +160,16 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
-        setSteps([['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null]);
+        setSteps([
+          ['A3', 'E3', 'C3'],
+          null,
+          ['F3', 'A3', 'C3'],
+          null,
+          // ['D3', 'F3', 'A3'],
+          // null,
+          // ['E3', 'G3', 'B3'],
+          // null,
+        ]);
         setSynthType('synth');
         setHighlightedLines([7]);
         setCodeIndex(index);
@@ -457,7 +466,11 @@ const StepsEditorSlide = () => {
       action: index => {
         setIsPlaying(true);
         setSamplerSteps([
-          ['C3', { name: 'E3', duration: 4 }, { name: 'F3', duration: 4 }],
+          [
+            'C3',
+            { name: 'E3', duration: 4 },
+            { name: 'F3', duration: 4, velocity: 0.5 },
+          ],
           'D3',
           'C3',
           'D3',
@@ -477,13 +490,15 @@ const StepsEditorSlide = () => {
         <Effect type="reverb" />
       </Track>
       <Track
-        steps={['C3', 'D3', 'C3', 'D3']}
+        steps={[['C3', 'E3', 'F3'], 'D3', 'C3', 'D3']}
       >
         <Instrument
           type="sampler" 
           samples={{
             C3: '/audio/kick.wav',
             D3: '/audio/snare.wav'
+            E3: '/audio/hihat-loop.wav',
+            F3: '/audio/sub.wav',
           }}
         />
       </Track>

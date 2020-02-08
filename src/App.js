@@ -527,11 +527,11 @@ const Song = ({
           <Notes>Show instruments and effects</Notes>
         </Slide>
 
-        <Slide>
+        {/* <Slide>
           <Heading>MIDI Drum Pads</Heading>
 
           <Notes>Little performance!</Notes>
-        </Slide>
+        </Slide> */}
       </Deck>
     </div>
   );
