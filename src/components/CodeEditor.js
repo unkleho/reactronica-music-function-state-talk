@@ -10,6 +10,20 @@ const CodeEditor = ({
   highlightedLines = [],
   className,
 }) => {
+  React.useEffect(() => {
+    if (highlightedLines && highlightedLines[0]) {
+      console.log(highlightedLines[0]);
+      const firstHighlight = highlightedLines[0] - 1;
+      const lines = document.getElementsByClassName('token-line');
+
+      console.log(lines[firstHighlight]);
+      lines[firstHighlight].scrollIntoView({
+        block: 'center',
+        behavior: 'smooth',
+      });
+    }
+  }, [highlightedLines]);
+
   return (
     <>
       <Editor
@@ -42,6 +56,18 @@ const CodeEditor = ({
             transition: 0.5s;
           }`;
         })}
+
+        {`
+        .code-editor pre {
+          max-height: 760px;
+          overflow: auto;
+          pointer-events: all !important;          
+        }
+
+        .code-editor pre::-webkit-scrollbar {
+          display: none;
+        }
+        `}
       </style>
     </>
   );
