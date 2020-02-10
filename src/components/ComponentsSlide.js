@@ -638,8 +638,8 @@ const StepsEditorSlide = () => {
     <>
       <div
         style={{
-          width: '60%',
-          // maxHeight: 760,
+          width: '100%',
+          maxWidth: 1050,
           margin: '0 auto',
         }}
       >

@@ -335,7 +335,7 @@ function App() {
           <ComponentsSlide></ComponentsSlide>
         </WideSlide>
 
-        <WideSlide height="100%">
+        <WideSlide>
           <StepsEditorSlide
             defaultSteps={[null]}
             startNote="C3"

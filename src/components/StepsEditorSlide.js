@@ -23,26 +23,50 @@ const StepsEditorSlide = () => {
   const [codeIndex, setCodeIndex] = useState(0);
   const [currentStepIndex, setCurrentStepIndex] = useState();
   const [highlightedLines, setHighlightedLines] = useState([]);
+  const [layout, setLayout] = useState('1-column');
 
   const codeSteps = [
+    // {
+    //   title: 'How does Reactronica work with UI components?',
+    //   action: index => {
+    //     setCodeIndex(index);
+    //   },
+    // },
     {
       title: 'How does Reactronica work with UI components?',
-      action: index => {
-        setCodeIndex(index);
-      },
-    },
-    {
-      title: 'How does Reactronica work with UI components?',
-      code: `return (
-  <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
-      <Track>
-        <Instrument type="synth" />
+      code: `import { Song, Track, Instrument, Effect } from 'reactronica';
+
+const Example = () => {
+  return (
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+      <Track
+        steps={[
+          ['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null, 
+          ['D3', 'F3', 'A3'], null, ['E3', 'G3', 'B3'], null,
+        ]}
+      >
+        <Instrument type="amSynth" />
+        <Effect type="reverb" />
+      </Track>
+
+      <Track
+        steps={[['C3', 'E3', 'F3'], 'D3', 'C3', 'D3']}
+      >
+        <Instrument
+          type="sampler" 
+          samples={{
+            C3: '/audio/kick.wav',
+            D3: '/audio/snare.wav'
+            E3: '/audio/hihat-loop.wav',
+            F3: '/audio/sub.wav',
+          }}
+        />
       </Track>
     </Song>
-  </>
-)`,
+  )
+}`,
       action: index => {
+        setLayout('1-column');
         setShowStepsEditor(false);
         setHighlightedLines([]);
         setCodeIndex(index);
@@ -50,18 +74,43 @@ const StepsEditorSlide = () => {
     },
     {
       title: 'Lets add a step editor UI',
-      code: `return (
-  <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
-      <Track>
-        <Instrument type="synth" />
-      </Track>
-    </Song>
+      code: `import { Song, Track, Instrument, Effect } from 'reactronica';
 
-    <StepsEditor />
-  </>
-)`,
+const Example = () => {
+  return (
+    <>
+      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+        <Track
+          steps={[
+            ['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null, 
+            ['D3', 'F3', 'A3'], null, ['E3', 'G3', 'B3'], null,
+          ]}
+        >
+          <Instrument type="amSynth" />
+          <Effect type="reverb" />
+        </Track>
+
+        <Track
+          steps={[['C3', 'E3', 'F3'], 'D3', 'C3', 'D3']}
+        >
+          <Instrument
+            type="sampler" 
+            samples={{
+              C3: '/audio/kick.wav',
+              D3: '/audio/snare.wav'
+              E3: '/audio/hihat-loop.wav',
+              F3: '/audio/sub.wav',
+            }}
+          />
+        </Track>
+      </Song>
+
+      <StepsEditor />
+    </>
+  )
+}`,
       action: index => {
+        setLayout('2-column');
         setShowStepsEditor(true);
         setSteps([null, null, null, null, null, null, null, null]);
         setShowOnStepPlay(false);
@@ -289,35 +338,39 @@ return (
     <div
       style={{
         display: 'flex',
-        flexWrap: 'wrap',
+        maxWidth: layout === '2-column' ? '100%' : 1050,
+        width: '100%',
+        margin: '0 auto',
+        transition: '0.5s',
+        // flexWrap: 'wrap',
         // alignItems: 'center',
       }}
     >
-      <h2 className="codeTitle" style={{ width: '100%' }}>
-        {title}
-      </h2>
-
       <div
         style={{
           // alignSelf: 'flex-start',
-          // width: '50%',
-          flex: 1,
+          width: '100%',
+          maxWidth: 1050,
+          // flex: 1,
         }}
       >
-        {code && (
-          <CodeEditor
-            contentEditable={false}
-            style={{
-              minWidth: 'auto',
-            }}
-            highlightedLines={highlightedLines}
-            code={code}
-          />
-        )}
+        {/* {code && ( */}
+        <CodeEditor
+          contentEditable={false}
+          style={{
+            minWidth: 'auto',
+          }}
+          highlightedLines={highlightedLines}
+          code={code}
+        />
+
+        <h2 className="codeTitle">{title}</h2>
+        {/* )} */}
       </div>
 
       <div
         style={{
+          display: 'none',
           flex: 1,
           marginLeft: '3rem',
         }}
