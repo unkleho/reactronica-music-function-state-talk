@@ -26,12 +26,7 @@ const StepsEditorSlide = () => {
   const [layout, setLayout] = useState('1-column');
 
   const codeSteps = [
-    // {
-    //   title: 'How does Reactronica work with UI components?',
-    //   action: index => {
-    //     setCodeIndex(index);
-    //   },
-    // },
+    // ------------------------------------------------------------------------
     {
       title: 'How does Reactronica work with UI components?',
       code: `import { Song, Track, Instrument, Effect } from 'reactronica';
@@ -67,24 +62,93 @@ const Example = () => {
 }`,
       action: index => {
         setLayout('1-column');
-        setShowStepsEditor(false);
         setHighlightedLines([]);
         setCodeIndex(index);
       },
     },
+    // ------------------------------------------------------------------------
+    // Move code to left
+    // ------------------------------------------------------------------------
     {
-      title: 'Lets add a step editor UI',
+      title: 'How does Reactronica work with UI components?',
+      code: null,
+      action: index => {
+        setLayout('2-column');
+        setHighlightedLines([]);
+        // setCodeIndex(index);
+      },
+    },
+    // ------------------------------------------------------------------------
+    {
+      title: 'Refactor synth steps to state',
       code: `import { Song, Track, Instrument, Effect } from 'reactronica';
 
 const Example = () => {
+  const [synthSteps, setSynthSteps] = useState([
+    ['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null, 
+    ['D3', 'F3', 'A3'], null, ['E3', 'G3', 'B3'], null,
+  ]);
+
+  return (
+    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+      <Track
+        steps={synthSteps}
+      >
+        <Instrument type="amSynth" />
+        <Effect type="reverb" />
+      </Track>
+
+      <Track
+        steps={[['C3', 'E3', 'F3'], 'D3', 'C3', 'D3']}
+      >
+        <Instrument
+          type="sampler" 
+          samples={{
+            C3: '/audio/kick.wav',
+            D3: '/audio/snare.wav'
+            E3: '/audio/hihat-loop.wav',
+            F3: '/audio/sub.wav',
+          }}
+        />
+      </Track>
+    </Song>
+  )
+}`,
+      action: index => {
+        setSteps([null, null, null, null, null, null, null, null]);
+        setShowOnStepPlay(false);
+        setHighlightedLines([4, 5, 6, 7]);
+        setCodeIndex(index);
+      },
+    },
+    // ------------------------------------------------------------------------
+    {
+      title: 'Refactor synth steps to state',
+      code: null,
+      action: index => {
+        setShowStepsEditor(false);
+        setSteps([null, null, null, null, null, null, null, null]);
+        setShowOnStepPlay(false);
+        setHighlightedLines([12]);
+        // setCodeIndex(index);
+      },
+    },
+    // ------------------------------------------------------------------------
+    {
+      title: 'Add piano roll UI',
+      code: `import { Song, Track, Instrument, Effect } from 'reactronica';
+
+const Example = () => {
+  const [synthSteps, setSynthSteps] = useState([
+    ['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null, 
+    ['D3', 'F3', 'A3'], null, ['E3', 'G3', 'B3'], null,
+  ]);
+
   return (
     <>
       <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
         <Track
-          steps={[
-            ['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null, 
-            ['D3', 'F3', 'A3'], null, ['E3', 'G3', 'B3'], null,
-          ]}
+          steps={synthSteps}
         >
           <Instrument type="amSynth" />
           <Effect type="reverb" />
@@ -105,188 +169,190 @@ const Example = () => {
         </Track>
       </Song>
 
-      <StepsEditor />
+      <PianoRoll />
     </>
   )
 }`,
       action: index => {
-        setLayout('2-column');
         setShowStepsEditor(true);
         setSteps([null, null, null, null, null, null, null, null]);
         setShowOnStepPlay(false);
-        setHighlightedLines([9]);
+        setHighlightedLines([34]);
         setCodeIndex(index);
       },
     },
+    // ------------------------------------------------------------------------
     {
-      title: 'Add some state for steps',
-      code: `const [steps, setSteps] = useState(defaultSteps);
+      title: 'Give piano roll some props',
+      code: `import { Song, Track, Instrument, Effect } from 'reactronica';
 
-return (
-  <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
-      <Track>
-        <Instrument type="synth" />
-      </Track>
-    </Song>
+const Example = () => {
+  const [synthSteps, setSynthSteps] = useState([
+    ['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null, 
+    ['D3', 'F3', 'A3'], null, ['E3', 'G3', 'B3'], null,
+  ]);
 
-    <StepsEditor />
-  </>
-)`,
-      action: index => {
-        setShowStepsEditor(true);
-        setSteps(exampleSteps);
-        setHighlightedLines([1]);
-        setCodeIndex(index);
-      },
-    },
-    {
-      title: 'Add steps to Track props',
-      code: `const [steps, setSteps] = useState(defaultSteps);
+  return (
+    <>
+      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+        <Track
+          steps={synthSteps}
+        >
+          <Instrument type="amSynth" />
+          <Effect type="reverb" />
+        </Track>
 
-return (
-  <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
-      <Track 
-        steps={steps}
-      >
-        <Instrument type="synth" />
-      </Track>
-    </Song>
+        <Track
+          steps={[['C3', 'E3', 'F3'], 'D3', 'C3', 'D3']}
+        >
+          <Instrument
+            type="sampler" 
+            samples={{
+              C3: '/audio/kick.wav',
+              D3: '/audio/snare.wav'
+              E3: '/audio/hihat-loop.wav',
+              F3: '/audio/sub.wav',
+            }}
+          />
+        </Track>
+      </Song>
 
-    <StepsEditor />
-  </>
-)`,
+      <PianoRoll 
+        steps={synthSteps} 
+      />
+    </>
+  )
+}`,
       action: index => {
         setIsPlaying(false);
-        setShowStepsEditorSteps(false);
-        setHighlightedLines([7]);
+        setSteps(exampleSteps);
+        setShowStepsEditorSteps(true);
+        setShowOnStepPlay(false);
+        setHighlightedLines([35]);
         setCodeIndex(index);
       },
     },
+    // ------------------------------------------------------------------------
     {
       title: 'Have a listen',
-      code: `const [steps, setSteps] = useState(defaultSteps);
-
-return (
-  <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
-      <Track 
-        steps={steps}
-      >
-        <Instrument type="synth" />
-      </Track>
-    </Song>
-
-    <StepsEditor />
-  </>
-)`,
-      action: index => {
+      code: null,
+      action: () => {
+        setHighlightedLines([11]);
         setIsPlaying(true);
-        setShowStepsEditorSteps(false);
-        setHighlightedLines([5]);
-        setCodeIndex(index);
       },
     },
+    // ------------------------------------------------------------------------
     {
-      title: 'Add steps to Steps editor props',
-      code: `const [steps, setSteps] = useState(defaultSteps);
+      title: 'Add currentStep',
+      code: `import { Song, Track, Instrument, Effect } from 'reactronica';
 
-return (
-  <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
-      <Track 
-        steps={steps}
-      >
-        <Instrument type="synth" />
-      </Track>
-    </Song>
+const Example = () => {
+  const [synthSteps, setSynthSteps] = useState([
+    ['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null, 
+    ['D3', 'F3', 'A3'], null, ['E3', 'G3', 'B3'], null,
+  ]);
+  const [currentStep, setCurrentStep] = useState();
 
-    <StepsEditor steps={steps} />
-  </>
-)`,
+  return (
+    <>
+      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+        <Track
+          steps={synthSteps}
+        >
+          <Instrument type="amSynth" />
+          <Effect type="reverb" />
+        </Track>
+
+        <Track
+          steps={[['C3', 'E3', 'F3'], 'D3', 'C3', 'D3']}
+        >
+          <Instrument
+            type="sampler" 
+            samples={{
+              C3: '/audio/kick.wav',
+              D3: '/audio/snare.wav'
+              E3: '/audio/hihat-loop.wav',
+              F3: '/audio/sub.wav',
+            }}
+          />
+        </Track>
+      </Song>
+
+      <PianoRoll 
+        steps={synthSteps} 
+      />
+    </>
+  )
+}`,
       action: index => {
+        setSteps(exampleSteps);
         setShowStepsEditorSteps(true);
-        setHighlightedLines([13]);
+        setShowOnStepPlay(false);
+        setHighlightedLines([8]);
         setCodeIndex(index);
       },
     },
-    {
-      title: 'Add state for currentStep',
-      code: `const [steps, setSteps] = useState(defaultSteps);
-const [currentStep, setCurrentStep] = useState();
-
-return (
-  <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
-      <Track 
-        steps={steps}
-      >
-        <Instrument type="synth" />
-      </Track>
-    </Song>
-
-    <StepsEditor steps={steps} />
-  </>
-)`,
-      action: index => {
-        setHighlightedLines([2]);
-        setCodeIndex(index);
-      },
-    },
+    // ------------------------------------------------------------------------
     {
       title: 'Set currentStep with Track callback',
-      code: `const [steps, setSteps] = useState(defaultSteps);
-const [currentStep, setCurrentStep] = useState();
+      code: `import { Song, Track, Instrument, Effect } from 'reactronica';
 
-return (
-  <>
-    <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
-      <Track 
-        steps={steps} 
-        onStepPlay={(_, i) => setCurrentStep(i)}
-      >
-        <Instrument type="synth" />
-      </Track>
-    </Song>
+const Example = () => {
+  const [synthSteps, setSynthSteps] = useState([
+    ['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null, 
+    ['D3', 'F3', 'A3'], null, ['E3', 'G3', 'B3'], null,
+  ]);
+  const [currentStep, setCurrentStep] = useState();
 
-    <StepsEditor steps={steps} />
-  </>
-)`,
+  return (
+    <>
+      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+        <Track
+          steps={synthSteps}
+          onStepPlay={(_, i) => setCurrentStep(i)}
+        >
+          <Instrument type="amSynth" />
+          <Effect type="reverb" />
+        </Track>
+
+        <Track
+          steps={[['C3', 'E3', 'F3'], 'D3', 'C3', 'D3']}
+        >
+          <Instrument
+            type="sampler" 
+            samples={{
+              C3: '/audio/kick.wav',
+              D3: '/audio/snare.wav'
+              E3: '/audio/hihat-loop.wav',
+              F3: '/audio/sub.wav',
+            }}
+          />
+        </Track>
+      </Song>
+
+      <PianoRoll 
+        steps={synthSteps} 
+        currentStep={currentStep}
+      />
+    </>
+  )
+}`,
       action: index => {
+        setSteps(exampleSteps);
+        setShowStepsEditorSteps(true);
         setShowOnStepPlay(false);
-        setHighlightedLines([9]);
+        setHighlightedLines([15]);
         setCodeIndex(index);
       },
     },
+
     {
       title: 'Playhead moves with the music',
-      code: `   <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
-      <Track 
-        steps={steps} 
-        onStepPlay={(_, i) => setCurrentStep(i)}
-      >
-        <Instrument 
-          type="synth" ${
-            notes.length > 0
-              ? `
-          notes={[{ name: '${notes[0].name}' }]}`
-              : ''
-          }
-        />
-      </Track>
-    </Song>
-
-    <StepsEditor 
-      steps={steps}
-      currentStep={currentStep}
-    />
-  </>
-)`,
-      action: index => {
+      code: null,
+      action: () => {
         setShowOnStepPlay(true);
-        setHighlightedLines([14]);
-        setCodeIndex(index);
+        setHighlightedLines([38]);
+        // setCodeIndex(index);
       },
     },
     {
@@ -370,7 +436,7 @@ return (
 
       <div
         style={{
-          display: 'none',
+          display: showStepsEditor ? 'block' : 'none',
           flex: 1,
           marginLeft: '3rem',
         }}
