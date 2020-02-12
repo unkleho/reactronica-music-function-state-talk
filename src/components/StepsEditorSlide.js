@@ -311,7 +311,14 @@ const Example = () => {
           steps={synthSteps}
           onStepPlay={(_, i) => setCurrentStep(i)}
         >
-          <Instrument type="amSynth" />
+          <Instrument 
+            type="synth" ${
+              notes.length > 0
+                ? `
+            notes={[{ name: '${notes[0].name}' }]}`
+                : ''
+            }
+          />
           <Effect type="reverb" />
         </Track>
 
@@ -345,43 +352,119 @@ const Example = () => {
         setCodeIndex(index);
       },
     },
-
+    // ------------------------------------------------------------------------
     {
       title: 'Playhead moves with the music',
-      code: null,
-      action: () => {
-        setShowOnStepPlay(true);
-        setHighlightedLines([38]);
-        // setCodeIndex(index);
-      },
-    },
-    {
-      title: 'Add more notes',
-      code: `   <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={100}>
-      <Track 
-        steps={steps} 
-        onStepPlay={(_, i) => setCurrentStep(i)}
-      >
-        <Instrument 
-          type="synth" ${
-            notes.length > 0
-              ? `
-          notes={[{ name: '${notes[0].name}' }]}`
-              : ''
-          }
-        />
-      </Track>
-    </Song>
+      code: `import { Song, Track, Instrument, Effect } from 'reactronica';
 
-    <StepsEditor 
-      steps={steps}
-      currentStep={currentStep}
-    />
-  </>
-)`,
+const Example = () => {
+  const [synthSteps, setSynthSteps] = useState([
+    ['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null, 
+    ['D3', 'F3', 'A3'], null, ['E3', 'G3', 'B3'], null,
+  ]);
+  const [currentStep, setCurrentStep] = useState();
+
+  return (
+    <>
+      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+        <Track
+          steps={synthSteps}
+          onStepPlay={(_, i) => setCurrentStep(i)}
+        >
+          <Instrument 
+            type="synth" ${
+              notes.length > 0
+                ? `
+            notes={[{ name: '${notes[0].name}' }]}`
+                : ''
+            }
+          />
+          <Effect type="reverb" />
+        </Track>
+
+        <Track
+          steps={[['C3', 'E3', 'F3'], 'D3', 'C3', 'D3']}
+        >
+          <Instrument
+            type="sampler" 
+            samples={{
+              C3: '/audio/kick.wav',
+              D3: '/audio/snare.wav'
+              E3: '/audio/hihat-loop.wav',
+              F3: '/audio/sub.wav',
+            }}
+          />
+        </Track>
+      </Song>
+
+      <PianoRoll 
+        steps={synthSteps} 
+        currentStep={currentStep}
+      />
+    </>
+  )
+}`,
       action: index => {
         setShowOnStepPlay(true);
-        setHighlightedLines([14]);
+        setHighlightedLines([40]);
+        setCodeIndex(index);
+      },
+    },
+    // ------------------------------------------------------------------------
+    {
+      title: 'Notes can be played in realtime',
+      code: `import { Song, Track, Instrument, Effect } from 'reactronica';
+
+const Example = () => {
+  const [synthSteps, setSynthSteps] = useState([
+    ['A3', 'E3', 'C3'], null, ['F3', 'A3', 'C3'], null, 
+    ['D3', 'F3', 'A3'], null, ['E3', 'G3', 'B3'], null,
+  ]);
+  const [currentStep, setCurrentStep] = useState();
+
+  return (
+    <>
+      <Song isPlaying={${isPlaying ? 'true' : 'false'}} bpm={70}>
+        <Track
+          steps={synthSteps}
+          onStepPlay={(_, i) => setCurrentStep(i)}
+        >
+          <Instrument 
+            type="synth" ${
+              notes.length > 0
+                ? `
+            notes={[{ name: '${notes[0].name}' }]}`
+                : ''
+            }
+          />
+          <Effect type="reverb" />
+        </Track>
+
+        <Track
+          steps={[['C3', 'E3', 'F3'], 'D3', 'C3', 'D3']}
+        >
+          <Instrument
+            type="sampler" 
+            samples={{
+              C3: '/audio/kick.wav',
+              D3: '/audio/snare.wav'
+              E3: '/audio/hihat-loop.wav',
+              F3: '/audio/sub.wav',
+            }}
+          />
+        </Track>
+      </Song>
+
+      <PianoRoll 
+        steps={synthSteps} 
+        currentStep={currentStep}
+      />
+    </>
+  )
+}`,
+      action: index => {
+        // setShowOnStepPlay(true);
+        // setHighlightedLines([14]);
         setCodeIndex(index);
       },
     },
@@ -398,7 +481,11 @@ const Example = () => {
   const code = codeSteps[codeIndex].code;
   const title = codeSteps[codeIndex] && codeSteps[codeIndex].title;
 
+  // const prevCode = usePrevious(code);
+
   const [steps, setSteps] = useState(undefined);
+
+  // console.log(code, prevCode);
 
   return (
     <div
@@ -408,19 +495,14 @@ const Example = () => {
         width: '100%',
         margin: '0 auto',
         transition: '0.5s',
-        // flexWrap: 'wrap',
-        // alignItems: 'center',
       }}
     >
       <div
         style={{
-          // alignSelf: 'flex-start',
           width: '100%',
           maxWidth: 1050,
-          // flex: 1,
         }}
       >
-        {/* {code && ( */}
         <CodeEditor
           contentEditable={false}
           style={{
@@ -431,7 +513,6 @@ const Example = () => {
         />
 
         <h2 className="codeTitle">{title}</h2>
-        {/* )} */}
       </div>
 
       <div
@@ -477,11 +558,11 @@ const Example = () => {
                     name: note,
                   },
                 ]);
-                setHighlightedLines([15, 8]);
+                setHighlightedLines([19]);
               }}
               onKeyboardUp={note => {
                 setNotes([]);
-                setHighlightedLines([14]);
+                setHighlightedLines([]);
               }}
             />
 

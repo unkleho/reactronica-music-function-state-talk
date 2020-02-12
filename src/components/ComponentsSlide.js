@@ -36,8 +36,25 @@ const StepsEditorSlide = () => {
   // Code State
   const [codeIndex, setCodeIndex] = useState(0);
   const [highlightedLines, setHighlightedLines] = useState([]);
+  const [highlightedTokens, setHighlightedTokens] = useState([]);
   const [codeFontSize, setCodeFontSize] = useState(null);
   const [importCode, setImportCode] = useState('');
+  const [actionSlug, setActionSlug] = useState();
+
+  const handleSynthStepPlay = (_, index, slug) => {
+    console.log(slug);
+
+    if (actionSlug === 'play-single-notes') {
+      const tokenSteps = [6, 9, 12, 15, 6, 9, 12, 15];
+      const tokenStep = tokenSteps[index];
+      setHighlightedTokens([
+        {
+          line: 7,
+          tokens: [tokenStep],
+        },
+      ]);
+    }
+  };
 
   const codeSteps = [
     {
@@ -142,6 +159,7 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
+        setActionSlug('play-single-notes');
         setBpm(120);
         setIsPlaying(true);
         setHighlightedLines([5]);
@@ -178,6 +196,7 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
+        setActionSlug('play-chords');
         setSteps([
           ['A3', 'E3', 'C3'],
           null,
@@ -650,6 +669,7 @@ const StepsEditorSlide = () => {
             fontSize: codeFontSize || '32px',
           }}
           highlightedLines={highlightedLines}
+          highlightedTokens={highlightedTokens}
           code={`${importCode}const Example = () => {
   ${code}
 }`}
@@ -677,7 +697,7 @@ const StepsEditorSlide = () => {
       <Song isPlaying={isPlaying} bpm={bpm}>
         <Track
           steps={steps}
-          // onStepPlay={(_, index) => setCurrentStepIndex(index)}
+          onStepPlay={(_, index) => handleSynthStepPlay(_, index, actionSlug)}
         >
           <Instrument type={synthType}></Instrument>
 

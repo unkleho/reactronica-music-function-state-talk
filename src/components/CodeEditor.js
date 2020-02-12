@@ -8,15 +8,20 @@ const CodeEditor = ({
   style,
   language = 'jsx',
   highlightedLines = [],
+  highlightedTokens = [],
+  // highlightedTokens = [
+  //   {
+  //     line: 5,
+  //     tokens: [8],
+  //   },
+  // ],
   className,
 }) => {
   React.useEffect(() => {
     if (highlightedLines && highlightedLines[0]) {
-      console.log(highlightedLines[0]);
       const firstHighlight = highlightedLines[0] - 1;
       const lines = document.getElementsByClassName('token-line');
 
-      console.log(lines[firstHighlight]);
       lines[firstHighlight].scrollIntoView({
         block: 'center',
         behavior: 'smooth',
@@ -44,17 +49,24 @@ const CodeEditor = ({
           ? `
           .code-editor .token-line {
             opacity: 0.4;
-            transition: 0.5s;
+            transition: 0.1s;
           }
         `
           : ''}
 
         {highlightedLines.map(line => {
           return `.code-editor .token-line:nth-child(${line}) {
-            // background-color: #161616;
             opacity: 1;
             transition: 0.5s;
           }`;
+        })}
+
+        {highlightedTokens.map(lineToken => {
+          return lineToken.tokens.map(token => {
+            return `.code-editor .token-line:nth-child(${lineToken.line}) .token:nth-child(${token}) {
+              text-decoration: underline;
+            }`;
+          });
         })}
 
         {`
