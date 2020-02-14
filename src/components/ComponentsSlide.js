@@ -41,17 +41,77 @@ const StepsEditorSlide = () => {
   const [importCode, setImportCode] = useState('');
   const [actionSlug, setActionSlug] = useState();
 
-  const handleSynthStepPlay = (_, index, slug) => {
-    console.log(slug);
+  // Store callback in ref as it needs to reference latest state variables
+  const handleSynthStepPlay = React.useRef();
+
+  handleSynthStepPlay.current = (_, index) => {
+    let tokenSteps;
+    let tokenStep;
+    let line;
 
     if (actionSlug === 'play-single-notes') {
-      const tokenSteps = [6, 9, 12, 15, 6, 9, 12, 15];
-      const tokenStep = tokenSteps[index];
+      tokenSteps = [6, 9, 12, 15, 6, 9, 12, 15];
+      tokenStep = tokenSteps[index];
+
       setHighlightedTokens([
         {
           line: 7,
           tokens: [tokenStep],
         },
+      ]);
+    } else if (actionSlug === 'play-two-chords') {
+      tokenSteps = [[7, 10, 13], [17], [21, 24, 27], [31]];
+      tokenStep = tokenSteps[index % 4];
+
+      setHighlightedTokens([
+        {
+          line: 7,
+          tokens: tokenStep,
+        },
+      ]);
+    } else if (
+      actionSlug === 'play-four-chords' ||
+      actionSlug === 'play-four-chords-and-beat' ||
+      actionSlug === 'play-four-chords-and-beat-hat' ||
+      actionSlug === 'play-four-chords-and-beat-hat-sub'
+    ) {
+      tokenSteps = [[3, 6, 9], [13], [17, 20, 23], [27]];
+      tokenStep = tokenSteps[index % 4];
+      line = index >= 4 ? 9 : 8;
+
+      const beatTokenSteps = [6, 9, 12, 15];
+      const beatHatTokenSteps = [[7, 10], [14], [17], [20]];
+      const beatHatSubTokenSteps = [[7, 10, 13], [17], [20], [23]];
+
+      setHighlightedTokens([
+        {
+          line,
+          tokens: tokenStep,
+        },
+        ...(actionSlug === 'play-four-chords-and-beat'
+          ? [
+              {
+                line: 17,
+                tokens: [beatTokenSteps[index % 4]],
+              },
+            ]
+          : []),
+        ...(actionSlug === 'play-four-chords-and-beat-hat'
+          ? [
+              {
+                line: 17,
+                tokens: beatHatTokenSteps[index % 4],
+              },
+            ]
+          : []),
+        ...(actionSlug === 'play-four-chords-and-beat-hat-sub'
+          ? [
+              {
+                line: 17,
+                tokens: beatHatSubTokenSteps[index % 4],
+              },
+            ]
+          : []),
       ]);
     }
   };
@@ -196,7 +256,7 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
-        setActionSlug('play-chords');
+        setActionSlug('play-two-chords');
         setSteps([
           ['A3', 'E3', 'C3'],
           null,
@@ -307,6 +367,7 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
+        setActionSlug('play-four-chords');
         setSteps([
           ['A3', 'E3', 'C3'],
           null,
@@ -341,7 +402,6 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
-        // setEffects([]);
         setHighlightedLines([16, 17]);
         setCodeIndex(index);
       },
@@ -368,9 +428,6 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
-        // setEffects([]);
-        // setCodeFontSize('24px');
-        // setSamplerSteps(['C3', null, 'C3', null]);
         setHighlightedLines([17, 18, 19]);
         setCodeIndex(index);
       },
@@ -434,8 +491,7 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
-        // setEffects([]);
-        // setCodeFontSize('24px');
+        setActionSlug('play-four-chords-and-beat');
         setSamplerSteps(['C3', null, 'C3', null, 'C3', null, 'C3', null]);
         setHighlightedLines([17]);
         setCodeIndex(index);
@@ -537,6 +593,7 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
+        setActionSlug('play-four-chords-and-beat-hat');
         setIsPlaying(true);
         setSamplerSteps([
           ['C3', { name: 'E3', duration: 4 }],
@@ -582,6 +639,7 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
+        setActionSlug('play-four-chords-and-beat-hat-sub');
         setIsPlaying(true);
         setSamplerSteps([
           [
@@ -697,7 +755,7 @@ const StepsEditorSlide = () => {
       <Song isPlaying={isPlaying} bpm={bpm}>
         <Track
           steps={steps}
-          onStepPlay={(_, index) => handleSynthStepPlay(_, index, actionSlug)}
+          onStepPlay={(_, index) => handleSynthStepPlay.current(_, index)}
         >
           <Instrument type={synthType}></Instrument>
 
