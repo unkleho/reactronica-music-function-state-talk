@@ -572,7 +572,7 @@ const Example = () => {
                     name: note,
                   },
                 ]);
-                setHighlightedLines([19]);
+                setHighlightedLines([18]);
               }}
               onKeyboardUp={note => {
                 setNotes([]);

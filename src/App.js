@@ -14,7 +14,7 @@ import {
 } from 'spectacle';
 import createTheme from 'spectacle/lib/themes/default';
 import styled from 'react-emotion';
-import CodeSlide from 'spectacle-code-slide';
+// import CodeSlide from 'spectacle-code-slide';
 // import { Song, Track, Instrument, Effect } from 'reactronica';
 
 // import ReactLive from './ReactLive';
@@ -22,7 +22,7 @@ import StepsEditorSlide from './components/StepsEditorSlide';
 import ComponentsSlide from './components/ComponentsSlide';
 import TabExample from './components/TabExample';
 // import codeTheme from './codeTheme';
-// import WaveAnimation from './components/WaveAnimation/WaveAnimation';
+import WaveAnimation from './components/WaveAnimation/WaveAnimation';
 
 import './global.module.css';
 import './App.css';
@@ -45,7 +45,7 @@ const theme = createTheme(
 // ----------------------------------------------------------------------------
 
 const MainHeading = styled(RawHeading)`
-  margin-bottom: 64px;
+  margin-bottom: 32px;
   font-size: 10rem;
   line-height: 1.2;
   background: linear-gradient(160deg, #5f0fd1, #0fa6d1);
@@ -101,7 +101,7 @@ function App() {
             <strong>Music</strong> as a Function of <strong>State</strong>
           </Text>
           <MainHeading>Reactronica</MainHeading>
-          {/* <WaveAnimation></WaveAnimation> */}
+          <WaveAnimation></WaveAnimation>
           <br />
           <br />
           <SubHeading size={5}>
@@ -121,7 +121,7 @@ function App() {
               </ListItem>
             </Appear>
             <Appear>
-              <ListItem>Design background</ListItem>
+              <ListItem>Industrial design background</ListItem>
             </Appear>
             <Appear>
               <ListItem>
