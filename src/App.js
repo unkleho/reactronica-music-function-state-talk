@@ -28,6 +28,7 @@ import './global.module.css';
 import './App.css';
 import './codeTheme.scss';
 import './codePane.scss';
+import HighlightCodeEditor from './components/HighlightCodeEditor';
 
 const theme = createTheme(
   {
@@ -237,6 +238,11 @@ function App() {
           <Heading size={3}>Reactronica</Heading>
           <List>
             <Appear>
+              <ListItem>
+                <a href="https://reactronica.com">reactronica.com</a>
+              </ListItem>
+            </Appear>
+            <Appear>
               <ListItem>React components for making music</ListItem>
             </Appear>
             <Appear>
@@ -351,6 +357,49 @@ function App() {
           <Heading>Internals</Heading>
           <Text>Song and Instrument components</Text>
         </Slide>
+
+        <WideSlide>
+          <div
+            style={{
+              maxWidth: '55%',
+              margin: '0 auto',
+            }}
+          >
+            <HighlightCodeEditor
+              code={`const SongContext = React.createContext();
+          
+const Song = ({
+  isPlaying,
+  bpm,
+  children
+}) => {
+  useEffect(() => {
+    if (isPlaying) {
+      Tone.Transport.start();
+    } else {
+      Tone.Transport.stop();
+    }
+  }, [isPlaying]);
+
+  useEffect(() => {
+    Tone.Transport.bpm.value = bpm;
+  }, [bpm])
+
+  return (
+    <SongContext.Provider value={{ isPlaying }}>
+      {children}
+    </SongContext.Provider>
+  )
+}`}
+              ranges={[[3], [4]]}
+              // onRangeChange={(range, index) => {
+              //   console.log(range, index);
+              // }}
+            />
+            <br />
+            <Heading size={5}>{`<Song />`}</Heading>
+          </div>
+        </WideSlide>
 
         <CodeSlide
           code={`const SongContext = React.createContext();
@@ -526,6 +575,17 @@ const Song = ({
 
           <Notes>Show instruments and effects</Notes>
         </Slide>
+
+        {/* --------------------------------------------------------------- */}
+        {/* FUTURE */}
+        {/* --------------------------------------------------------------- */}
+
+        {/* <Slide>
+          <Heading>Future</Heading>
+          <List>
+            <ListItem>More props for Tone JS</ListItem>
+          </List>
+        </Slide> */}
 
         {/* <Slide>
           <Heading>MIDI Drum Pads</Heading>

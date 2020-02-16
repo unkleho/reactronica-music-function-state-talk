@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Song, Track, Instrument } from 'reactronica';
+import { Song, Track, Instrument, Effect } from 'reactronica';
 
 import CodeEditor from './CodeEditor';
 import StepsEditor from './StepsEditor';
@@ -10,6 +10,24 @@ const StepsEditorSlide = () => {
   // Reactronica State
   const [isPlaying, setIsPlaying] = useState(false);
   const [notes, setNotes] = useState([]);
+  const [samplerSteps] = useState([
+    [
+      'C3',
+      { name: 'E3', duration: 4 },
+      { name: 'F3', duration: 4, velocity: 0.5 },
+    ],
+    'D3',
+    'C3',
+    'D3',
+    [
+      'C3',
+      { name: 'E3', duration: 4 },
+      { name: 'F3', duration: 4, velocity: 0.5 },
+    ],
+    'D3',
+    'C3',
+    'D3',
+  ]);
 
   // StepsEditor State
   const [showStepsEditor, setShowStepsEditor] = useState(false);
@@ -481,11 +499,7 @@ const Example = () => {
   const code = codeSteps[codeIndex].code;
   const title = codeSteps[codeIndex] && codeSteps[codeIndex].title;
 
-  // const prevCode = usePrevious(code);
-
   const [steps, setSteps] = useState(undefined);
-
-  // console.log(code, prevCode);
 
   return (
     <div
@@ -578,12 +592,29 @@ const Example = () => {
         )}
       </div>
 
-      <Song isPlaying={isPlaying} bpm={100}>
+      <Song isPlaying={isPlaying} bpm={70}>
         <Track
           steps={steps}
           onStepPlay={(_, index) => setCurrentStepIndex(index)}
         >
           <Instrument type="amSynth" notes={notes}></Instrument>
+
+          <Effect type={'freeverb'} id={1} wet={0.7}></Effect>
+        </Track>
+
+        <Track
+          steps={samplerSteps}
+          // onStepPlay={(_, index) => setCurrentStepIndex(index)}
+        >
+          <Instrument
+            type="sampler"
+            samples={{
+              C3: '/audio/kick.wav',
+              D3: '/audio/snare.wav',
+              E3: '/audio/KBH_hihat_loop_140_-3db.wav',
+              F3: '/audio/ABR_808_sub_barri_glide_Am.wav',
+            }}
+          ></Instrument>
         </Track>
       </Song>
     </div>
@@ -594,15 +625,15 @@ const exampleSteps = [
   [
     {
       name: 'A3',
-      duration: 0.2,
+      // duration: 0.2,
     },
     {
       name: 'C3',
-      duration: 0.2,
+      // duration: 0.2,
     },
     {
       name: 'E3',
-      duration: 0.2,
+      // duration: 0.2,
     },
   ],
   null,
@@ -623,15 +654,15 @@ const exampleSteps = [
   [
     {
       name: 'F3',
-      duration: 0.2,
+      // duration: 0.2,
     },
     {
       name: 'A3',
-      duration: 0.2,
+      // duration: 0.2,
     },
     {
       name: 'C3',
-      duration: 0.2,
+      // duration: 0.2,
     },
   ],
   null,
@@ -652,15 +683,15 @@ const exampleSteps = [
   [
     {
       name: 'D3',
-      duration: 0.2,
+      // duration: 0.2,
     },
     {
       name: 'F3',
-      duration: 0.2,
+      // duration: 0.2,
     },
     {
       name: 'A3',
-      duration: 0.2,
+      // duration: 0.2,
     },
   ],
   null,
@@ -681,15 +712,15 @@ const exampleSteps = [
   [
     {
       name: 'E3',
-      duration: 0.2,
+      // duration: 0.2,
     },
     {
       name: 'G3',
-      duration: 0.2,
+      // duration: 0.2,
     },
     {
       name: 'B3',
-      duration: 0.2,
+      // duration: 0.2,
     },
   ],
   null,

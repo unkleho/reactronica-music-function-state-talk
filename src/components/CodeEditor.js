@@ -7,6 +7,7 @@ const CodeEditor = ({
   code,
   style,
   language = 'jsx',
+  /** Array of numbers */
   highlightedLines = [],
   highlightedTokens = [],
   // highlightedTokens = [
