@@ -135,7 +135,7 @@ const StepsEditorSlide = () => {
         setImportCode(`import { Song } from 'reactronica';
         
 `);
-        setHighlightedLines([1]);
+        setHighlightedLines([0]);
         setCodeIndex(index);
       },
     },
@@ -149,7 +149,7 @@ const StepsEditorSlide = () => {
         setImportCode(`import { Song } from 'reactronica';
         
 `);
-        setHighlightedLines([5]);
+        setHighlightedLines([4]);
         setCodeIndex(index);
       },
     },
@@ -165,7 +165,7 @@ const StepsEditorSlide = () => {
         setImportCode(`import { Song, Track } from 'reactronica';
         
 `);
-        setHighlightedLines([6, 7]);
+        setHighlightedLines([5, 6]);
         setCodeIndex(index);
       },
     },
@@ -183,7 +183,7 @@ const StepsEditorSlide = () => {
         setImportCode(`import { Song, Track } from 'reactronica';
         
 `);
-        setHighlightedLines([7]);
+        setHighlightedLines([6]);
         setCodeIndex(index);
       },
     },
@@ -203,7 +203,7 @@ const StepsEditorSlide = () => {
         
 `);
         setIsPlaying(false);
-        setHighlightedLines([9]);
+        setHighlightedLines([8]);
         setCodeIndex(index);
       },
     },
@@ -222,7 +222,7 @@ const StepsEditorSlide = () => {
         setActionSlug('play-single-notes');
         setBpm(120);
         setIsPlaying(true);
-        setHighlightedLines([5]);
+        setHighlightedLines([4]);
         setCodeIndex(index);
       },
     },
@@ -240,7 +240,7 @@ const StepsEditorSlide = () => {
       action: index => {
         setBpm(70);
         setSteps(['A3', 'E3', 'C3', null, 'A3', 'E3', 'C3', null]);
-        setHighlightedLines([5]);
+        setHighlightedLines([4]);
         setCodeIndex(index);
       },
     },
@@ -272,7 +272,7 @@ const StepsEditorSlide = () => {
           // null,
         ]);
         setSynthType('synth');
-        setHighlightedLines([7]);
+        setHighlightedLines([6]);
         setCodeIndex(index);
       },
     },
@@ -293,7 +293,7 @@ const StepsEditorSlide = () => {
 `);
         setSynthType('fmSynth');
         setEffects([]);
-        setHighlightedLines([9]);
+        setHighlightedLines([8]);
         setCodeIndex(index);
       },
     },
@@ -311,7 +311,7 @@ const StepsEditorSlide = () => {
       action: index => {
         setSynthType('amSynth');
         setEffects([]);
-        setHighlightedLines([9]);
+        setHighlightedLines([8]);
         setCodeIndex(index);
       },
     },
@@ -347,7 +347,7 @@ const StepsEditorSlide = () => {
             type: 'freeverb',
           },
         ]);
-        setHighlightedLines([10]);
+        setHighlightedLines([9]);
         setCodeIndex(index);
       },
     },
@@ -379,7 +379,7 @@ const StepsEditorSlide = () => {
           null,
         ]);
         setCodeFontSize(null);
-        setHighlightedLines([7, 8, 9, 10]);
+        setHighlightedLines([6, 7, 8, 9]);
         setCodeIndex(index);
       },
     },
@@ -402,7 +402,7 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
-        setHighlightedLines([16, 17]);
+        setHighlightedLines([15, 16]);
         setCodeIndex(index);
       },
     },
@@ -428,7 +428,7 @@ const StepsEditorSlide = () => {
     </Song>
   )`,
       action: index => {
-        setHighlightedLines([17, 18, 19]);
+        setHighlightedLines([16, 17, 18]);
         setCodeIndex(index);
       },
     },
@@ -460,7 +460,7 @@ const StepsEditorSlide = () => {
         // setEffects([]);
         // setCodeFontSize('24px');
         setSamplerSteps([null, null, null, null, null, null, null, null]);
-        setHighlightedLines([19, 20, 21]);
+        setHighlightedLines([18, 19, 20]);
         setCodeIndex(index);
       },
     },
@@ -493,7 +493,7 @@ const StepsEditorSlide = () => {
       action: index => {
         setActionSlug('play-four-chords-and-beat');
         setSamplerSteps(['C3', null, 'C3', null, 'C3', null, 'C3', null]);
-        setHighlightedLines([17]);
+        setHighlightedLines([16]);
         setCodeIndex(index);
       },
     },
@@ -526,7 +526,7 @@ const StepsEditorSlide = () => {
   )`,
       action: index => {
         setSamplerSteps(['C3', null, 'C3', null, 'C3', null, 'C3', null]);
-        setHighlightedLines([23]);
+        setHighlightedLines([22]);
         setCodeIndex(index);
       },
     },
@@ -560,7 +560,7 @@ const StepsEditorSlide = () => {
       action: index => {
         setIsPlaying(true);
         setSamplerSteps(['C3', 'D3', 'C3', 'D3', 'C3', 'D3', 'C3', 'D3']);
-        setHighlightedLines([17]);
+        setHighlightedLines([16]);
         setCodeIndex(index);
       },
     },
@@ -605,7 +605,7 @@ const StepsEditorSlide = () => {
           'C3',
           'D3',
         ]);
-        setHighlightedLines([17, 24]);
+        setHighlightedLines([16, 23]);
         setCodeIndex(index);
       },
     },
@@ -659,7 +659,7 @@ const StepsEditorSlide = () => {
           'C3',
           'D3',
         ]);
-        setHighlightedLines([17, 25]);
+        setHighlightedLines([16, 24]);
         setCodeIndex(index);
       },
     },
@@ -694,7 +694,7 @@ const StepsEditorSlide = () => {
   )`,
       action: index => {
         setIsPlaying(false);
-        setHighlightedLines([5]);
+        setHighlightedLines([4]);
         setCodeIndex(index);
       },
     },

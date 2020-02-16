@@ -358,6 +358,10 @@ function App() {
           <Text>Song and Instrument components</Text>
         </Slide>
 
+        {/* --------------------------------------------------------------- */}
+        {/* Song Component */}
+        {/* --------------------------------------------------------------- */}
+
         <WideSlide>
           <div
             style={{
@@ -391,7 +395,36 @@ const Song = ({
     </SongContext.Provider>
   )
 }`}
-              ranges={[[3], [4]]}
+              ranges={[
+                {
+                  loc: [2, 3, 4, 5, 6],
+                  // title: 'Song props',
+                },
+                {
+                  loc: [3],
+                  // title: isPlaying prop
+                },
+                {
+                  loc: [7, 8, 9, 10, 11, 12, 13],
+                  // title: isPlaying useEffect
+                },
+                {
+                  loc: [4],
+                  // title: bpm prop
+                },
+                {
+                  loc: [15, 16, 17],
+                  // title: isPlaying useEffect
+                },
+                {
+                  loc: [0],
+                  // title: 'SongContext createContext',
+                },
+                {
+                  loc: [20, 21, 22],
+                  // title: 'SongContext.Provider',
+                },
+              ].map(range => range.loc)}
               // onRangeChange={(range, index) => {
               //   console.log(range, index);
               // }}
@@ -399,75 +432,26 @@ const Song = ({
             <br />
             <Heading size={5}>{`<Song />`}</Heading>
           </div>
-        </WideSlide>
 
-        <CodeSlide
-          code={`const SongContext = React.createContext();
-          
-const Song = ({
-  isPlaying,
-  bpm,
-  children
-}) => {
-  useEffect(() => {
-    if (isPlaying) {
-      Tone.Transport.start();
-    } else {
-      Tone.Transport.stop();
-    }
-  }, [isPlaying]);
-
-  useEffect(() => {
-    Tone.Transport.bpm.value = bpm;
-  }, [bpm])
-
-  return (
-    <SongContext.Provider value={{ isPlaying }}>
-      {children}
-    </SongContext.Provider>
-  )
-}`}
-          ranges={[
-            {
-              loc: [2, 7],
-              // title: 'Song props',
-            },
-            {
-              loc: [3, 4],
-              // title: isPlaying prop
-            },
-            {
-              loc: [7, 14],
-              // title: isPlaying useEffect
-            },
-            {
-              loc: [4, 5],
-              // title: bpm prop
-            },
-            {
-              loc: [15, 18],
-              // title: isPlaying useEffect
-            },
-            {
-              loc: [0, 1],
-              // title: 'SongContext createContext',
-            },
-            {
-              loc: [20, 23],
-              // title: 'SongContext.Provider',
-            },
-          ]}
-          className="code-theme code-slide"
-          lang="jsx"
-        >
           <Notes>
             Show Reactronica Song internals. Mention that this is a simplified
             version!
           </Notes>
-        </CodeSlide>
+        </WideSlide>
 
-        <CodeSlide
-          code={`const Track = ({
+        {/* --------------------------------------------------------------- */}
+        {/* Track Component */}
+        {/* --------------------------------------------------------------- */}
+
+        <WideSlide>
+          <div
+            style={{
+              maxWidth: '55%',
+              margin: '0 auto',
+            }}
+          >
+            <HighlightCodeEditor
+              code={`const Track = ({
   steps,
   onStepPlay,
   children,
@@ -494,14 +478,6 @@ const Song = ({
   }, []);
 
   useEffect(() => {
-    if (isPlaying) {
-      sequencer.current.start();
-    } else {
-      sequencer.current.stop();
-    }
-  }, [isPlaying])
-
-  useEffect(() => {
     sequencer.current.removeAll();
 
     steps.forEach((note, i) => {
@@ -509,53 +485,72 @@ const Song = ({
     });
   }, [steps])
 
+  useEffect(() => {
+    if (isPlaying) {
+      sequencer.current.start();
+    } else {
+      sequencer.current.stop();
+    }
+  }, [isPlaying])
+
   return (
     <TrackContext.Provider>
       {children}
     </TrackContext.Provider>
   );
 }`}
-          ranges={[
-            {
-              loc: [0, 5],
-              // title: 'Track props',
-            },
-            {
-              loc: [6, 7],
-            },
-            {
-              loc: [9, 20],
-              // title: 'Mount effect' to set up sequence
-            },
-            {
-              loc: [21, 24],
-              // title: 'Unmount' cleanup function
-            },
-            {
-              loc: [24, 25],
-              // title: Empty array dep ensures it only runs once
-            },
-            {
-              loc: [5, 6],
-              // title: Access isPlaying from Song using context
-            },
-            {
-              loc: [26, 33],
-              // title: start or stop sequencer if isPlaying changes
-            },
-            {
-              loc: [34, 41],
-              // title: update Tone.Sequence if steps change
-            },
-          ]}
-          className="code-theme code-slide"
-          lang="jsx"
-        >
+              ranges={[
+                {
+                  loc: [0, 1, 2, 3, 4],
+                  // title: 'Track props',
+                },
+                {
+                  loc: [6],
+                  // title: 'Instrument ref',
+                },
+                {
+                  loc: [9, 10, 11, 12, 13],
+                  // title: 'Mount effect' to set up sequence
+                },
+                {
+                  loc: [14, 15, 16],
+                  // title: 'Callback for onStepPlay'
+                },
+                {
+                  loc: [18],
+                  // title: 'Steps argument for Sequence'
+                },
+                {
+                  loc: [21, 22, 23],
+                  // title: 'Unmount' cleanup function
+                },
+                {
+                  loc: [24],
+                  // title: Empty array dep ensures it only runs once
+                },
+                {
+                  loc: [26, 27, 28, 29, 30, 31, 32],
+                  // title: start or stop sequencer if isPlaying changes
+                },
+                {
+                  loc: [5],
+                  // title: Access isPlaying from Song using context
+                },
+                {
+                  loc: [34, 35, 36, 37, 38, 39, 40],
+                  // title: update Tone.Sequence if steps change
+                },
+              ].map(range => range.loc)}
+            />
+            <br />
+            <Heading size={5}>{`<Track />`}</Heading>
+          </div>
+
           <Notes>
             Show Reactronica Track internals. Highly simplified version, without
             Instrument update and effects
           </Notes>
-        </CodeSlide>
+        </WideSlide>
 
         {/* --------------------------------------------------------------- */}
         {/* DEMOS */}

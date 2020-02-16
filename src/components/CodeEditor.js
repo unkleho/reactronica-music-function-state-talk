@@ -19,8 +19,8 @@ const CodeEditor = ({
   className,
 }) => {
   React.useEffect(() => {
-    if (highlightedLines && highlightedLines[0]) {
-      const firstHighlight = highlightedLines[0] - 1;
+    if (highlightedLines.length > 0) {
+      const firstHighlight = highlightedLines[0];
       const lines = document.getElementsByClassName('token-line');
 
       lines[firstHighlight].scrollIntoView({
@@ -56,7 +56,7 @@ const CodeEditor = ({
           : ''}
 
         {highlightedLines.map(line => {
-          return `.code-editor .token-line:nth-child(${line}) {
+          return `.code-editor .token-line:nth-child(${line + 1}) {
             opacity: 1;
             transition: 0.5s;
           }`;

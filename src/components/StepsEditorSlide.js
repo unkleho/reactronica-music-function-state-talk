@@ -135,7 +135,7 @@ const Example = () => {
       action: index => {
         setSteps([null, null, null, null, null, null, null, null]);
         setShowOnStepPlay(false);
-        setHighlightedLines([4, 5, 6, 7]);
+        setHighlightedLines([3, 4, 5, 6]);
         setCodeIndex(index);
       },
     },
@@ -147,7 +147,7 @@ const Example = () => {
         setShowStepsEditor(false);
         setSteps([null, null, null, null, null, null, null, null]);
         setShowOnStepPlay(false);
-        setHighlightedLines([12]);
+        setHighlightedLines([11]);
         // setCodeIndex(index);
       },
     },
@@ -195,7 +195,7 @@ const Example = () => {
         setShowStepsEditor(true);
         setSteps([null, null, null, null, null, null, null, null]);
         setShowOnStepPlay(false);
-        setHighlightedLines([34]);
+        setHighlightedLines([33]);
         setCodeIndex(index);
       },
     },
@@ -246,7 +246,7 @@ const Example = () => {
         setSteps(exampleSteps);
         setShowStepsEditorSteps(true);
         setShowOnStepPlay(false);
-        setHighlightedLines([35]);
+        setHighlightedLines([34]);
         setCodeIndex(index);
       },
     },
@@ -255,7 +255,7 @@ const Example = () => {
       title: 'Have a listen',
       code: null,
       action: () => {
-        setHighlightedLines([11]);
+        setHighlightedLines([10]);
         setIsPlaying(true);
       },
     },
@@ -306,7 +306,7 @@ const Example = () => {
         setSteps(exampleSteps);
         setShowStepsEditorSteps(true);
         setShowOnStepPlay(false);
-        setHighlightedLines([8]);
+        setHighlightedLines([7]);
         setCodeIndex(index);
       },
     },
@@ -366,7 +366,7 @@ const Example = () => {
         setSteps(exampleSteps);
         setShowStepsEditorSteps(true);
         setShowOnStepPlay(false);
-        setHighlightedLines([15]);
+        setHighlightedLines([14]);
         setCodeIndex(index);
       },
     },
@@ -424,7 +424,7 @@ const Example = () => {
 }`,
       action: index => {
         setShowOnStepPlay(true);
-        setHighlightedLines([40]);
+        setHighlightedLines([39]);
         setCodeIndex(index);
       },
     },
