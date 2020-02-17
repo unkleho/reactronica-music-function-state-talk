@@ -23,6 +23,7 @@ import ComponentsSlide from './components/ComponentsSlide';
 import TabExample from './components/TabExample';
 // import codeTheme from './codeTheme';
 import WaveAnimation from './components/WaveAnimation/WaveAnimation';
+import SheetMusicSlide from './components/SheetMusicSlide';
 
 import './global.module.css';
 import './App.css';
@@ -561,8 +562,13 @@ const Song = ({
         </Slide>
 
         <Slide>
-          <Heading size={3}>Ukulele Tab</Heading>
+          <Heading size={4}>Ukulele Tab</Heading>
           <TabExample></TabExample>
+        </Slide>
+
+        <Slide>
+          <Heading size={4}>Sheet Music</Heading>
+          <SheetMusicSlide></SheetMusicSlide>
         </Slide>
 
         <Slide>
