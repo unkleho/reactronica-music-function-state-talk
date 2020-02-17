@@ -26,6 +26,7 @@ import WaveAnimation from './components/WaveAnimation/WaveAnimation';
 import SheetMusicSlide from './components/SheetMusicSlide';
 
 import './global.module.css';
+import './styles/base.scss';
 import './App.css';
 import './codeTheme.scss';
 import './codePane.scss';

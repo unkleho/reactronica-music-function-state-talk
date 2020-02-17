@@ -5,6 +5,7 @@ import SheetMusic from './SheetMusic';
 
 const SheetMusicSlide = () => {
   const [isPlaying, setIsPlaying] = React.useState();
+  const [samplesLoaded, setSamplesLoaded] = React.useState(false);
   const [notes, setNotes] = React.useState();
   const handleEvent = React.useRef();
   const bpm = 80;
@@ -25,19 +26,13 @@ const SheetMusicSlide = () => {
       }
 
       setNotes([{ name: `${event.note}${octave}`, duration }]);
-
-      // let timeout = setTimeout(() => {
-      //   setNotes([]);
-
-      //   clearTimeout(timeout);
-      // }, 5000);
     }
   };
 
   return (
     <>
       <SheetMusic
-        isPlaying={isPlaying}
+        isPlaying={samplesLoaded}
         bpm={bpm}
         scale={1.5}
         tunebookString={`X:1\nM:4/4\nK:A\nL:1/4\n|:EA/c/BG/F/|Eec2|AG/B/EF|G2z2:|\n`}
@@ -50,30 +45,35 @@ const SheetMusicSlide = () => {
       <p style={{ fontSize: '0.5em' }}>
         Excerpt from Our Sailor Prince by J.C. Neild Jr, 1867, State Library of
         NSW.
+        <br />
+        <a href="https://collection.sl.nsw.gov.au/digital/file/06ddDNk67LV8G">
+          collection.sl.nsw.gov.au/digital/file/06ddDNk67LV8G
+        </a>
       </p>
 
       <br />
 
-      <button
+      {/* <button
         className="demoButton"
         onClick={() => {
           setIsPlaying(!isPlaying);
         }}
       >
         {isPlaying ? 'Stop' : 'Play'}
-      </button>
+      </button> */}
 
       <Song bpm={bpm}>
         <Track>
-          {/* <Instrument type="synth" notes={notes}></Instrument> */}
           <Instrument
             type="sampler"
             notes={notes}
             samples={{
-              // 'C#3': '/audio/kick.wav',
               'C#3': '/audio/piano/Player_dyn2_rr1_020.wav',
               'D#3': '/audio/piano/Player_dyn2_rr1_022.wav',
               F3: '/audio/piano/Player_dyn2_rr1_024.wav',
+            }}
+            onLoad={() => {
+              setSamplesLoaded(true);
             }}
           ></Instrument>
         </Track>
