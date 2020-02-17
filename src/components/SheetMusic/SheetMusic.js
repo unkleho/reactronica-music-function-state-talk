@@ -58,15 +58,15 @@ const SheetMusic = ({
         const rests = document.getElementsByClassName('abcjs-rest');
 
         for (let note of notes) {
-          note.classList.remove('abc-js-note-playing');
+          note.classList.remove('abcjs-note-playing');
         }
 
         for (let rest of rests) {
-          rest.classList.remove('abc-js-note-playing');
+          rest.classList.remove('abcjs-note-playing');
         }
 
         event.elements.forEach(element => {
-          element[0].classList.add('abc-js-note-playing');
+          element[0].classList.add('abcjs-note-playing');
         });
       },
     });
@@ -93,7 +93,11 @@ const SheetMusic = ({
             border-radius: 8px;
           }
 
-          #paper .abc-js-note-playing {
+          #paper .abcjs-note, #paper .abcjs-rest {
+            transition: 0.2s;
+          }
+
+          #paper .abcjs-note-playing {
             fill: #d10fc9;
           }
         `}
