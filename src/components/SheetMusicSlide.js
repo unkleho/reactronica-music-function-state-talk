@@ -26,11 +26,11 @@ const SheetMusicSlide = () => {
 
       setNotes([{ name: `${event.note}${octave}`, duration }]);
 
-      let timeout = setTimeout(() => {
-        setNotes([]);
+      // let timeout = setTimeout(() => {
+      //   setNotes([]);
 
-        clearTimeout(timeout);
-      }, 500);
+      //   clearTimeout(timeout);
+      // }, 5000);
     }
   };
 
@@ -39,7 +39,7 @@ const SheetMusicSlide = () => {
       <SheetMusic
         isPlaying={isPlaying}
         bpm={bpm}
-        scale={1}
+        scale={1.5}
         tunebookString={`X:1\nM:4/4\nK:A\nL:1/4\n|:EA/c/BG/F/|Eec2|AG/B/EF|G2z2:|\n`}
         onEvent={handleEvent.current}
         onLineEnd={() => {
@@ -51,6 +51,8 @@ const SheetMusicSlide = () => {
         Excerpt from Our Sailor Prince by J.C. Neild Jr, 1867, State Library of
         NSW.
       </p>
+
+      <br />
 
       <button
         className="demoButton"

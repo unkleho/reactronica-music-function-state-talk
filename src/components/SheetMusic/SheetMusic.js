@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 
 import abcjs from 'abcjs';
 
@@ -7,6 +7,7 @@ const SheetMusic = ({
   tunebookString,
   bpm,
   scale = 1,
+  className,
   onBeat,
   onEvent,
   onLineEnd,
@@ -18,7 +19,7 @@ const SheetMusic = ({
     const tune = abcjs.renderAbc('paper', tunebookString, {
       add_classes: true,
       scale,
-      staffwidth: 1000,
+      staffwidth: 900,
     });
 
     timer.current = new abcjs.TimingCallbacks(tune[0], {
@@ -69,9 +70,9 @@ const SheetMusic = ({
         });
       },
     });
-
-    // timer.start();
+    /* eslint-disable */
   }, [JSON.stringify(tunebookString)]);
+  /* eslint-enable */
 
   React.useEffect(() => {
     if (isPlaying) {
@@ -83,18 +84,17 @@ const SheetMusic = ({
 
   return (
     <>
-      <div id="paper" ref={paper}></div>
+      <div id="paper" ref={paper} className={className || ''}></div>
 
       <style>
         {`
-          #paper svg {
+          #paper {
             background-color: #DDD;
-            // width: 770px;
+            border-radius: 8px;
           }
 
           #paper .abc-js-note-playing {
-            fill: #0fa6d1;
-            // stroke: #0fa6d1;
+            fill: #d10fc9;
           }
         `}
       </style>
