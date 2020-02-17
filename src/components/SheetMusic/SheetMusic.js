@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import abcjs from 'abcjs';
 
 const SheetMusic = ({
-  tunebookString = 'X:1\nK:D\nDDAA|BBA2|\n',
+  isPlaying,
+  tunebookString,
+  bpm,
+  scale = 1,
   onBeat,
   onEvent,
   onLineEnd,
 }) => {
   const paper = React.useRef();
+  const timer = React.useRef();
 
   React.useEffect(() => {
     const tune = abcjs.renderAbc('paper', tunebookString, {
       add_classes: true,
+      scale,
+      staffwidth: 1000,
     });
 
-    const timer = new abcjs.TimingCallbacks(tune[0], {
-      qpm: 50,
+    timer.current = new abcjs.TimingCallbacks(tune[0], {
+      qpm: bpm,
       beatSubdivisions: 4,
       beatCallback: (beatNumber, totalBeats, totalTime) => {
         if (typeof onBeat === 'function') {
@@ -48,9 +54,14 @@ const SheetMusic = ({
         }
 
         const notes = document.getElementsByClassName('abcjs-note');
+        const rests = document.getElementsByClassName('abcjs-rest');
 
         for (let note of notes) {
           note.classList.remove('abc-js-note-playing');
+        }
+
+        for (let rest of rests) {
+          rest.classList.remove('abc-js-note-playing');
         }
 
         event.elements.forEach(element => {
@@ -59,8 +70,16 @@ const SheetMusic = ({
       },
     });
 
-    timer.start();
+    // timer.start();
   }, [JSON.stringify(tunebookString)]);
+
+  React.useEffect(() => {
+    if (isPlaying) {
+      timer.current.start();
+    } else {
+      timer.current.stop();
+    }
+  }, [isPlaying]);
 
   return (
     <>
@@ -70,11 +89,12 @@ const SheetMusic = ({
         {`
           #paper svg {
             background-color: #DDD;
+            // width: 770px;
           }
 
           #paper .abc-js-note-playing {
             fill: #0fa6d1;
-            stroke: #0fa6d1;
+            // stroke: #0fa6d1;
           }
         `}
       </style>
