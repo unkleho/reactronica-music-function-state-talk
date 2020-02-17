@@ -32,7 +32,7 @@ const SheetMusicSlide = () => {
   return (
     <>
       <SheetMusic
-        isPlaying={samplesLoaded}
+        isPlaying={isPlaying}
         bpm={bpm}
         scale={1.5}
         tunebookString={`X:1\nM:4/4\nK:A\nL:1/4\n|:EA/c/BG/F/|Eec2|AG/B/EF|G2z2:|\n`}
@@ -53,14 +53,15 @@ const SheetMusicSlide = () => {
 
       <br />
 
-      {/* <button
+      <button
         className="demoButton"
+        disabled={!samplesLoaded}
         onClick={() => {
           setIsPlaying(!isPlaying);
         }}
       >
         {isPlaying ? 'Stop' : 'Play'}
-      </button> */}
+      </button>
 
       <Song bpm={bpm}>
         <Track>

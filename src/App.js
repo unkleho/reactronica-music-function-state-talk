@@ -573,7 +573,7 @@ const Song = ({
         </Slide>
 
         <Slide>
-          <Heading>DAW</Heading>
+          <Heading size={4}>Digital Audio Workstation</Heading>
 
           <Notes>Show instruments and effects</Notes>
         </Slide>
