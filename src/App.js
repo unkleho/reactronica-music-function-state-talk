@@ -18,7 +18,7 @@ import styled from 'react-emotion';
 // import { Song, Track, Instrument, Effect } from 'reactronica';
 
 // import ReactLive from './ReactLive';
-import StepsEditorSlide from './components/StepsEditorSlide';
+// import StepsEditorSlide from './components/StepsEditorSlide';
 import ComponentsSlide from './components/ComponentsSlide';
 import TabExample from './components/TabExample';
 // import codeTheme from './codeTheme';
@@ -30,7 +30,7 @@ import './styles/base.scss';
 import './App.css';
 import './codeTheme.scss';
 import './codePane.scss';
-import HighlightCodeEditor from './components/HighlightCodeEditor';
+// import HighlightCodeEditor from './components/HighlightCodeEditor';
 
 const theme = createTheme(
   {
@@ -144,12 +144,9 @@ function App() {
           </Text>
         </Slide> */}
 
-        <Slide>
+        {/* <Slide>
           <Heading size={3}>UI as a Function of State</Heading>
           <List>
-            {/* <ListItem>
-              React popularised rendering predictable markup from functions
-            </ListItem> */}
             <Appear>
               <ListItem>UI = f(state)</ListItem>
             </Appear>
@@ -181,7 +178,7 @@ function App() {
           <Notes>
             We are at a React conference, so we know this already...
           </Notes>
-        </Slide>
+        </Slide> */}
 
         {/* <Slide>
           <Heading size={3}>_____ as a Function of State</Heading>
@@ -234,9 +231,11 @@ function App() {
           <SubHeading size={5}>Introducing</SubHeading>
           <Heading>Reactronica</Heading>
           <Text>Music = f(state)</Text>
+          <br />
+          <a href="https://reactronica.com">reactronica.com</a>
         </Slide>
 
-        <Slide>
+        {/* <Slide>
           <Heading size={3}>Reactronica</Heading>
           <List>
             <Appear>
@@ -261,7 +260,7 @@ function App() {
               </ListItem>
             </Appear>
           </List>
-        </Slide>
+        </Slide> */}
 
         {/* <Slide>
           <Heading size={3}>Tone JS</Heading>
@@ -343,28 +342,28 @@ function App() {
           <ComponentsSlide></ComponentsSlide>
         </WideSlide>
 
-        <WideSlide>
+        {/* <WideSlide>
           <StepsEditorSlide
             defaultSteps={[null]}
             startNote="C3"
             endNote="B3"
           ></StepsEditorSlide>
-        </WideSlide>
+        </WideSlide> */}
 
         {/**
          * Show internals of Reactronica components
          */}
 
-        <Slide>
+        {/* <Slide>
           <Heading>Internals</Heading>
           <Text>Song and Instrument components</Text>
-        </Slide>
+        </Slide> */}
 
         {/* --------------------------------------------------------------- */}
         {/* Song Component */}
         {/* --------------------------------------------------------------- */}
 
-        <WideSlide>
+        {/* <WideSlide>
           <div
             style={{
               maxWidth: '55%',
@@ -439,13 +438,13 @@ const Song = ({
             Show Reactronica Song internals. Mention that this is a simplified
             version!
           </Notes>
-        </WideSlide>
+        </WideSlide> */}
 
         {/* --------------------------------------------------------------- */}
         {/* Track Component */}
         {/* --------------------------------------------------------------- */}
 
-        <WideSlide>
+        {/* <WideSlide>
           <div
             style={{
               maxWidth: '55%',
@@ -552,15 +551,15 @@ const Song = ({
             Show Reactronica Track internals. Highly simplified version, without
             Instrument update and effects
           </Notes>
-        </WideSlide>
+        </WideSlide> */}
 
         {/* --------------------------------------------------------------- */}
         {/* DEMOS */}
         {/* --------------------------------------------------------------- */}
 
-        <Slide>
+        {/* <Slide>
           <Heading>Demos</Heading>
-        </Slide>
+        </Slide> */}
 
         <Slide>
           <Heading size={4}>Ukulele Tab</Heading>
