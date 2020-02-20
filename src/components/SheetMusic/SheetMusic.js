@@ -19,7 +19,7 @@ const SheetMusic = ({
     const tune = abcjs.renderAbc('paper', tunebookString, {
       add_classes: true,
       scale,
-      staffwidth: 900,
+      staffwidth: 1200,
     });
 
     timer.current = new abcjs.TimingCallbacks(tune[0], {
@@ -41,7 +41,8 @@ const SheetMusic = ({
             onEvent(null);
           } else {
             // Event.midiPitches isn't working, so we need to work out pitch from ABC notation
-            const note = tunebookString[event.startChar];
+            // const note = tunebookString[event.startChar];
+            const note = tunebookString.slice(event.startChar, event.endChar);
 
             onEvent({
               ...event,
@@ -89,6 +90,8 @@ const SheetMusic = ({
       <style>
         {`
           #paper {
+            width: 1300px;
+            margin: 0 auto 2rem auto;
             background-color: #DDD;
             border-radius: 8px;
           }

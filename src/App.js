@@ -18,7 +18,7 @@ import styled from 'react-emotion';
 // import { Song, Track, Instrument, Effect } from 'reactronica';
 
 // import ReactLive from './ReactLive';
-// import StepsEditorSlide from './components/StepsEditorSlide';
+import StepsEditorSlide from './components/StepsEditorSlide';
 import ComponentsSlide from './components/ComponentsSlide';
 import TabExample from './components/TabExample';
 // import codeTheme from './codeTheme';
@@ -107,7 +107,7 @@ function App() {
           <br />
           <br />
           <SubHeading size={5}>
-            <a href="https://twitter.com/unkleho">@unkleho</a>
+            Kaho Cheung / <a href="https://twitter.com/unkleho">@unkleho</a>
           </SubHeading>
           <br></br>
           <Text fontSize="2rem">DX Lab, State Library of NSW</Text>
@@ -228,23 +228,30 @@ function App() {
         </Slide> */}
 
         <Slide>
-          <SubHeading size={5}>Introducing</SubHeading>
-          <Heading>Reactronica</Heading>
+          <Text>UI = f(state)</Text>
+        </Slide>
+
+        <Slide>
           <Text>Music = f(state)</Text>
-          <br />
-          <a href="https://reactronica.com">reactronica.com</a>
         </Slide>
 
         {/* <Slide>
+          <SubHeading size={5}>Introducing</SubHeading>
+          <Heading>Reactronica</Heading>
+          <a href="https://github.com/unkleho/reactronica">
+            github.com/unkleho/reactronica
+          </a>{' '}
+          / <a href="https://reactronica.com">reactronica.com</a>
+        </Slide> */}
+
+        <Slide>
+          <SubHeading size={5}>Introducing</SubHeading>
           <Heading size={3}>Reactronica</Heading>
           <List>
             <Appear>
               <ListItem>
                 <a href="https://reactronica.com">reactronica.com</a>
               </ListItem>
-            </Appear>
-            <Appear>
-              <ListItem>React components for making music</ListItem>
             </Appear>
             <Appear>
               <ListItem>VERY early days...</ListItem>
@@ -256,11 +263,11 @@ function App() {
             </Appear>
             <Appear>
               <ListItem>
-                Uses <strong>Tone JS</strong> under the hood
+                Browser-based, <strong>Tone JS</strong> under the hood
               </ListItem>
             </Appear>
           </List>
-        </Slide> */}
+        </Slide>
 
         {/* <Slide>
           <Heading size={3}>Tone JS</Heading>
@@ -342,13 +349,13 @@ function App() {
           <ComponentsSlide></ComponentsSlide>
         </WideSlide>
 
-        {/* <WideSlide>
+        <WideSlide>
           <StepsEditorSlide
             defaultSteps={[null]}
             startNote="C3"
             endNote="B3"
           ></StepsEditorSlide>
-        </WideSlide> */}
+        </WideSlide>
 
         {/**
          * Show internals of Reactronica components
@@ -558,18 +565,27 @@ const Song = ({
         {/* --------------------------------------------------------------- */}
 
         {/* <Slide>
-          <Heading>Demos</Heading>
+          <Heading>Reactronica + UI</Heading>
         </Slide> */}
 
         <Slide>
           <Heading size={4}>Ukulele Tab</Heading>
+          <img
+            src="./ukulele.svg"
+            alt="ukulele"
+            height="250"
+            style={{
+              marginTop: '-5rem',
+              transform: 'rotate(-90deg)',
+            }}
+          />
           <TabExample></TabExample>
         </Slide>
 
-        <Slide>
+        <WideSlide>
           <Heading size={4}>Sheet Music</Heading>
           <SheetMusicSlide></SheetMusicSlide>
-        </Slide>
+        </WideSlide>
 
         <Slide>
           <Heading size={4}>Digital Audio Workstation</Heading>
@@ -581,12 +597,20 @@ const Song = ({
         {/* FUTURE */}
         {/* --------------------------------------------------------------- */}
 
-        {/* <Slide>
-          <Heading>Future</Heading>
+        <Slide>
+          <Heading>Thanks</Heading>
           <List>
-            <ListItem>More props for Tone JS</ListItem>
+            <ListItem>
+              <a href="https://reactronica.com">reactronica.com</a>
+            </ListItem>
+            <ListItem>
+              <a href="https://reactronica.com">
+                github.com/unkleho/reactronica
+              </a>
+            </ListItem>
+            <ListItem>Feedback please!</ListItem>
           </List>
-        </Slide> */}
+        </Slide>
 
         {/* <Slide>
           <Heading>MIDI Drum Pads</Heading>

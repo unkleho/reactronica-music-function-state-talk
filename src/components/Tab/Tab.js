@@ -125,7 +125,7 @@ const Tab = ({
             data-testid={`tabLines`}
           >
             <div className={css.tabLineLine} />
-            {/*<div>{stringNote}</div>*/}
+            <div className={css.stringNote}>{stringNote.replace('5', '')}</div>
 
             <div className={css.tabLineSteps}>
               {tabLine.map((step, j) => {

@@ -17,7 +17,8 @@
 
 .steps {
   height: calc(100% - var(--baseline-4));
-  overflow: auto;
+  // overflow: auto;
+  overflow: none;
 }
 
 .header {
@@ -59,6 +60,7 @@
   border-bottom: 1px solid var(--colour-black);
   border-radius: 0;
   cursor: pointer;
+  transition: 0.1s;
 
   @include media-sm {
     font-size: var(--font-size-lg);
@@ -71,6 +73,14 @@
 
 .step:nth-child(4n + 2) {
   background-color: var(--colour-grey-light);
+}
+
+.step.stepIsPlaying {
+  background-color: var(--colour-primary);
+}
+
+.step.stepIsPlaying.stepIsCurrent {
+  transform: scale(1.2);
 }
 
 .step.stepIsCurrent {

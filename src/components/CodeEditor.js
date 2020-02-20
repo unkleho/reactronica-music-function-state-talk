@@ -49,7 +49,7 @@ const CodeEditor = ({
         {highlightedLines.length > 0
           ? `
           .code-editor .token-line {
-            opacity: 0.2;
+            opacity: 0.3;
             transition: 0.1s;
           }
         `

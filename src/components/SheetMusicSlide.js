@@ -12,20 +12,11 @@ const SheetMusicSlide = () => {
 
   handleEvent.current = event => {
     if (event && event.note && event.note !== 'z') {
-      let octave = 3;
-      let { note } = event;
-      let duration = '4n';
+      const { name, duration } = parseAbcNote(event.note);
 
-      if (['c', 'd', 'e', 'f', 'g', 'a', 'b'].includes(event.note)) {
-        octave = 4;
-      }
+      console.log(event.note, name, duration);
 
-      if (note.includes('/')) {
-        duration = '8n';
-        note = note.replace('/', '');
-      }
-
-      setNotes([{ name: `${event.note}${octave}`, duration }]);
+      setNotes([{ name, duration }]);
     }
   };
 
@@ -34,7 +25,7 @@ const SheetMusicSlide = () => {
       <SheetMusic
         isPlaying={isPlaying}
         bpm={bpm}
-        scale={1.5}
+        scale={2}
         tunebookString={`X:1\nM:4/4\nK:A\nL:1/4\n|:EA/c/BG/F/|Eec2|AG/B/EF|G2z2:|\n`}
         onEvent={handleEvent.current}
         onLineEnd={() => {
@@ -81,6 +72,29 @@ const SheetMusicSlide = () => {
       </Song>
     </>
   );
+};
+
+const parseAbcNote = abcNote => {
+  let octave = 3;
+  let duration;
+  let noteName = abcNote.slice(0, 1);
+
+  // Higher octave for lower case notes
+  if (['c', 'd', 'e', 'f', 'g', 'a', 'b'].includes(noteName)) {
+    octave = 4;
+  }
+
+  if (abcNote.includes('/')) {
+    duration = '8n';
+  } else {
+    duration = '4n';
+  }
+
+  return {
+    name: `${noteName}${octave}`,
+    duration,
+    octave,
+  };
 };
 
 export default SheetMusicSlide;

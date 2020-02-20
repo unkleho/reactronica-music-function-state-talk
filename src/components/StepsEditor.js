@@ -162,6 +162,8 @@ const DAWStepsEditor = ({
                     return step.name === note;
                   }) >= 0;
 
+                const isPlaying = index === currentStepIndex;
+
                 const dataTestId = `step-button-${columnIndex - 1}-${rowIndex}${
                   isCurrent ? '-current' : ''
                 }`;
@@ -205,6 +207,7 @@ const DAWStepsEditor = ({
                     className={[
                       css.step,
                       isCurrent ? css.stepIsCurrent : '',
+                      isPlaying ? css.stepIsPlaying : '',
                     ].join(' ')}
                     onClick={() => {
                       handleStepClick({ name: note, duration: 0.5 }, index);
