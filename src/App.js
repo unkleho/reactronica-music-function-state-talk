@@ -608,8 +608,8 @@ const Song = ({
             </Appear>
             <Appear>
               <ListItem>
-                <a href="https://reactronica.com/reactconfau2020">
-                  reactronica.com/reactconfau2020
+                <a href="https://reactronica.com">
+                  github.com/unkleho/reactronica
                 </a>
               </ListItem>
             </Appear>
@@ -619,8 +619,8 @@ const Song = ({
             <Appear>
               <ListItem>
                 Slides:{' '}
-                <a href="https://reactronica.com">
-                  github.com/unkleho/reactronica
+                <a href="https://reactronica.com/reactconfau2020">
+                  reactronica.com/reactconfau2020
                 </a>
               </ListItem>
             </Appear>
