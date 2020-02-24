@@ -589,6 +589,7 @@ const Song = ({
 
         <Slide>
           <Heading size={4}>Digital Audio Workstation</Heading>
+          <a href="https://reactronica.com/daw">reactronica.com/daw</a>
 
           <Notes>Show instruments and effects</Notes>
         </Slide>
