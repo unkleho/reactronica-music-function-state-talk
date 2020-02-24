@@ -228,11 +228,11 @@ function App() {
         </Slide> */}
 
         <Slide>
-          <Text>UI = f(state)</Text>
+          <Text fontSize="5rem">UI = f(state)</Text>
         </Slide>
 
         <Slide>
-          <Text>Music = f(state)</Text>
+          <Text fontSize="5rem">Music = f(state)</Text>
         </Slide>
 
         {/* <Slide>
@@ -600,15 +600,35 @@ const Song = ({
         <Slide>
           <Heading>Thanks</Heading>
           <List>
-            <ListItem>
-              <a href="https://reactronica.com">reactronica.com</a>
-            </ListItem>
-            <ListItem>
-              <a href="https://reactronica.com">
-                github.com/unkleho/reactronica
-              </a>
-            </ListItem>
-            <ListItem>Feedback please!</ListItem>
+            <Appear>
+              <ListItem>
+                <a href="https://reactronica.com">reactronica.com</a>
+              </ListItem>
+            </Appear>
+            <Appear>
+              <ListItem>
+                <a href="https://reactronica.com/reactconfau2020">
+                  reactronica.com/reactconfau2020
+                </a>
+              </ListItem>
+            </Appear>
+            <Appear>
+              <ListItem>Feedback please!</ListItem>
+            </Appear>
+            <Appear>
+              <ListItem>
+                Slides:{' '}
+                <a href="https://reactronica.com">
+                  github.com/unkleho/reactronica
+                </a>
+              </ListItem>
+            </Appear>
+            <Appear>
+              <ListItem>
+                Slides made with <strong>React Spectacle</strong> and{' '}
+                <strong>React Live</strong>
+              </ListItem>
+            </Appear>
           </List>
         </Slide>
 
