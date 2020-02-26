@@ -63,9 +63,9 @@ const SheetMusicSlide = () => {
             type="sampler"
             notes={notes}
             samples={{
-              'C#3': '/audio/piano/Player_dyn2_rr1_020_louder.wav',
-              'D#3': '/audio/piano/Player_dyn2_rr1_022_louder.wav',
-              F3: '/audio/piano/Player_dyn2_rr1_024_louder.wav',
+              'C#3': `${process.env.PUBLIC_URL}/audio/piano/Player_dyn2_rr1_020_louder.wav`,
+              'D#3': `${process.env.PUBLIC_URL}/audio/piano/Player_dyn2_rr1_022_louder.wav`,
+              F3: `${process.env.PUBLIC_URL}/audio/piano/Player_dyn2_rr1_024_louder.wav`,
             }}
             onLoad={() => {
               setSamplesLoaded(true);

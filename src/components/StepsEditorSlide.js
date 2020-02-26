@@ -609,10 +609,10 @@ const Example = () => {
           <Instrument
             type="sampler"
             samples={{
-              C3: '/audio/kick.wav',
-              D3: '/audio/snare.wav',
-              E3: '/audio/KBH_hihat_loop_140_-3db.wav',
-              F3: '/audio/ABR_808_sub_barri_glide_Am.wav',
+              C3: `${process.env.PUBLIC_URL}/audio/kick.wav`,
+              D3: `${process.env.PUBLIC_URL}/audio/snare.wav`,
+              E3: `${process.env.PUBLIC_URL}/audio/KBH_hihat_loop_140_-3db.wav`,
+              F3: `${process.env.PUBLIC_URL}/audio/ABR_808_sub_barri_glide_Am.wav`,
             }}
           ></Instrument>
         </Track>
