@@ -22,7 +22,7 @@ import StepsEditorSlide from './components/StepsEditorSlide';
 import ComponentsSlide from './components/ComponentsSlide';
 import TabExample from './components/TabExample';
 // import codeTheme from './codeTheme';
-import WaveAnimation from './components/WaveAnimation/WaveAnimation';
+// import WaveAnimation from './components/WaveAnimation/WaveAnimation';
 import SheetMusicSlide from './components/SheetMusicSlide';
 
 import './global.module.css';
@@ -30,6 +30,7 @@ import './styles/base.scss';
 import './App.css';
 import './codeTheme.scss';
 import './codePane.scss';
+import IntroSlide from './components/IntroSlide';
 // import HighlightCodeEditor from './components/HighlightCodeEditor';
 
 const theme = createTheme(
@@ -46,7 +47,7 @@ const theme = createTheme(
 // Styled Components
 // ----------------------------------------------------------------------------
 
-const MainHeading = styled(RawHeading)`
+export const MainHeading = styled(RawHeading)`
   margin-bottom: 32px;
   font-size: 10rem;
   line-height: 1.2;
@@ -55,7 +56,7 @@ const MainHeading = styled(RawHeading)`
   -webkit-text-fill-color: transparent;
 `;
 
-const Heading = styled(RawHeading)`
+export const Heading = styled(RawHeading)`
   margin-bottom: 64px;
   line-height: 1.2;
   background: linear-gradient(160deg, #5f0fd1, #0fa6d1);
@@ -63,7 +64,7 @@ const Heading = styled(RawHeading)`
   -webkit-text-fill-color: transparent;
 `;
 
-const SubHeading = styled(RawHeading)`
+export const SubHeading = styled(RawHeading)`
   color: #ccc;
   font-weight: 600;
 `;
@@ -74,7 +75,7 @@ const SubHeading = styled(RawHeading)`
 //   line-height: 1.3;
 // `;
 
-const Text = styled(RawText)`
+export const Text = styled(RawText)`
   color: #ccc;
   font-size: ${props => (props.fontSize ? props.fontSize : '2.666rem')};
 `;
@@ -99,18 +100,7 @@ function App() {
     <div className="App">
       <Deck theme={theme} showFullscreenControl={false} progress="bar">
         <Slide>
-          <Text>
-            <strong>Music</strong> as a Function of <strong>State</strong>
-          </Text>
-          <MainHeading>Reactronica</MainHeading>
-          <WaveAnimation></WaveAnimation>
-          <br />
-          <br />
-          <SubHeading size={5}>
-            Kaho Cheung / <a href="https://twitter.com/unkleho">@unkleho</a>
-          </SubHeading>
-          <br></br>
-          <Text fontSize="2rem">DX Lab, State Library of NSW</Text>
+          <IntroSlide />
         </Slide>
 
         <Slide>
@@ -580,6 +570,16 @@ const Song = ({
             }}
           />
           <TabExample></TabExample>
+
+          <p
+            style={{
+              marginTop: '2rem',
+              fontSize: '1rem',
+            }}
+          >
+            Ukulele sounds from <a href="https://patcharena.com/">PatchArena</a>{' '}
+            (SFZ Flukulele)
+          </p>
         </Slide>
 
         <WideSlide>
