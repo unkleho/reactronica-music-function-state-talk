@@ -58,7 +58,7 @@ const SheetMusicSlide = () => {
       </button>
 
       <Song bpm={bpm}>
-        <Track>
+        <Track volume={-6}>
           <Instrument
             type="sampler"
             notes={notes}
