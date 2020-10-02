@@ -98,7 +98,7 @@ const WideSlide = styled(Slide)`
 function App() {
   return (
     <div className="App">
-      <Deck theme={theme} showFullscreenControl={false} progress="bar">
+      <Deck theme={theme} showFullscreenControl={false} progress="none">
         <Slide>
           <IntroSlide />
         </Slide>
